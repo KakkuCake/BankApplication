@@ -22,4 +22,8 @@
     <string name="invalidEmail">Syötä oikea sähköposti</string>
     <string name="invalidPass">Liian heikko salasana</string>
     <string name="invalidName">Liian pitkä nimi</string>
+    <string name="saveChanges">Tallenna</string>
+    <string name="welcome">Tervetuloa!</string>
+    <string name="editProfile">Muokkaa Profiilia</string>
+    <string name="logOut">Kirjaudu Ulos</string>
 </resources>

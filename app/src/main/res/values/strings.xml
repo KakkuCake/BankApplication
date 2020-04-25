@@ -21,4 +21,8 @@
     <string name="invalidEmail">Please enter a valid email</string>
     <string name="invalidPass">Password is too weak</string>
     <string name="invalidName">Name is too long</string>
+    <string name="saveChanges">Save</string>
+    <string name="welcome">Welcome!</string>
+    <string name="editProfile">Edit Profile</string>
+    <string name="logOut">Log Out</string>
 </resources>

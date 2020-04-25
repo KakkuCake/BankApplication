@@ -31,8 +31,10 @@ public class EditProfileActivity extends AppCompatActivity {
     private Button button_save;
     SessionManager sessionManager;
     String getId;
-    private static String URL_EDIT = "http://192.168.1.162/android_register_login/edit_detail.php";
-
+    //KALLE
+    //private static String URL_EDIT = "http://192.168.1.162/android_register_login/edit_detail.php";
+    //JOONA 192.168.1.4
+    private static String URL_EDIT = "http://192.168.1.4/android_register_login/edit_detail.php";
     Validation validator = new Validation(this);
 
     @Override

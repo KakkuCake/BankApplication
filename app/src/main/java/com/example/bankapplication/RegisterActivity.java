@@ -29,7 +29,10 @@ public class RegisterActivity extends AppCompatActivity {
     private Button button_regist;
     private ProgressBar loading;
     private TextInputLayout first_name, last_name, email, password, c_password;
-    String URL_REGIST = "http://192.168.1.162/android_register_login/register.php";
+    //KALLE
+    //String URL_REGIST = "http://192.168.1.162/android_register_login/register.php";
+    //JOONA
+    String URL_REGIST = "http://192.168.1.4/android_register_login/register.php";
 
     Validation validator = new Validation(this);
 
