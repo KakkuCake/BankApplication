@@ -19,7 +19,7 @@
         app:counterMaxLength="17"
         app:errorEnabled="true">
     <com.google.android.material.textfield.TextInputEditText
-            android:hint="First Name"
+            android:hint="@string/firstName"
             android:inputType="textPersonName"
             android:textColor="@color/colorPrimaryDark"
             android:layout_width="match_parent"
@@ -35,7 +35,7 @@
         app:errorEnabled="true">
 
     <com.google.android.material.textfield.TextInputEditText
-            android:hint="Last Name"
+            android:hint="@string/lastName"
             android:inputType="textPersonName"
             android:textColor="@color/colorPrimaryDark"
             android:layout_width="match_parent"
@@ -48,7 +48,7 @@
         android:layout_height="wrap_content"
         app:errorEnabled="true">
         <com.google.android.material.textfield.TextInputEditText
-            android:hint="Email"
+            android:hint="@string/email"
             android:inputType="textEmailAddress"
             android:textColor="@color/colorPrimaryDark"
             android:layout_width="match_parent"
@@ -63,7 +63,7 @@
         app:passwordToggleEnabled="true">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:hint="Password"
+            android:hint="@string/password"
             android:inputType="textPassword"
             android:textColor="@color/colorPrimaryDark"
             android:layout_width="match_parent"
@@ -80,7 +80,7 @@
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Confirm Password"
+            android:hint="@string/confirmPass"
             android:inputType="textPassword"
             android:textColor="@color/colorPrimaryDark" />
     </com.google.android.material.textfield.TextInputLayout>
@@ -98,7 +98,7 @@
         android:id="@+id/button_regist"
         android:backgroundTint="@color/colorPrimary"
         android:textColor="@android:color/white"
-        android:text="Register"
+        android:text="@string/register"
         android:layout_margin="30dp"
         android:layout_width="match_parent"
         android:layout_height="55dp" />

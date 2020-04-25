@@ -1,6 +1,24 @@
 <resources>
     <string name="app_name">NavigationExample</string>
-
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
+    <!--Login & register -->
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="login">Log In</string>
+    <string name="changeLang">Change the language</string>
+    <string name="register">Register</string>
+    <string name="logInFail">Wrong email or password</string>
+    <string name="connectionError">Connection Error</string>
+    <string name="firstName">First Name</string>
+    <string name="lastName">Last Name</string>
+    <string name="confirmPass">Confirm Password</string>
+    <string name="insertPass">Please Insert Password</string>
+    <string name="insertEmail">Please Insert Email</string>
+    <string name="registerSuccess">Registration was successful!</string>
+    <string name="registerFail">Registration failed!</string>
+    <string name="fieldError">Field can\'t be empty</string>
+    <string name="invalidEmail">Please enter a valid email</string>
+    <string name="invalidPass">Password is too weak</string>
+    <string name="invalidName">Name is too long</string>
 </resources>

@@ -1,9 +1,16 @@
 package com.example.bankapplication;
 
+import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.res.Configuration;
+import android.content.res.Resources;
+import android.os.Build;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -24,6 +31,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 
 public class LogInActivity extends AppCompatActivity {
@@ -31,6 +39,7 @@ public class LogInActivity extends AppCompatActivity {
     private EditText email, password;
     private Button button_login;
     private TextView link_regist;
+    private TextView changeLang;
     private ProgressBar loading;
     private static String URL_LOGIN = "http://192.168.1.162/android_register_login/login.php";
     SessionManager sessionManager;
@@ -47,6 +56,7 @@ public class LogInActivity extends AppCompatActivity {
         password = findViewById(R.id.password);
         button_login = findViewById(R.id.button_login);
         link_regist = findViewById(R.id.link_regist);
+        changeLang = findViewById(R.id.changeLang);
 
         button_login.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -57,8 +67,8 @@ public class LogInActivity extends AppCompatActivity {
                 if (!mEmail.isEmpty() || !mPassword.isEmpty()) {
                     Login(mEmail, mPassword);
                 } else {
-                    email.setError("Please insert email");
-                    password.setError("Please insert password");
+                    email.setError(getString(R.string.insertEmail));
+                    password.setError(getString(R.string.insertPass));
                 }
             }
         });
@@ -70,6 +80,14 @@ public class LogInActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        changeLang.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                changeLanguage();
+            }
+        });
+
     }
 
     private void Login(final String email, final String password) {
@@ -108,14 +126,14 @@ public class LogInActivity extends AppCompatActivity {
                     } else {
                         loading.setVisibility(View.GONE);
                         button_login.setVisibility(View.VISIBLE);
-                        Toast.makeText(LogInActivity.this, "Wrong username or password", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(LogInActivity.this, getString(R.string.logInFail), Toast.LENGTH_SHORT).show();
                     }
 
                 } catch (JSONException e) {
                     e.printStackTrace();
                     loading.setVisibility(View.GONE);
                     button_login.setVisibility(View.VISIBLE);
-                    Toast.makeText(LogInActivity.this, "Error " + e.toString(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LogInActivity.this, getString(R.string.logInFail), Toast.LENGTH_SHORT).show();
                 }
 
             }
@@ -125,7 +143,7 @@ public class LogInActivity extends AppCompatActivity {
                     public void onErrorResponse(VolleyError error) {
                         loading.setVisibility(View.GONE);
                         button_login.setVisibility(View.VISIBLE);
-                        Toast.makeText(LogInActivity.this, "Error " + error.toString(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(LogInActivity.this, getString(R.string.connectionError), Toast.LENGTH_SHORT).show();
                     }
                 })
         {
@@ -142,5 +160,40 @@ public class LogInActivity extends AppCompatActivity {
         requestQueue.add(stringRequest);
 
     }
+    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR1)
+    private void changeLocale(String locale) {
+        Resources resources = getResources();
+        DisplayMetrics dm = resources.getDisplayMetrics();
+        Configuration config = resources.getConfiguration();
+        config.setLocale(new Locale(locale));
+        resources.updateConfiguration(config, dm);
+    }
+
+
+    public void changeLanguage(){
+        final String[] lista = {"In English", "Suomeksi"};
+        AlertDialog.Builder aBuilder = new AlertDialog.Builder(LogInActivity.this);
+        //aBuilder.setTitle("choose language");
+        aBuilder.setSingleChoiceItems(lista, -1, new DialogInterface.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR1)
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                if(which == 1){
+                    changeLocale("fi");
+                    finish();
+                    startActivity(getIntent());
+                }else if(which == 0){
+                    changeLocale("en");
+                    finish();
+                    startActivity(getIntent());
+                }
+                dialog.dismiss();
+            }
+        });
+        AlertDialog dialog = aBuilder.create();
+        dialog.show();
+
+    }
+
 
 }

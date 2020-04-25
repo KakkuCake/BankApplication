@@ -34,10 +34,10 @@ public class Validation {
         TextInputLayout email = (TextInputLayout) ((Activity)context).findViewById(R.id.email);
 
         if (emailInput.isEmpty()) {
-            email.setError("Field can't be empty");
+            email.setError(context.getResources().getString(R.string.fieldError));
             return false;
         } else if (!Patterns.EMAIL_ADDRESS.matcher(emailInput).matches()) {
-            email.setError("Please enter a valid email address");
+            email.setError(context.getResources().getString(R.string.invalidEmail));
             return false;
         } else {
             email.setError(null);
@@ -50,10 +50,10 @@ public class Validation {
         TextInputLayout first_name = (TextInputLayout) ((Activity)context).findViewById(R.id.first_name);
 
         if (usernameInput.isEmpty()) {
-            first_name.setError("Field can't be empty");
+            first_name.setError(context.getResources().getString(R.string.fieldError));
             return false;
         } else if (usernameInput.length() > 17) {
-            first_name.setError("First name too long");
+            first_name.setError(context.getResources().getString(R.string.invalidName));
             return false;
         } else {
             first_name.setError(null);
@@ -66,10 +66,10 @@ public class Validation {
         TextInputLayout last_name = (TextInputLayout) ((Activity)context).findViewById(R.id.last_name);
 
         if (usernameInput.isEmpty()) {
-            last_name.setError("Field can't be empty");
+            last_name.setError(context.getResources().getString(R.string.fieldError));
             return false;
         } else if (usernameInput.length() > 25) {
-            last_name.setError("Second name too long");
+            last_name.setError(context.getResources().getString(R.string.invalidName));
             return false;
         } else {
             last_name.setError(null);
@@ -82,10 +82,10 @@ public class Validation {
         TextInputLayout password = (TextInputLayout) ((Activity)context).findViewById(R.id.password);
 
         if (passwordInput.isEmpty()) {
-            password.setError("Field can't be empty");
+            password.setError(context.getResources().getString(R.string.fieldError));
             return false;
         } else if (!PASSWORD_PATTERN.matcher(passwordInput).matches()) {
-            password.setError("Password too weak");
+            password.setError(context.getResources().getString(R.string.invalidPass));
             return false;
         } else {
             password.setError(null);
@@ -98,10 +98,10 @@ public class Validation {
         TextInputLayout c_password = (TextInputLayout) ((Activity)context).findViewById(R.id.c_password);
 
         if (c_passwordInput.isEmpty()) {
-            c_password.setError("Field can't be empty");
+            c_password.setError(context.getResources().getString(R.string.fieldError));
             return false;
         } else if (!PASSWORD_PATTERN.matcher(c_passwordInput).matches()) {
-            c_password.setError("Password too weak");
+            c_password.setError(context.getResources().getString(R.string.invalidPass));
             return false;
         } else {
             c_password.setError(null);

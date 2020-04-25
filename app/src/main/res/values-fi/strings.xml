@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">NavigationExample</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <!--Login & register -->
+    <string name="email">Sähköposti</string>
+    <string name="password">Salasana</string>
+    <string name="login">Kirjaudu</string>
+    <string name="changeLang">Vaihda kieli</string>
+    <string name="register">Luo tili</string>
+    <string name="logInFail">Väärä sähköposti tai salasana</string>
+    <string name="connectionError">Yhteysvirhe</string>
+    <string name="firstName">Etunimi</string>
+    <string name="lastName">Sukunimi</string>
+    <string name="confirmPass">Vahvista salasana</string>
+    <string name="insertPass">Syötä Salasana</string>
+    <string name="insertEmail">Syötä Sähköposti</string>
+    <string name="registerSuccess">Rekisteröityminen onnistui!</string>
+    <string name="registerFail">Rekisteröityminen epäonnistui!</string>
+    <string name="fieldError">Kohta ei voi olla tyhjä</string>
+    <string name="invalidEmail">Syötä oikea sähköposti</string>
+    <string name="invalidPass">Liian heikko salasana</string>
+    <string name="invalidName">Liian pitkä nimi</string>
+</resources>

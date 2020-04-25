@@ -24,7 +24,7 @@
         android:layout_below="@id/logo">
         <EditText
             android:inputType="textEmailAddress"
-            android:hint="Email"
+            android:hint="@string/email"
             android:id="@+id/email"
             android:textColor="@color/colorText"
             android:layout_width="match_parent"
@@ -38,7 +38,7 @@
         android:layout_below="@id/layoutemail">
         <EditText
             android:inputType="textPassword"
-            android:hint="Password"
+            android:hint="@string/password"
             android:id="@+id/password"
             android:textColor="@color/colorText"
             android:layout_width="match_parent"
@@ -58,21 +58,30 @@
         android:layout_below="@id/layoutpassword"
         android:layout_marginTop="30dp"
         android:backgroundTint="@color/colorPrimary2"
-        android:text="LOGIN"
+        android:text="@string/login"
         android:textColor="@color/colorText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
     <TextView
         android:id="@+id/link_regist"
-        android:layout_marginBottom="20dp"
-        android:gravity="center"
-        android:textColor="@color/colorAccent"
-        android:text="Register"
-        android:layout_alignParentBottom="true"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="284dp"
+        android:gravity="center"
+        android:text="@string/register"
+        android:textColor="@color/colorAccent" />
 
+    <TextView
+        android:id="@+id/changeLang"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="29dp"
+        android:gravity="center"
+        android:text="@string/changeLang"
+        android:textColor="@color/colorAccent" />
 
 
 </RelativeLayout>

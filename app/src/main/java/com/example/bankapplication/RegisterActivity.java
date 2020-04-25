@@ -84,14 +84,14 @@ public class RegisterActivity extends AppCompatActivity {
                     String success = jsonObject.getString("success");
 
                     if(success.equals("1")) {
-                        Toast.makeText(RegisterActivity.this, "Registration was successful!", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(RegisterActivity.this, getString(R.string.registerSuccess), Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent(RegisterActivity.this, LogInActivity.class);
                         startActivity(intent);
                     }
 
                 } catch (JSONException e) {
                     e.printStackTrace();
-                    Toast.makeText(RegisterActivity.this, "Register Error! " + e.toString(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(RegisterActivity.this, getString(R.string.registerFail), Toast.LENGTH_SHORT).show();
                     loading.setVisibility(View.GONE);
                     button_regist.setVisibility(View.VISIBLE);
                 }
@@ -100,7 +100,7 @@ public class RegisterActivity extends AppCompatActivity {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(RegisterActivity.this, "Register Error! " + error.toString(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(RegisterActivity.this, getString(R.string.connectionError), Toast.LENGTH_SHORT).show();
                         loading.setVisibility(View.GONE);
                         button_regist.setVisibility(View.VISIBLE);
                     }
