@@ -26,4 +26,8 @@
     <string name="welcome">Tervetuloa!</string>
     <string name="editProfile">Muokkaa Profiilia</string>
     <string name="logOut">Kirjaudu Ulos</string>
+    <string name="loggedOut">Kirjauduttu ulos!</string>
+    <string name="account">Tili</string>
+    <string name="transactions">Tilitapahtumat</string>
+    <string name="home">Koti</string>
 </resources>

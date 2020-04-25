@@ -6,7 +6,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
@@ -17,6 +19,7 @@ import com.google.android.material.navigation.NavigationView;
 public class HomeActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     private DrawerLayout drawer;
 
+    @SuppressLint("ResourceType")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,8 +31,22 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
 
         drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.navigation_view);
-        navigationView.setNavigationItemSelectedListener(this);
+        ///
+        Menu menu = navigationView.getMenu();
+        MenuItem tittle1 = menu.findItem(R.id.navigation_home);
+        tittle1.setTitle(getString(R.string.home));
 
+        MenuItem tittle2 = menu.findItem(R.id.navigation_bank_actions);
+        tittle2.setTitle("ei toimi jostai syystä käännös pitää selvittää.");
+
+        MenuItem tittle3 = menu.findItem(R.id.navigation_account);
+        tittle3.setTitle(getString(R.string.account));
+
+        MenuItem tittle4 = menu.findItem(R.id.navigation_logout);
+        tittle4.setTitle(getString(R.string.logOut));
+
+        navigationView.setNavigationItemSelectedListener(this);
+        ///
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar,
                 R.string.navigation_drawer_open, R.string.navigation_drawer_close);
 
@@ -59,7 +76,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                         new AccountFragment()).commit();
                 break;
             case R.id.navigation_logout:
-                Toast.makeText(this, "Send", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, getString(R.string.loggedOut), Toast.LENGTH_SHORT).show();
                 break;
         }
 

@@ -25,4 +25,8 @@
     <string name="welcome">Welcome!</string>
     <string name="editProfile">Edit Profile</string>
     <string name="logOut">Log Out</string>
+    <string name="loggedOut">Logged out!</string>
+    <string name="account">Account</string>
+    <string name="transactions">Transactions</string>
+    <string name="home">Home</string>
 </resources>
