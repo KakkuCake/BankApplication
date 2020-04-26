@@ -27,14 +27,14 @@ import java.util.Map;
 
 public class EditProfileActivity extends AppCompatActivity {
 
-    private TextInputLayout first_name, email, password;
+    private TextInputLayout first_name, email, password, c_password;
     private Button button_save;
     SessionManager sessionManager;
     String getId;
     //KALLE
-    //private static String URL_EDIT = "http://192.168.1.162/android_register_login/edit_detail.php";
+    private static String URL_EDIT = "http://192.168.1.162/android_register_login/edit_detail.php";
     //JOONA 192.168.1.4
-    private static String URL_EDIT = "http://192.168.1.4/android_register_login/edit_detail.php";
+    //private static String URL_EDIT = "http://192.168.1.4/android_register_login/edit_detail.php";
     Validation validator = new Validation(this);
 
     @Override
@@ -48,6 +48,7 @@ public class EditProfileActivity extends AppCompatActivity {
         first_name = findViewById(R.id.first_name);
         email= findViewById(R.id.email);
         password = findViewById(R.id.password);
+        c_password = findViewById(R.id.c_password);
 
         HashMap<String, String> user = sessionManager.getUserDetail();
         getId = user.get(sessionManager.ID);
@@ -68,9 +69,10 @@ public class EditProfileActivity extends AppCompatActivity {
         String first_nameInput = first_name.getEditText().getText().toString().trim();
         String emailInput = email.getEditText().getText().toString().trim();
         String passwordInput = password.getEditText().getText().toString().trim();
+        String c_passwordInput = c_password.getEditText().getText().toString().trim();
 
-        if (!validator.validateFirstName(first_nameInput) | !validator.validateEmail(emailInput) |
-                !validator.validatePassword(passwordInput)) {
+        if (!validator.validateFirstName(first_nameInput) | !validator.validateEmail(emailInput) | !validator.checkThatPasswordsMatch(passwordInput, c_passwordInput)
+                | !validator.validatePassword(passwordInput) | !validator.validateConfirmedPassword(c_passwordInput)) {
             return;
         }
 

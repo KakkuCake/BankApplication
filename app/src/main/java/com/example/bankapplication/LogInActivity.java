@@ -43,9 +43,9 @@ public class LogInActivity extends AppCompatActivity {
     private ProgressBar loading;
 
     //KALLE
-    //private static String URL_LOGIN = "http://192.168.1.162/android_register_login/login.php";
+    private static String URL_LOGIN = "http://192.168.1.162/android_register_login/login.php";
     //JOONA
-    private static String URL_LOGIN = "http://192.168.1.4/android_register_login/login.php";
+    //private static String URL_LOGIN = "http://192.168.1.4/android_register_login/login.php";
 
     SessionManager sessionManager;
 

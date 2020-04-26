@@ -16,8 +16,13 @@ import androidx.appcompat.widget.Toolbar;
 
 import com.google.android.material.navigation.NavigationView;
 
+import java.util.HashMap;
+
 public class HomeActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+
+    public String mName, mEmail;
     private DrawerLayout drawer;
+    SessionManager sessionManager;
 
     @SuppressLint("ResourceType")
     @Override
@@ -25,6 +30,8 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
+        sessionManager = new SessionManager(this);
+        sessionManager.checkLogin();
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -37,7 +44,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         tittle1.setTitle(getString(R.string.home));
 
         MenuItem tittle2 = menu.findItem(R.id.navigation_bank_actions);
-        tittle2.setTitle("ei toimi jostai syystä käännös pitää selvittää.");
+        tittle2.setTitle(getString(R.string.transactions));
 
         MenuItem tittle3 = menu.findItem(R.id.navigation_account);
         tittle3.setTitle(getString(R.string.account));
@@ -53,19 +60,25 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
+        HashMap<String, String> user = sessionManager.getUserDetail(); // Selvitetään kirjautuneen käyttäjän etunimi ja sähköposti.
+        mName = user.get(sessionManager.FIRST_NAME);
+        mEmail = user.get(sessionManager.EMAIL);
+
         if (savedInstanceState == null) {
+            HomeFragment homeFragment = HomeFragment.newInstance(mName, mEmail); // Lähetetään HomeFragmenttiin kirjautuneen käyttäjän etunimi ja sukunimi.
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                    new HomeFragment()).commit();
+                    homeFragment).commit();
             navigationView.setCheckedItem(R.id.navigation_home);
         }
     }
 
     @Override
-    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) { // Tässä metodissa on määritelty mitä tapahtuu kun painaa eri kohdista valikkoa.
         switch (item.getItemId()) {
             case R.id.navigation_home:
+                HomeFragment homeFragment = HomeFragment.newInstance(mName, mEmail); // Lähetetään HomeFragmenttiin kirjautuneen käyttäjän etunimi ja sukunimi.
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                        new HomeFragment()).commit();
+                        homeFragment).commit();
                 break;
             case R.id.navigation_bank_actions:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
@@ -76,7 +89,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                         new AccountFragment()).commit();
                 break;
             case R.id.navigation_logout:
-                Toast.makeText(this, getString(R.string.loggedOut), Toast.LENGTH_SHORT).show();
+                sessionManager.logout();
                 break;
         }
 

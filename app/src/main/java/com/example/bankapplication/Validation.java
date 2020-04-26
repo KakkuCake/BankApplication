@@ -3,6 +3,7 @@ package com.example.bankapplication;
 import android.app.Activity;
 import android.content.Context;
 import android.util.Patterns;
+import android.widget.Toast;
 
 import com.google.android.material.textfield.TextInputLayout;
 
@@ -108,4 +109,20 @@ public class Validation {
             return true;
         }
     }
+
+    protected boolean checkThatPasswordsMatch(String passwordInput, String c_passwordInput) {
+
+        TextInputLayout password = (TextInputLayout) ((Activity)context).findViewById(R.id.password);
+        TextInputLayout c_password = (TextInputLayout) ((Activity)context).findViewById(R.id.c_password);
+
+        if (passwordInput.equals(c_passwordInput)) {
+            c_password.setError(null);
+            return true;
+        } else {
+            Toast.makeText(context, "Passwords don't match", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+
+    }
+
 }
