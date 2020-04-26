@@ -18,8 +18,6 @@ public class HomeFragment extends Fragment {
     private static final String ARG_EMAIL = "argEmail";
     String mName, mEmail;
     private TextView name, email;
-    private Button button_logout;
-    private Button button_edit_profile;
     SessionManager sessionManager;
 
     public static HomeFragment newInstance(String name, String email) {
@@ -44,25 +42,10 @@ public class HomeFragment extends Fragment {
             mEmail = getArguments().getString(ARG_EMAIL);
         }
 
-
         name.setText(mName);
         email.setText(mEmail);
 
-        button_edit_profile = (Button) view.findViewById(R.id.button_edit_profile);
-        button_edit_profile.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivityEditProfile();
-            }
-        });
-
         return view;
-    }
-
-    // This method gets the user details
-    private void startActivityEditProfile() {
-        Intent intent = new Intent(getActivity(), EditProfileActivity.class);
-        startActivity(intent);
     }
 
 }
