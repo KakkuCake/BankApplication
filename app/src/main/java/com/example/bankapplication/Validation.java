@@ -22,7 +22,6 @@ public class Validation {
                     ".{4,}" +               //at least 4 characters
                     "$");
 
-    private TextInputLayout first_name, last_name, email, password, c_password;
     Context context;
 
         public Validation(Context context){  //Tämän rakentajan avulla voidaan tehdä muutoksia eri näkymissä.

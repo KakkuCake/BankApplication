@@ -90,6 +90,16 @@ public class RegisterActivity extends AppCompatActivity {
                         Toast.makeText(RegisterActivity.this, getString(R.string.registerSuccess), Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent(RegisterActivity.this, LogInActivity.class);
                         startActivity(intent);
+
+                    } else if(success.equals("-1")) {
+                        Toast.makeText(RegisterActivity.this, "Sähköposti varattu", Toast.LENGTH_SHORT).show();
+                        loading.setVisibility(View.GONE);
+                        button_regist.setVisibility(View.VISIBLE);
+
+                    } else {
+                        Toast.makeText(RegisterActivity.this, getString(R.string.registerFail), Toast.LENGTH_SHORT).show();
+                        loading.setVisibility(View.GONE);
+                        button_regist.setVisibility(View.VISIBLE);
                     }
 
                 } catch (JSONException e) {
