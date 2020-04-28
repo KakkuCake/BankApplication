@@ -111,17 +111,66 @@ public class Validation {
 
     protected boolean checkThatPasswordsMatch(String passwordInput, String c_passwordInput) {
 
-        TextInputLayout password = (TextInputLayout) ((Activity)context).findViewById(R.id.password);
-        TextInputLayout c_password = (TextInputLayout) ((Activity)context).findViewById(R.id.c_password);
-
         if (passwordInput.equals(c_passwordInput)) {
-            c_password.setError(null);
             return true;
         } else {
             Toast.makeText(context, "Passwords don't match", Toast.LENGTH_SHORT).show();
             return false;
         }
 
+    }
+
+    protected boolean validateAccountNumber(String account_numberInput) {
+
+        TextInputLayout account_number = (TextInputLayout) ((Activity)context).findViewById(R.id.account_number);
+
+        try
+        {
+            float f = Float.valueOf(account_numberInput.trim()).floatValue();
+            account_number.setError(null);
+            return true;
+        }
+        catch (NumberFormatException nfe)
+        {
+            account_number.setError("Invalid account_number, please try again!");
+            return false;
+        }
+    }
+
+    protected boolean validateBalance(String balanceInput) {
+
+        TextInputLayout balance = (TextInputLayout) ((Activity)context).findViewById(R.id.balance);
+
+        try
+        {
+            float f = Float.valueOf(balanceInput.trim()).floatValue();
+            balance.setError(null);
+            return true;
+        }
+        catch (NumberFormatException nfe)
+        {
+            balance.setError("Invalid balance, please try again!");
+            return false;
+        }
+    }
+
+
+
+    protected boolean validateCredit(String creditInput) {
+
+        TextInputLayout credit = (TextInputLayout) ((Activity)context).findViewById(R.id.credit);
+
+        try
+        {
+            float f = Float.valueOf(creditInput.trim()).floatValue();
+            credit.setError(null);
+            return true;
+        }
+        catch (NumberFormatException nfe)
+        {
+            credit.setError("Invalid credit, please try again!");
+            return false;
+        }
     }
 
 }

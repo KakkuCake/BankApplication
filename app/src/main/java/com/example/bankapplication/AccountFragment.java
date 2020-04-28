@@ -34,7 +34,7 @@ public class AccountFragment extends Fragment {
         button_create_accounts.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startCreateAccountsActivity();
+                startCreateNewAccountActivity();
 
             }
         });
@@ -46,8 +46,8 @@ public class AccountFragment extends Fragment {
         startActivity(intent);
     }
 
-    private void startCreateAccountsActivity() {
-        Intent intent = new Intent(getActivity(), CreateAccountsActivity.class);
+    private void startCreateNewAccountActivity() {
+        Intent intent = new Intent(getActivity(), CreateNewAccountActivity.class);
         startActivity(intent);
     }
 
