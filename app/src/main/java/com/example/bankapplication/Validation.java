@@ -24,7 +24,7 @@ public class Validation {
 
     Context context;
 
-        public Validation(Context context){  //Tämän rakentajan avulla voidaan tehdä muutoksia eri näkymissä.
+    public Validation(Context context){  //Tämän rakentajan avulla voidaan tehdä muutoksia eri näkymissä.
             this.context=context;
         }
 
