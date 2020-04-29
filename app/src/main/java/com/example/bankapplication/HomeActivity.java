@@ -10,7 +10,6 @@ import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.Toast;
 
 import androidx.appcompat.widget.Toolbar;
 
@@ -24,6 +23,8 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     private DrawerLayout drawer;
     SessionManager sessionManager;
 
+    Database database = new Database(this);
+
     @SuppressLint("ResourceType")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +33,13 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
 
         sessionManager = new SessionManager(this);
         sessionManager.checkLogin();
+        HashMap<String, String> user = sessionManager.getUserDetail(); // Selvitetään kirjautuneen käyttäjän etunimi ja sähköposti.
+        mName = user.get(sessionManager.FIRST_NAME);
+        mEmail = user.get(sessionManager.EMAIL);
+
+        database.checkRegularAccountData(mEmail);
+        database.checkCreditAccountData(mEmail);
+        database.checkSavingsAccountData(mEmail);
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -59,10 +67,6 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
 
         drawer.addDrawerListener(toggle);
         toggle.syncState();
-
-        HashMap<String, String> user = sessionManager.getUserDetail(); // Selvitetään kirjautuneen käyttäjän etunimi ja sähköposti.
-        mName = user.get(sessionManager.FIRST_NAME);
-        mEmail = user.get(sessionManager.EMAIL);
 
         if (savedInstanceState == null) {
             HomeFragment homeFragment = HomeFragment.newInstance(mName, mEmail); // Lähetetään HomeFragmenttiin kirjautuneen käyttäjän etunimi ja sukunimi.

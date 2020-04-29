@@ -3,8 +3,8 @@ package com.example.bankapplication;
 public class CreditAccount extends Account {
 
     private int credit;
-    public CreditAccount(String aN, int b, int c) {
-        super(aN, b);
+    public CreditAccount(String eM, String aN, int b, int c) {
+        super(eM, aN, b);
         credit = c;
     }
 

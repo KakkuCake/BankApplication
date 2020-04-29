@@ -16,16 +16,12 @@ import java.util.HashMap;
 public class CreateNewAccountActivity2 extends AppCompatActivity {
 
     private Button button_create_new_account;
-    private ProgressBar loading;
     String getEmail, account_type;
     private TextInputLayout account_number, balance, credit;
-    //private static String URL_CREATE_REGULAR_ACCOUNT = "http://192.168.1.162/android_register_login/create_regular_account.php";
-    private static String URL_CREATE_CREDIT_ACCOUNT = "http://192.168.1.162/android_register_login/create_credit_account.php";
-    private static String URL_CREATE_SAVINGS_ACCOUNT = "http://192.168.1.162/android_register_login/create_savings_account.php";
 
     SessionManager sessionManager;
     Validation validator = new Validation(this);
-    Bank bank = new Bank(this);
+    Database database = new Database(this);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,8 +35,6 @@ public class CreateNewAccountActivity2 extends AppCompatActivity {
         HashMap<String, String> user = sessionManager.getUserDetail();
         getEmail = user.get(sessionManager.EMAIL);
 
-        loading = findViewById(R.id.loading);
-
         account_number = findViewById(R.id.account_number);
         balance = findViewById(R.id.balance);
         credit = findViewById(R.id.credit);
@@ -49,6 +43,7 @@ public class CreateNewAccountActivity2 extends AppCompatActivity {
         button_create_new_account.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                     String account_numberInput = account_number.getEditText().getText().toString().trim();
                     String balanceInput = balance.getEditText().getText().toString().trim();
                     String creditInput = credit.getEditText().getText().toString().trim();
@@ -63,11 +58,11 @@ public class CreateNewAccountActivity2 extends AppCompatActivity {
                     final String credit = creditInput;
 
                 if (account_type.equals("regularAccount")) {
-                    bank.addRegularAccount(v, email, account_number, balance);
+                    database.addRegularAccount(v, email, account_number, balance);
                 } else if (account_type.equals("creditAccount")) {
-                    bank.addCreditAccount(v, email, account_number, balance, credit);
+                    database.addCreditAccount(v, email, account_number, balance, credit);
                 } else if (account_type.equals("savingsAccount")) {
-                    bank.addSavingsAccount(v, email, account_number, balance);
+                    database.addSavingsAccount(v, email, account_number, balance);
                 }
             }
         });

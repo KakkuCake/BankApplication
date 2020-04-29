@@ -2,8 +2,8 @@ package com.example.bankapplication;
 
 public class RegularAccount extends Account {
 
-    public RegularAccount(String aN, int b) {
-        super(aN, b);
+    public RegularAccount(String email, String account_number, int balance) {
+        super(email, account_number, balance);
     }
 
 }

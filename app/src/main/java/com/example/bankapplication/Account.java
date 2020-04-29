@@ -1,13 +1,18 @@
 package com.example.bankapplication;
 
 public abstract class Account {
-    private String acNumber;
+    private String email, acNumber;
     int balance;
 
-    public Account(String aN, int b) {
+    public Account(String eM, String aN, int b) {
+        email = eM;
         acNumber = aN;
         balance = b;
         System.out.println("Account created.");
+    }
+
+    public String getEmail() {
+        return email;
     }
 
     public String getAcNumber() {
