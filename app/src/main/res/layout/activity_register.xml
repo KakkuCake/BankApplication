@@ -96,7 +96,7 @@
 
     <Button
         android:id="@+id/button_regist"
-        android:backgroundTint="@color/colorPrimary"
+        android:background="@android:color/holo_blue_light"
         android:textColor="@android:color/white"
         android:text="@string/register"
         android:layout_margin="30dp"

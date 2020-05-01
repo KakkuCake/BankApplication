@@ -53,15 +53,17 @@ public class CreateNewAccountActivity2 extends AppCompatActivity {
                     }
 
                     final String email = getEmail;
-                    final String account_number = account_numberInput;
                     final String balance = balanceInput;
                     final String credit = creditInput;
 
                 if (account_type.equals("regularAccount")) {
+                    final String account_number = "R" + account_numberInput;
                     database.addRegularAccount(v, email, account_number, balance);
                 } else if (account_type.equals("creditAccount")) {
+                    final String account_number = "C" + account_numberInput;
                     database.addCreditAccount(v, email, account_number, balance, credit);
                 } else if (account_type.equals("savingsAccount")) {
+                    final String account_number = "S" + account_numberInput;
                     database.addSavingsAccount(v, email, account_number, balance);
                 }
             }

@@ -12,7 +12,11 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".CreateNewAccountActivity"></activity>
+        <activity android:name=".AddMoneyActivity"></activity>
+        <activity android:name=".AccountTransfer" />
+        <activity android:name=".TransferActivity" />
+        <activity android:name=".BankTransactionsActivity" />
+        <activity android:name=".CreateNewAccountActivity" />
         <activity android:name=".CreateNewAccountActivity2" />
         <activity android:name=".LogInActivity">
             <intent-filter>

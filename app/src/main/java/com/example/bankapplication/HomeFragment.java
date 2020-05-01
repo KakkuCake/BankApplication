@@ -18,7 +18,6 @@ public class HomeFragment extends Fragment {
     private static final String ARG_EMAIL = "argEmail";
     String mName, mEmail;
     private TextView name, email;
-    SessionManager sessionManager;
 
     public static HomeFragment newInstance(String name, String email) {
         HomeFragment fragment = new HomeFragment();

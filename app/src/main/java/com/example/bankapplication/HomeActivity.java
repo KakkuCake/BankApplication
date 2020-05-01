@@ -24,6 +24,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     SessionManager sessionManager;
 
     Database database = new Database(this);
+    Bank bank = Bank.getInstance();
 
     @SuppressLint("ResourceType")
     @Override
@@ -36,6 +37,8 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         HashMap<String, String> user = sessionManager.getUserDetail(); // Selvitetään kirjautuneen käyttäjän etunimi ja sähköposti.
         mName = user.get(sessionManager.FIRST_NAME);
         mEmail = user.get(sessionManager.EMAIL);
+
+        bank.clearArrayList();
 
         database.checkRegularAccountData(mEmail);
         database.checkCreditAccountData(mEmail);
@@ -85,14 +88,16 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                         homeFragment).commit();
                 break;
             case R.id.navigation_bank_actions:
+                BankActionsFragment bankActionsFragment= BankActionsFragment.newInstance(mEmail);
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                        new BankActionsFragment()).commit();
+                        bankActionsFragment).commit();
                 break;
             case R.id.navigation_account:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                         new AccountFragment()).commit();
                 break;
             case R.id.navigation_logout:
+                bank.clearArrayList();
                 sessionManager.logout();
                 break;
         }

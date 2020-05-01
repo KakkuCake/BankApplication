@@ -124,9 +124,14 @@ public class Validation {
 
         TextInputLayout account_number = (TextInputLayout) ((Activity)context).findViewById(R.id.account_number);
 
+        if (account_numberInput.length() != 7) {
+            account_number.setError("Account number must be 7 digits!");
+            return false;
+        }
+
         try
         {
-            float f = Float.valueOf(account_numberInput.trim()).floatValue();
+            int i = Integer.valueOf(account_numberInput.trim()).intValue();
             account_number.setError(null);
             return true;
         }

@@ -35,10 +35,13 @@ public class Database {
     private static String URL_CHECK_REGULAR_ACCOUNT = "http://192.168.1.162/android_register_login/check_regular_account.php";
     private static String URL_CHECK_CREDIT_ACCOUNT = "http://192.168.1.162/android_register_login/check_credit_account.php";
     private static String URL_CHECK_SAVINGS_ACCOUNT = "http://192.168.1.162/android_register_login/check_savings_account.php";
+    private static String URL_ADD_MONEY_R = "http://192.168.1.162/android_register_login/add_money_regular_account.php";
+    private static String URL_ADD_MONEY_C = "http://192.168.1.162/android_register_login/add_money_credit_account.php";
+    private static String URL_ADD_MONEY_S = "http://192.168.1.162/android_register_login/add_money_savings_account.php";
 
     Context context;
 
-    public Database(Context context){  //Tämän rakentajan avulla voidaan tehdä muutoksia eri näkymissä.
+    public Database(Context context) {  //Tämän rakentajan avulla voidaan tehdä muutoksia eri näkymissä.
         this.context=context;
     }
 
@@ -247,8 +250,8 @@ public class Database {
                     String success = jsonObject.getString("success");
 
                     if(success.equals("1")) {
-                        int balance_int = Integer.parseInt(balance); //Kun luodaan uusi regularAccount olio, muunnetaan balance int -muotoon.
-                        bank.addRegularAccount(email, account_number, balance_int);
+                        float balance_float = Float.parseFloat(balance);  //Kun luodaan uusi regularAccount olio, muunnetaan balance int -muotoon.
+                        bank.addRegularAccount(email, account_number, balance_float);
                         Toast.makeText(context, "Success!", Toast.LENGTH_SHORT).show();
                         startHomeActivity(context);
                     } else if (success.equals("-1")) {
@@ -307,9 +310,9 @@ public class Database {
                     String success = jsonObject.getString("success");
 
                     if(success.equals("1")) {
-                        int balance_int = Integer.parseInt(balance); //Kun luodaan uusi regularAccount olio, muunnetaan balance int -muotoon.
-                        int credit_int = Integer.parseInt(credit); //Kun luodaan uusi regularAccount olio, muunnetaan credit int -muotoon.
-                        bank.addCreditAccount(email, account_number, balance_int, credit_int);
+                        float balance_float = Float.parseFloat(balance); //Kun luodaan uusi regularAccount olio, muunnetaan balance flaot -muotoon.
+                        float credit_float = Float.parseFloat(credit); //Kun luodaan uusi regularAccount olio, muunnetaan credit float -muotoon.
+                        bank.addCreditAccount(email, account_number, balance_float, credit_float);
                         Toast.makeText(context, "Success!", Toast.LENGTH_SHORT).show();
                         startHomeActivity(context);
                     } else if (success.equals("-1")) {
@@ -429,7 +432,7 @@ public class Database {
                             String account_number = object.getString("account_number").trim();
                             String balance = object.getString("balance").trim();
 
-                            int balance_int = Integer.parseInt(balance); //Kun luodaan uusi regularAccount olio, muunnetaan balance int -muotoon.
+                            float balance_int = Float.parseFloat(balance); //Kun luodaan uusi regularAccount olio, muunnetaan balance int -muotoon.
                             bank.addRegularAccount(email, account_number, balance_int);
                         }
 
@@ -481,8 +484,8 @@ public class Database {
                             String balance = object.getString("balance").trim();
                             String credit = object.getString("credit").trim();
 
-                            int balance_int = Integer.parseInt(balance); //Kun luodaan uusi regularAccount olio, muunnetaan balance int -muotoon.
-                            int credit_int = Integer.parseInt(credit); //Kun luodaan uusi regularAccount olio, muunnetaan balance int -muotoon.
+                            float balance_int = Float.parseFloat(balance); //Kun luodaan uusi regularAccount olio, muunnetaan balance int -muotoon.
+                            float credit_int = Float.parseFloat(credit); //Kun luodaan uusi regularAccount olio, muunnetaan balance int -muotoon.
 
                             System.out.println("credit INT: " + balance_int);
                             System.out.println("credit: " + credit_int);
@@ -561,6 +564,92 @@ public class Database {
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> params = new HashMap<>();
                 params.put("email", email);
+                return params;
+            }
+        };
+
+        RequestQueue requestQueue = Volley.newRequestQueue(context);
+        requestQueue.add(stringRequest);
+
+    }
+
+    protected void addMoneyRegularAccount(View v, final String account_number, final String balance) {
+
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, URL_ADD_MONEY_R, new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        try {
+                            JSONObject jsonObject = new JSONObject(response);
+                            String success = jsonObject.getString("success");
+
+                            if (success.equals("1")) {
+                                Toast.makeText( context, "Deposit was successful", Toast.LENGTH_SHORT).show();
+                                startHomeActivity(context);
+                            } else {
+                                Toast.makeText( context, "Deposit failed", Toast.LENGTH_SHORT).show();
+                            }
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                            Toast.makeText( context, "Connection error: " + e.toString(), Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText( context, "Connection error: " + error.toString(), Toast.LENGTH_SHORT).show();
+                    }
+                })
+        {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<>();
+                params.put("account_number", account_number);
+                params.put("balance", balance);
+                return params;
+            }
+        };
+
+        RequestQueue requestQueue = Volley.newRequestQueue(context);
+        requestQueue.add(stringRequest);
+
+    }
+
+    protected void addMoneyCreditAccount(View v, final String account_number, final String balance) {
+
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, URL_ADD_MONEY_C, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
+                    JSONObject jsonObject = new JSONObject(response);
+                    String success = jsonObject.getString("success");
+
+                    if (success.equals("1")) {
+                        Toast.makeText( context, "Deposit was successful", Toast.LENGTH_SHORT).show();
+                        startHomeActivity(context);
+                    } else {
+                        Toast.makeText( context, "Deposit failed", Toast.LENGTH_SHORT).show();
+                    }
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    Toast.makeText( context, "Connection error: " + e.toString(), Toast.LENGTH_SHORT).show();
+                }
+            }
+        },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText( context, "Connection error: " + error.toString(), Toast.LENGTH_SHORT).show();
+                    }
+                })
+        {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<>();
+                params.put("account_number", account_number);
+                params.put("balance", balance);
                 return params;
             }
         };

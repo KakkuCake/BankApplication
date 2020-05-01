@@ -1,10 +1,11 @@
 package com.example.bankapplication;
 
 public abstract class Account {
-    private String email, acNumber;
-    int balance;
 
-    public Account(String eM, String aN, int b) {
+    private String email, acNumber;
+    protected float balance;
+
+    public Account(String eM, String aN, float b) {
         email = eM;
         acNumber = aN;
         balance = b;
@@ -19,12 +20,12 @@ public abstract class Account {
         return acNumber;
     }
 
-    public void setBalance(int amount) {
+    public void setBalance(float amount) {
         if (0 <= balance - amount)
             this.balance += amount;
     }
 
-    public int getBalance() {
+    public float getBalance() {
         return balance;
     }
 }
