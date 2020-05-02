@@ -13,6 +13,10 @@ public class CreditAccount extends Account {
         return credit;
     }
 
+    public void setCreditLimit(float new_credit) {
+        credit = new_credit;
+    }
+
     public void setBalance(float amount) {
         if (-credit <= balance + amount)
             this.balance += amount;

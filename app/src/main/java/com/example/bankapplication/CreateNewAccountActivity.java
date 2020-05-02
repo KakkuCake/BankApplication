@@ -9,23 +9,10 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
-import android.widget.Toast;
-
-import com.android.volley.AuthFailureError;
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
-
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class CreateNewAccountActivity extends AppCompatActivity {
 
@@ -70,15 +57,25 @@ public class CreateNewAccountActivity extends AppCompatActivity {
         button_select_account.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startCreateAccountsActivity(account_type);
+                if (account_type.equals("regularAccount")) {
+                    startCreateRegularAccountActivity();
+                } else if (account_type.equals("creditAccount")) {
+                    startCreateCreditAccountActivity();
+                } else if (account_type.equals("savingsAccount")) {
+                    System.out.println("S");
+                }
             }
         });
 
     }
 
-    private void startCreateAccountsActivity(String account_type) {
-        Intent intent = new Intent(CreateNewAccountActivity.this, CreateNewAccountActivity2.class);
-        intent.putExtra(ACCOUNT_TYPE, account_type);
+    private void startCreateRegularAccountActivity() {
+        Intent intent = new Intent(CreateNewAccountActivity.this, CreateNewRegularAccountActivity.class);
+        startActivity(intent);
+    }
+
+    private void startCreateCreditAccountActivity() {
+        Intent intent = new Intent(CreateNewAccountActivity.this, CreateNewCreditAccountActivity.class);
         startActivity(intent);
     }
 

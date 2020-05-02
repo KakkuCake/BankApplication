@@ -32,6 +32,15 @@ public class Bank {
         }
     }
 
+    public void setNewCreditLimit(String account_number, float new_credit) {
+        for (Account account : mAccounts) {
+            if (account instanceof CreditAccount) {
+                if (account_number.equals(account.getAcNumber()))
+                    ((CreditAccount) account).setCreditLimit(new_credit);
+            }
+        }
+    }
+
 
     public void printAllAccounts(String email) {
         System.out.println("All accounts:");

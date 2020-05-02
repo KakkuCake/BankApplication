@@ -1,6 +1,5 @@
 package com.example.bankapplication;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -10,6 +9,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -53,6 +53,7 @@ public class BankActionsFragment extends Fragment {
 
         spinner = view.findViewById(R.id.spinner2);
         spinner.setAdapter(adapter);
+
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -65,21 +66,56 @@ public class BankActionsFragment extends Fragment {
         });
 
         button_transaction = (Button) view.findViewById(R.id.button_transaction);
+
+        if (spinner.getCount()==0){
+            Toast.makeText(getActivity(),"You have no accounts", Toast.LENGTH_LONG).show();
+            button_transaction.setVisibility(View.GONE);
+            spinner.setVisibility(View.GONE);
+        }
+
         button_transaction.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(account);
+
+                if (account.equals(null)) {
+                    Toast.makeText(getActivity(), "You have no accounts, please go back and create one", Toast.LENGTH_SHORT).show();
+                }
+
+                char first_letter = account.charAt(0);
+                String account_mark = "" + first_letter;  //Let's get the account mark (which is either R, C, or S) to know which account user is using.
+
+                if (account_mark.equals("R")) {
+                    startRegularAccountActivity(account);
+                } else if (account_mark.equals("C")) {
+                    startCreditAccountActivity(account);
+                } else {
+                    System.out.println("");
+                }
             }
         });
 
         return view;
     }
 
-    private void startActivity(String account) {
-        Intent intent = new Intent(getActivity(), BankTransactionsActivity.class);
+    private void startRegularAccountActivity(String account) {
+        Intent intent = new Intent(getActivity(), RegularAccountActivity.class);
         intent.putExtra(ACCOUNT_NUMBER, account);
         startActivity(intent);
     }
+
+    private void startCreditAccountActivity(String account) {
+        Intent intent = new Intent(getActivity(), CreditAccountActivity.class);
+        intent.putExtra(ACCOUNT_NUMBER, account);
+        startActivity(intent);
+    }
+
+/*
+    private void startSavingsAccountActivity(String account) {
+        Intent intent = new Intent(getActivity(), SavingsAccountActivity.class);
+        intent.putExtra(ACCOUNT_NUMBER, account);
+        startActivity(intent);
+    } */
+
 
 
 

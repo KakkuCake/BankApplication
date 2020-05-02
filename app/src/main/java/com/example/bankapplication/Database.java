@@ -38,6 +38,7 @@ public class Database {
     private static String URL_ADD_MONEY_R = "http://192.168.1.162/android_register_login/add_money_regular_account.php";
     private static String URL_ADD_MONEY_C = "http://192.168.1.162/android_register_login/add_money_credit_account.php";
     private static String URL_ADD_MONEY_S = "http://192.168.1.162/android_register_login/add_money_savings_account.php";
+    private static String URL_CHANGE_CREDIT_LIMIT = "http://192.168.1.162/android_register_login/change_credit_limit.php";
 
     Context context;
 
@@ -45,7 +46,7 @@ public class Database {
         this.context=context;
     }
 
-    Bank bank = Bank.getInstance();  //Käytetään singleton-periaatetta, koska pankkioliota tarvitaan useammassa luokassa/näkymässä.
+    Bank bank = Bank.getInstance();  //Käytetään singleton-periaatetta, jotta käytetään aina samaa pankkioliota.
 
     protected void Regist(View v, final String email, final String first_name, final String last_name, final String password) {
 
@@ -255,6 +256,10 @@ public class Database {
                         Toast.makeText(context, "Success!", Toast.LENGTH_SHORT).show();
                         startHomeActivity(context);
                     } else if (success.equals("-1")) {
+                        Toast.makeText(context, "The account number has been already taken", Toast.LENGTH_LONG).show();
+                        loading.setVisibility(View.GONE);
+                        button_create_new_account.setVisibility(View.VISIBLE);
+                    } else if (success.equals("-2")) {
                         Toast.makeText(context, "You already have one regularaccount, please read more about our banks policy", Toast.LENGTH_LONG).show();
                         startHomeActivity(context);
                     } else {
@@ -316,6 +321,10 @@ public class Database {
                         Toast.makeText(context, "Success!", Toast.LENGTH_SHORT).show();
                         startHomeActivity(context);
                     } else if (success.equals("-1")) {
+                        Toast.makeText(context, "The account number has been already taken", Toast.LENGTH_LONG).show();
+                        loading.setVisibility(View.GONE);
+                        button_create_new_account.setVisibility(View.VISIBLE);
+                    } else if (success.equals("-2")) {
                         Toast.makeText(context, "You already have one creditaccount, please read more about our banks policy", Toast.LENGTH_LONG).show();
                         startHomeActivity(context);
                     } else {
@@ -323,7 +332,6 @@ public class Database {
                         loading.setVisibility(View.GONE);
                         button_create_new_account.setVisibility(View.VISIBLE);
                     }
-
                 } catch (JSONException e) {
                     e.printStackTrace();
                     Toast.makeText(context, "Failed", Toast.LENGTH_SHORT).show();
@@ -573,7 +581,7 @@ public class Database {
 
     }
 
-    protected void addMoneyRegularAccount(View v, final String account_number, final String balance) {
+    protected void addMoneyRegularAccount(View v, final String email, final String account_number, final String balance) {
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST, URL_ADD_MONEY_R, new Response.Listener<String>() {
                     @Override
@@ -605,6 +613,7 @@ public class Database {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> params = new HashMap<>();
+                params.put("email", email);
                 params.put("account_number", account_number);
                 params.put("balance", balance);
                 return params;
@@ -616,7 +625,7 @@ public class Database {
 
     }
 
-    protected void addMoneyCreditAccount(View v, final String account_number, final String balance) {
+    protected void addMoneyCreditAccount(View v, final String email, final String account_number, final String balance) {
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST, URL_ADD_MONEY_C, new Response.Listener<String>() {
             @Override
@@ -648,8 +657,52 @@ public class Database {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> params = new HashMap<>();
+                params.put("email", email);
                 params.put("account_number", account_number);
                 params.put("balance", balance);
+                return params;
+            }
+        };
+
+        RequestQueue requestQueue = Volley.newRequestQueue(context);
+        requestQueue.add(stringRequest);
+
+    }
+
+    protected void changeCreditLimit(View v, final String account_number, final String credit) {
+
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, URL_CHANGE_CREDIT_LIMIT, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
+                    JSONObject jsonObject = new JSONObject(response);
+                    String success = jsonObject.getString("success");
+
+                    if (success.equals("1")) {
+                        Toast.makeText(context, "Credit limit change was successful!", Toast.LENGTH_SHORT).show();
+                        startHomeActivity(context);
+                    } else {
+                        Toast.makeText( context, "Credit limit change failed", Toast.LENGTH_SHORT).show();
+                    }
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    Toast.makeText( context, "Connection error: " + e.toString(), Toast.LENGTH_SHORT).show();
+                }
+            }
+        },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText( context, "Connection error: " + error.toString(), Toast.LENGTH_SHORT).show();
+                    }
+                })
+        {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<>();
+                params.put("account_number", account_number);
+                params.put("credit", credit);
                 return params;
             }
         };
