@@ -2,7 +2,7 @@ package com.example.bankapplication;
 
 public abstract class Account {
 
-    private String email, acNumber;
+    protected String email, acNumber;
     protected float balance;
 
     public Account(String eM, String aN, float b) {

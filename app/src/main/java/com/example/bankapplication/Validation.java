@@ -149,8 +149,13 @@ public class Validation {
         try
         {
             float f = Float.valueOf(balanceInput.trim()).floatValue();
-            balance.setError(null);
-            return true;
+            if (f<0) {
+                balance.setError("balance can't be negative");
+                return false;
+            } else  {
+                balance.setError(null);
+                return true;
+            }
         }
         catch (NumberFormatException nfe)
         {
@@ -168,8 +173,13 @@ public class Validation {
         try
         {
             float f = Float.valueOf(creditInput.trim()).floatValue();
-            credit.setError(null);
-            return true;
+            if (f<0) {
+                credit.setError("balance can't be negative");
+                return false;
+            } else  {
+                credit.setError(null);
+                return true;
+            }
         }
         catch (NumberFormatException nfe)
         {

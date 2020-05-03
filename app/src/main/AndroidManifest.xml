@@ -12,7 +12,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".CreateNewCreditAccountActivity"></activity>
+        <activity android:name=".AccountNumberActivity"></activity>
+        <activity android:name=".CreateNewCreditAccountActivity" />
         <activity android:name=".ChangeCreditLimitActivity" />
         <activity android:name=".CreditAccountActivity" />
         <activity android:name=".AddMoneyActivity" />

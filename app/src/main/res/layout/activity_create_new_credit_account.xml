@@ -9,8 +9,20 @@
     android:paddingLeft="30dp"
     android:paddingRight="30dp"
     android:paddingTop="80dp"
-    android:background="@android:color/holo_orange_light"
-    tools:context=".TransferActivity">
+    android:background="@android:color/holo_green_light"
+    tools:context=".CreateNewCreditAccountActivity">
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/account_number"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:errorEnabled="true">
+        <com.google.android.material.textfield.TextInputEditText
+            android:hint="account number"
+            android:textColor="@color/colorPrimaryDark"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+    </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/balance"
@@ -18,12 +30,28 @@
         android:layout_height="wrap_content"
         app:errorEnabled="true"
         app:passwordToggleEnabled="true">
+
         <com.google.android.material.textfield.TextInputEditText
-            android:hint="Put here the amount of money"
+            android:hint="Amount of money to deposit:"
             android:textColor="@color/colorPrimaryDark"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
     </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/credit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:passwordToggleEnabled="true"
+        app:errorEnabled="true">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Credit (only if u add a credit account)"
+            android:textColor="@color/colorPrimaryDark" />
+    </com.google.android.material.textfield.TextInputLayout>
+
 
     <ProgressBar
         android:id="@+id/loading"
@@ -34,7 +62,7 @@
 
 
     <Button
-        android:id="@+id/button_transfer"
+        android:id="@+id/button_create_new_account"
         android:backgroundTint="@color/colorPrimary"
         android:textColor="@android:color/white"
         android:text="Confirm"

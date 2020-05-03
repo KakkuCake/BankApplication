@@ -25,7 +25,7 @@ public class RegularAccountActivity extends AppCompatActivity {
         button_transfer_r.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity1();
+                System.out.println("dsafadf");
             }
         });
         button_account_transfer_r = findViewById(R.id.button_account_transfer_r);
@@ -43,11 +43,14 @@ public class RegularAccountActivity extends AppCompatActivity {
             }
         });
     }
-
+ /*
     private void startActivity1() {
         Intent intent = new Intent(RegularAccountActivity.this, TransferActivity.class);
+        intent.putExtra(ACCOUNT_NUMBER, account_number);
         startActivity(intent);
     }
+    */
+
 
     private void startActivity2() {
         Intent intent = new Intent(RegularAccountActivity.this, AccountTransfer.class);
