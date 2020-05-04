@@ -61,8 +61,6 @@ public class CreateNewCreditAccountActivity extends AppCompatActivity {
             }
         });
 
-        Toast.makeText(this, "Choose the type of account you want to create and press the confirm button", Toast.LENGTH_LONG).show();
-
     }
 
 }

@@ -65,7 +65,7 @@ public class CreateNewAccountActivity extends AppCompatActivity {
                     } else if (account_type.equals("creditAccount")) {
                         startCreateCreditAccountActivity();
                     } else if (account_type.equals("savingsAccount")) {
-                        System.out.println("S");
+                        startCreateSavingsAccountActivity();
                     }
                 }
             });
@@ -84,10 +84,19 @@ public class CreateNewAccountActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    private void startCreateSavingsAccountActivity() {
+        Intent intent = new Intent(CreateNewAccountActivity.this, CreateNewSavingsAccountActivity.class);
+        startActivity(intent);
+    }
+
 
     private ArrayList<String> populateSpinner() {
 
         ArrayList<String> arr = bank.arraylistOfAccounts(mEmail);
+
+        for (String a : arr) {
+            System.out.println(a);
+        }
 
         nameList = new ArrayList(); //Täytetään ensiksi lista
         nameList.add("regularAccount");

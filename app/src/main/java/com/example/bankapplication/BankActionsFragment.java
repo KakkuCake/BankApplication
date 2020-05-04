@@ -88,8 +88,8 @@ public class BankActionsFragment extends Fragment {
                     startRegularAccountActivity(account);
                 } else if (account_mark.equals("C")) {
                     startCreditAccountActivity(account);
-                } else {
-                    System.out.println("");
+                } else if (account_mark.equals("S")) {
+                    startSavingsAccountActivity(account);
                 }
             }
         });
@@ -109,12 +109,12 @@ public class BankActionsFragment extends Fragment {
         startActivity(intent);
     }
 
-/*
+
     private void startSavingsAccountActivity(String account) {
         Intent intent = new Intent(getActivity(), SavingsAccountActivity.class);
         intent.putExtra(ACCOUNT_NUMBER, account);
         startActivity(intent);
-    } */
+    }
 
 
 

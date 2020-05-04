@@ -18,9 +18,7 @@ public class CreditAccount extends Account {
     }
 
     public void setBalance(float amount) {
-        if (-credit <= balance + amount)
             this.balance += amount;
-
     }
 
 }

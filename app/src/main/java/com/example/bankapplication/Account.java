@@ -9,7 +9,6 @@ public abstract class Account {
         email = eM;
         acNumber = aN;
         balance = b;
-        System.out.println("Account created.");
     }
 
     public String getEmail() {
@@ -21,7 +20,6 @@ public abstract class Account {
     }
 
     public void setBalance(float amount) {
-        if (0 <= balance - amount)
             this.balance += amount;
     }
 

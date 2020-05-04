@@ -9,7 +9,7 @@ import android.widget.Button;
 
 public class RegularAccountActivity extends AppCompatActivity {
 
-    private Button button_transfer_r, button_account_transfer_r, button_add_money_r;
+    private Button button_transfer_r, button_add_money_r;
     public static final String ACCOUNT_NUMBER = "com.example.bankapplication.ACCOUNT_NUMBER";
     String account_number;
 
@@ -25,27 +25,27 @@ public class RegularAccountActivity extends AppCompatActivity {
         button_transfer_r.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                System.out.println("dsafadf");
+                startActivity1();
             }
         });
         button_add_money_r  = findViewById(R.id.button_add_money_r);
         button_add_money_r.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity3();
+                startActivity2();
             }
         });
     }
- /*
+
     private void startActivity1() {
-        Intent intent = new Intent(RegularAccountActivity.this, TransferActivity.class);
+        Intent intent = new Intent(RegularAccountActivity.this, AccountNumberActivity.class);
         intent.putExtra(ACCOUNT_NUMBER, account_number);
         startActivity(intent);
     }
-    */
 
 
-    private void startActivity3() {
+
+    private void startActivity2() {
         Intent intent = new Intent(RegularAccountActivity.this, AddMoneyActivity.class);
         intent.putExtra(ACCOUNT_NUMBER, account_number);
         startActivity(intent);

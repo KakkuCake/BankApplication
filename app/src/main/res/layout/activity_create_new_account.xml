@@ -4,16 +4,21 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@android:color/white"
     android:gravity="center"
     tools:context=".CreateNewAccountActivity">
 
     <Spinner
         android:id="@+id/spinner"
+        android:backgroundTint="@android:color/holo_blue_dark"
+        android:textColor="@android:color/black"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"></Spinner>
     <Button
         android:id="@+id/button_select_account"
         android:layout_width="wrap_content"
+        android:backgroundTint="@android:color/holo_blue_dark"
+        android:textColor="@android:color/black"
         android:layout_height="wrap_content"
         android:text="Select the account type"></Button>
 

@@ -45,19 +45,19 @@ public class TransferActivity extends AppCompatActivity {
                 }
 
                 float amount = Float.parseFloat(balanceInput);
-                float payees_balance = Float.parseFloat(getBalance());//This is the balance of the account the user put in the previous activity.
+                Account myAccount = bank.returnAccount(my_account_number); //Tarkistetaan, että käyttäjällä on riittävästi rahaa tilillä tilisiirtoa varten.
+                float my_balance = myAccount.getBalance();//Let's get user's new balance from bank so we can count the new balance.
 
-                if (amount > payees_balance) {
+                if (amount > my_balance) {
                     balance.setError("You have not enough balance!");
                 } else {
                     bank.withdrawMoney(my_account_number, amount);
+                    Account myAccount2 = bank.returnAccount(my_account_number);
+                    float my_new_balance = myAccount2.getBalance();// Selvitetään käyttäjän uusi balance, kun rahat ovat lähteneet tililtä
+                    String my_new_balance_string = String.valueOf(my_new_balance);
+                    database.withdrawMoney(v, my_account_number, my_new_balance_string);
 
-                    Account myAccount = bank.returnAccount(my_account_number);
-                    float my_balance = myAccount.getBalance();//Let's get user's new balance from bank so we can count the new balance.
-                    String my_new_balance = String.valueOf(my_balance);
-                    System.out.println("my balance after withdraw is " + my_new_balance);
-                    database.withdrawMoney(v, my_account_number, my_new_balance);
-
+                    float payees_balance = Float.parseFloat(getBalance());//This is the balance of the account the user put in the previous activity.
                     System.out.println("The balance of account " + account_number_payee + " is + " + payees_balance);
                     float ac_new_balance = amount + payees_balance;
                     System.out.println("The balance of account " + account_number_payee + " after transfer is " + ac_new_balance);
@@ -86,7 +86,7 @@ public class TransferActivity extends AppCompatActivity {
     protected String getBalance() {
         HelperClass helper = HelperClass.getInstance();
         String ac_balance = helper.getBalance();
-        helper.clearList();
+        helper.clearList(); //Kun käyttäjän rahamäärä on tallennettu, tyhjennetään lista (joka sisälsi ainoastaan annetun käyttäjän balanssin).
         return ac_balance;
     }
 }

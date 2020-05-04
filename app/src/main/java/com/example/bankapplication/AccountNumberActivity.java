@@ -15,7 +15,6 @@ public class AccountNumberActivity extends AppCompatActivity {
     private Button button_account_number;
     private TextInputLayout account_number_layout;
     String my_account_number, account_numberInput;
-    public static final String ACCOUNT_NUMBER = "com.example.bankapplication.ACCOUNT_NUMBER";
     Validation validator = new Validation(this);
     Database database = new Database(this);
 
@@ -25,7 +24,7 @@ public class AccountNumberActivity extends AppCompatActivity {
         setContentView(R.layout.activity_account_number);
 
         Intent intent = getIntent(); //Let's get the account number which user chose in BankActionsFragment.
-        my_account_number = intent.getStringExtra(CreditAccountActivity.ACCOUNT_NUMBER);
+        my_account_number = intent.getStringExtra(BankActionsFragment.ACCOUNT_NUMBER);
 
         account_number_layout = findViewById(R.id.account_number);
 
@@ -38,6 +37,7 @@ public class AccountNumberActivity extends AppCompatActivity {
                 if (!validator.validateAccountNumberTransfer(account_numberInput)) {
                     return;
                 }
+
                 database.getAccountBalance(v, account_numberInput, my_account_number);
             }
         });

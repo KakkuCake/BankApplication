@@ -9,7 +9,7 @@
     android:paddingLeft="30dp"
     android:paddingRight="30dp"
     android:paddingTop="80dp"
-    android:background="@android:color/holo_orange_light"
+    android:background="@android:color/white"
     tools:context=".AccountNumberActivity">
 
     <com.google.android.material.textfield.TextInputLayout
@@ -35,8 +35,8 @@
 
     <Button
         android:id="@+id/button_account_number"
-        android:backgroundTint="@color/colorPrimary"
-        android:textColor="@android:color/white"
+        android:backgroundTint="@android:color/holo_blue_dark"
+        android:textColor="@android:color/black"
         android:text="Confirm"
         android:layout_margin="30dp"
         android:layout_width="match_parent"

@@ -24,7 +24,7 @@ public class AddMoneyActivity extends AppCompatActivity {
         setContentView(R.layout.activity_add_money);
 
         Intent intent = getIntent(); //Let's get the account number which user chose in BankActionsFragment.
-        account_number = intent.getStringExtra(RegularAccountActivity.ACCOUNT_NUMBER);
+        account_number = intent.getStringExtra(BankActionsFragment.ACCOUNT_NUMBER);
 
         balance = findViewById(R.id.balance);
 
@@ -34,6 +34,9 @@ public class AddMoneyActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 String deposit = balance.getEditText().getText().toString().trim();
+
+                System.out.println("deposit: " + deposit);
+
                 if (!validator.validateBalance(deposit)) {
                     return;
                 }
@@ -44,24 +47,24 @@ public class AddMoneyActivity extends AppCompatActivity {
                 Account myAccount = bank.returnAccount(account_number);
                 float accounts_balance = myAccount.getBalance();//Let's get user's new balance from bank so we can count the new balance.
 
+                System.out.println("accounts_balance: " + accounts_balance);
+
                 String new_balance_string = String.valueOf(accounts_balance);
 
+                System.out.println("new_balance_string: " + new_balance_string);
+
                 char first_letter = account_number.charAt(0);
-                String account_mark = "" + first_letter;  //Let's get the account mark (which is either R, C, or S) to know which account user is using.
+                String account_mark = "" + first_letter;  // Selvitetään käyttäjätunnuksen ensimmäinen kirjain (R, C tai S) riippuen tilityypistä.
                 if (account_mark.equals("R")) {
-                    database.addMoneyRegularAccount(v, account_number, new_balance_string ); //Finally let's save the new balance to database.
+                    database.addMoneyRegularAccount(v, account_number, new_balance_string); //Finally let's save the new balance to database.
                 } else if (account_mark.equals("C")) {
-                    database.addMoneyCreditAccount(v, account_number, new_balance_string ); //Finally let's save the new balance to database.
+                    database.addMoneyCreditAccount(v, account_number, new_balance_string); //Finally let's save the new balance to database.
                 } else {
                     System.out.println("");
                 }
             }
         });
 
-    }
-
-    private void startHomeActivity() {
-        startActivity(new Intent(AddMoneyActivity.this, HomeActivity.class));
     }
 
 }

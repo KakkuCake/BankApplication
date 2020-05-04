@@ -38,12 +38,6 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         mName = user.get(sessionManager.FIRST_NAME);
         mEmail = user.get(sessionManager.EMAIL);
 
-        bank.clearArrayList();
-
-        database.checkRegularAccountData(mEmail);
-        database.checkCreditAccountData(mEmail);
-        database.checkSavingsAccountData(mEmail);
-
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 

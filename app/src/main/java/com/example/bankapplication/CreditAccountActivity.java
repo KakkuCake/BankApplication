@@ -9,7 +9,7 @@ import android.widget.Button;
 
 public class CreditAccountActivity extends AppCompatActivity {
 
-    private Button button_transfer_c, button_account_transfer_c, button_add_money_c, button_change_credit_limit;
+    private Button button_transfer_c, button_add_money_c, button_change_credit_limit;
     public static final String ACCOUNT_NUMBER = "com.example.bankapplication.ACCOUNT_NUMBER";
     String account_number;
 

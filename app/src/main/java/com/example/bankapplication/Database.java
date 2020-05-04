@@ -44,10 +44,10 @@ public class Database {
 
     Context context;
 
+
     public Database(Context context) {  //Tämän rakentajan avulla voidaan tehdä muutoksia eri näkymissä.
         this.context=context;
     }
-
     Bank bank = Bank.getInstance();  //Käytetään singleton-periaatetta, jotta käytetään aina samaa pankkioliota.
 
     protected static final String ACCOUNT_NUMBER_PAYEE = "com.example.bankapplication.ACCOUNT_NUMBER_PAYEE";  // This is used in getAccountBalance -method to give information to the next activity.
@@ -144,8 +144,12 @@ public class Database {
 
                             SessionManager sessionManager = new SessionManager(context);
                             sessionManager.createSession(first_name, email, id);
-                            startHomeActivityAfterLogin(context, first_name, email);
 
+                            checkRegularAccountData(email);
+                            checkCreditAccountData(email);
+                            checkSavingsAccountData(email);
+
+                            startHomeActivityAfterLogin(context, first_name, email);
                         }
 
                     } else {
@@ -385,6 +389,8 @@ public class Database {
                     String success = jsonObject.getString("success");
 
                     if(success.equals("1")) {
+                        float balance_float = Float.parseFloat(balance);  //Kun luodaan uusi regularAccount olio, muunnetaan balance int -muotoon.
+                        bank.addSavingsAccount(email, account_number, balance_float);
                         Toast.makeText(context, "Success!", Toast.LENGTH_SHORT).show();
                         startHomeActivity(context);
                     } else if (success.equals("-1")) {
@@ -427,7 +433,7 @@ public class Database {
         requestQueue.add(stringRequest);
     }
 
-    protected void checkRegularAccountData(final String email) {
+    private void checkRegularAccountData(final String email) {
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST, URL_CHECK_REGULAR_ACCOUNT, new Response.Listener<String>() {
             @Override
@@ -447,7 +453,7 @@ public class Database {
 
                             float balance_float = Float.parseFloat(balance); //Kun luodaan uusi regularAccount olio, muunnetaan balance int -muotoon.
                             bank.addRegularAccount(email, account_number, balance_float);
-                        }
+                    }
 
                     }
 
@@ -478,7 +484,7 @@ public class Database {
 
     }
 
-    protected void checkCreditAccountData(final String email) {
+    private void checkCreditAccountData(final String email) {
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST, URL_CHECK_CREDIT_ACCOUNT, new Response.Listener<String>() {
             @Override
@@ -532,7 +538,7 @@ public class Database {
 
     }
 
-    protected void checkSavingsAccountData(final String email) {
+    private void checkSavingsAccountData(final String email) {
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST, URL_CHECK_SAVINGS_ACCOUNT, new Response.Listener<String>() {
             @Override
@@ -550,15 +556,15 @@ public class Database {
                             String account_number = object.getString("account_number").trim();
                             String balance = object.getString("balance").trim();
 
-                            int balance_int = Integer.parseInt(balance); //Kun luodaan uusi regularAccount olio, muunnetaan balance int -muotoon.
-                          //  bank.addSavingsAccount(account_number, balance_int);
+                            float balance_float = Float.parseFloat(balance); //Kun luodaan uusi regularAccount olio, muunnetaan balance int -muotoon.
+                            bank.addSavingsAccount(email, account_number, balance_float);
                         }
 
                     }
 
                 } catch (JSONException e) {
                     e.printStackTrace();
-                    Toast.makeText(context, "Connection3 error occurred", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context, "Connection1 error occurred", Toast.LENGTH_SHORT).show();
                 }
 
             }
@@ -566,7 +572,7 @@ public class Database {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(context, "Connection33 error occurred", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context, "Connection11 error occurred", Toast.LENGTH_SHORT).show();
                     }
                 })
         {
@@ -593,10 +599,10 @@ public class Database {
                             String success = jsonObject.getString("success");
 
                             if (success.equals("1")) {
-                                Toast.makeText( context, "Deposit was successful", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(context, "Deposit was successful", Toast.LENGTH_SHORT).show();
                                 startHomeActivity(context);
                             } else {
-                                Toast.makeText( context, "Deposit failed", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(context, "Deposit failed", Toast.LENGTH_SHORT).show();
                             }
 
                         } catch (JSONException e) {
@@ -914,7 +920,9 @@ public class Database {
         requestQueue.add(stringRequest);
     }
 
-    protected void getAccountBalance(View v, final String account_number, final String my_account_number) {
+    protected void getAccountBalance(View v, String account_numberInput, final String my_account_number) {
+
+        final String account_number = account_numberInput.substring(0, 1).toUpperCase() + account_numberInput.substring(1);
 
         final Button button_account_number = (Button) ((Activity)context).findViewById(R.id.button_account_number);
         final ProgressBar loading = (ProgressBar) ((Activity)context).findViewById(R.id.loading);

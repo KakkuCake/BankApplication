@@ -6,7 +6,6 @@ public class Bank {
 
     private static Bank b = null;
     private static ArrayList<Account> mAccounts = new ArrayList<>();
-    private static ArrayList<Float> acBalanceforTransfer = new ArrayList<>();
 
     public void addRegularAccount(String email, String account_number, float balance) {
         mAccounts.add(new RegularAccount(email, account_number, balance));
@@ -16,8 +15,11 @@ public class Bank {
         mAccounts.add(new CreditAccount(email, account_number, balance, credit));
     }
 
+    public void addSavingsAccount(String email, String account_number, float balance) {
+        mAccounts.add(new SavingsAccount(email, account_number, balance));
+    }
+
     public void depositMoney(String acNumber, float amount) {
-        //System.out.println("Depositing to the account: " + acNumber + " the amount " + amount);
         for (Account account : mAccounts)  {
             if (account.getAcNumber().equals(acNumber)) {
                 account.setBalance(amount);
@@ -42,18 +44,14 @@ public class Bank {
         }
     }
 
-
-    public void printAllAccounts(String email) {
-        System.out.println("All accounts:");
-        for (Account account: mAccounts) {
-            if (email.equals(account.getEmail())) {
-                System.out.print("Account number: " + account.getAcNumber() + " Amount of money: " + account.getBalance());
-                if (account instanceof CreditAccount) {
-                    System.out.println(" Credit limit: " + ((CreditAccount) account).getCreditLimit());
-                }
+    public String getInterestRate(String account_number) {
+        for (Account account : mAccounts) {
+            if (account instanceof SavingsAccount) {
+                if (account_number.equals(account.getAcNumber()))
+                    return String.valueOf(((SavingsAccount) account).getInterestRate());
             }
-            System.out.println();
         }
+        return null;
     }
 
     public ArrayList<String> arraylistOfAccounts(String email) {

@@ -168,8 +168,13 @@ public class Validation {
                 balance.setError("balance can't be negative");
                 return false;
             } else  {
-                balance.setError(null);
-                return true;
+                if (f > 1000000) {
+                    balance.setError("You can deposit max 1m at a time");
+                    return false;
+                } else  {
+                    balance.setError(null);
+                    return true;
+                }
             }
         }
         catch (NumberFormatException nfe)
@@ -185,15 +190,19 @@ public class Validation {
 
         TextInputLayout credit = (TextInputLayout) ((Activity)context).findViewById(R.id.credit);
 
-        try
-        {
+        try {
             float f = Float.valueOf(creditInput.trim()).floatValue();
-            if (f<0) {
+            if (f < 0) {
                 credit.setError("balance can't be negative");
                 return false;
-            } else  {
-                credit.setError(null);
-                return true;
+            } else {
+                if (f > 50000) {
+                    credit.setError("You can have max 50k credit limit");
+                    return false;
+                } else {
+                    credit.setError(null);
+                    return true;
+                }
             }
         }
         catch (NumberFormatException nfe)
