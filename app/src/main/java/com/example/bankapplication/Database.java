@@ -40,7 +40,6 @@ public class Database {
     private static String URL_ADD_MONEY_S = "http://192.168.1.162/android_register_login/add_money_savings_account.php";
     private static String URL_CHANGE_CREDIT_LIMIT = "http://192.168.1.162/android_register_login/change_credit_limit.php";
     private static String URL_WITHDRAW_MONEY = "http://192.168.1.162/android_register_login/withdraw_money.php";
-    private static String URL_TRANSFER_MONEY = "http://192.168.1.162/android_register_login/transfer_money.php";
     private static String URL_GET_ACCOUNT_BALANCE = "http://192.168.1.162/android_register_login/get_account_balance.php";
 
     Context context;
