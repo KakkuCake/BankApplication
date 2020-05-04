@@ -14,12 +14,11 @@ public class TransferActivity extends AppCompatActivity {
 
     private Button button_transfer;
     private TextInputLayout balance;
-    String my_account_number;
+    String my_account_number, account_number_payee;
 
     Validation validator = new Validation(this);
     Database database = new Database(this);
     Bank bank = Bank.getInstance();
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,8 +29,9 @@ public class TransferActivity extends AppCompatActivity {
         balance = findViewById(R.id.balance);
 
         Intent intent = getIntent(); //Let's get the account number which user chose in BankActionsFragment.
-        my_account_number = intent.getStringExtra(CreditAccountActivity.ACCOUNT_NUMBER);
-        System.out.println(my_account_number);
+        my_account_number = intent.getStringExtra(Database.MY_ACCOUNT_NUMBER);
+        account_number_payee = intent.getStringExtra(Database.ACCOUNT_NUMBER_PAYEE);
+        System.out.println("My account_number is  " + my_account_number + " and account_number_payee is  " + account_number_payee);
 
         button_transfer = findViewById(R.id.button_transfer);
         button_transfer.setOnClickListener(new View.OnClickListener() {
@@ -45,18 +45,37 @@ public class TransferActivity extends AppCompatActivity {
                 }
 
                 float amount = Float.parseFloat(balanceInput);
-                bank.withdrawMoney(my_account_number, amount);
+                float payees_balance = Float.parseFloat(getBalance());//This is the balance of the account the user put in the previous activity.
 
-                Account myAccount = bank.returnAccount(my_account_number);
-                float my_balance = myAccount.getBalance();//Let's get user's new balance from bank so we can count the new balance.
-                String my_new_balance = String.valueOf(my_balance);
-                database.withdrawMoney(v, my_account_number, my_new_balance);
+                if (amount > payees_balance) {
+                    balance.setError("You have not enough balance!");
+                } else {
+                    bank.withdrawMoney(my_account_number, amount);
 
-                float ac_balance = Float.parseFloat(getBalance()); //This is the balance of the account the user put in the previous activity.
-                float ac_new_balance = ac_balance + amount;
-                String new_balance_string = String.valueOf(ac_new_balance);
+                    Account myAccount = bank.returnAccount(my_account_number);
+                    float my_balance = myAccount.getBalance();//Let's get user's new balance from bank so we can count the new balance.
+                    String my_new_balance = String.valueOf(my_balance);
+                    System.out.println("my balance after withdraw is " + my_new_balance);
+                    database.withdrawMoney(v, my_account_number, my_new_balance);
 
-                database.transferMoney(v, "R1111111", new_balance_string);
+                    System.out.println("The balance of account " + account_number_payee + " is + " + payees_balance);
+                    float ac_new_balance = amount + payees_balance;
+                    System.out.println("The balance of account " + account_number_payee + " after transfer is " + ac_new_balance);
+                    String new_balance_string = String.valueOf(ac_new_balance);
+                    System.out.println("The balance of account " + account_number_payee + " after transfer is as a string " + new_balance_string);
+
+
+                    char first_letter = account_number_payee.charAt(0);
+                    String account_mark = "" + first_letter;  //Let's get the account mark (which is either R, C, or S) to know which account user is using.
+
+                    if (account_mark.equals("R")) {
+                        database.transferMoneyRegularAccount(v, account_number_payee, new_balance_string);
+                    } else if (account_mark.equals("C")) {
+                        database.transferMoneyCreditAccount(v, account_number_payee, new_balance_string);
+                    } else {
+                        System.out.println("");
+                    }
+                }
 
             }
         });
@@ -67,6 +86,7 @@ public class TransferActivity extends AppCompatActivity {
     protected String getBalance() {
         HelperClass helper = HelperClass.getInstance();
         String ac_balance = helper.getBalance();
-        return  ac_balance;
+        helper.clearList();
+        return ac_balance;
     }
 }

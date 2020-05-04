@@ -28,13 +28,7 @@ public class CreditAccountActivity extends AppCompatActivity {
                 startActivity1();
             }
         });
-        button_account_transfer_c = findViewById(R.id.button_account_transfer_c);
-        button_account_transfer_c.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity2();
-            }
-        });
+
         button_add_money_c  = findViewById(R.id.button_add_money_c);
         button_add_money_c.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -55,11 +49,6 @@ public class CreditAccountActivity extends AppCompatActivity {
     private void startActivity1() {
         Intent intent = new Intent(CreditAccountActivity.this, AccountNumberActivity.class);
         intent.putExtra(ACCOUNT_NUMBER, account_number);
-        startActivity(intent);
-    }
-
-    private void startActivity2() {
-        Intent intent = new Intent(CreditAccountActivity.this, AccountTransfer.class);
         startActivity(intent);
     }
 

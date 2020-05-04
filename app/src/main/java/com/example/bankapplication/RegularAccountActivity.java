@@ -28,13 +28,6 @@ public class RegularAccountActivity extends AppCompatActivity {
                 System.out.println("dsafadf");
             }
         });
-        button_account_transfer_r = findViewById(R.id.button_account_transfer_r);
-        button_account_transfer_r.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity2();
-            }
-        });
         button_add_money_r  = findViewById(R.id.button_add_money_r);
         button_add_money_r.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -51,11 +44,6 @@ public class RegularAccountActivity extends AppCompatActivity {
     }
     */
 
-
-    private void startActivity2() {
-        Intent intent = new Intent(RegularAccountActivity.this, AccountTransfer.class);
-        startActivity(intent);
-    }
 
     private void startActivity3() {
         Intent intent = new Intent(RegularAccountActivity.this, AddMoneyActivity.class);

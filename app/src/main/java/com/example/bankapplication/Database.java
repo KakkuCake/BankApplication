@@ -51,6 +51,9 @@ public class Database {
 
     Bank bank = Bank.getInstance();  //Käytetään singleton-periaatetta, jotta käytetään aina samaa pankkioliota.
 
+    protected static final String ACCOUNT_NUMBER_PAYEE = "com.example.bankapplication.ACCOUNT_NUMBER_PAYEE";  // This is used in getAccountBalance -method to give information to the next activity.
+    protected static final String MY_ACCOUNT_NUMBER = "com.example.bankapplication.MY_ACCOUNT_NUMBER";  // This is used in getAccountBalance -method to give information to the next activity.
+
     protected void Regist(View v, final String email, final String first_name, final String last_name, final String password) {
 
         final ProgressBar loading = (ProgressBar) ((Activity)context).findViewById(R.id.loading);
@@ -750,7 +753,7 @@ public class Database {
 
     }
 
-    protected void transferMoney(View v, final String account_number, final String balance) {
+    protected void transferMoneyRegularAccount(View v, final String account_number, final String balance) {
 
         final Button button_transfer = (Button) ((Activity)context).findViewById(R.id.button_transfer);
         final ProgressBar loading = (ProgressBar) ((Activity)context).findViewById(R.id.loading);
@@ -758,7 +761,7 @@ public class Database {
         loading.setVisibility(View.VISIBLE);
         button_transfer.setVisibility(View.GONE);
 
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, URL_TRANSFER_MONEY, new Response.Listener<String>() {
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, URL_ADD_MONEY_R, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 try {
@@ -768,10 +771,6 @@ public class Database {
                     if(success.equals("1")) {   //Kun luodaan uusi regularAccount olio, muunnetaan balance int -muotoon.
                         Toast.makeText(context, "Transfer was successful!", Toast.LENGTH_SHORT).show();
                         startHomeActivity(context);
-                    } else if (success.equals("-1")) {
-                        Toast.makeText(context, "We couldn't find an account with that account_number", Toast.LENGTH_LONG).show();
-                        loading.setVisibility(View.GONE);
-                        button_transfer.setVisibility(View.VISIBLE);
                     } else {
                         Toast.makeText(context, "Transfer failed", Toast.LENGTH_SHORT).show();
                         loading.setVisibility(View.GONE);
@@ -808,7 +807,115 @@ public class Database {
         requestQueue.add(stringRequest);
     }
 
-    protected void getAccountBalance(final String account_number) {
+    protected void transferMoneyCreditAccount(View v, final String account_number, final String balance) {
+
+        final Button button_transfer = (Button) ((Activity)context).findViewById(R.id.button_transfer);
+        final ProgressBar loading = (ProgressBar) ((Activity)context).findViewById(R.id.loading);
+
+        loading.setVisibility(View.VISIBLE);
+        button_transfer.setVisibility(View.GONE);
+
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, URL_ADD_MONEY_C, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
+                    JSONObject jsonObject = new JSONObject(response);
+                    String success = jsonObject.getString("success");
+
+                    if(success.equals("1")) {   //Kun luodaan uusi regularAccount olio, muunnetaan balance int -muotoon.
+                        Toast.makeText(context, "Transfer was successful!", Toast.LENGTH_SHORT).show();
+                        startHomeActivity(context);
+                    } else {
+                        Toast.makeText(context, "Transfer failed", Toast.LENGTH_SHORT).show();
+                        loading.setVisibility(View.GONE);
+                        button_transfer.setVisibility(View.VISIBLE);
+                    }
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    Toast.makeText(context, "Connection Error", Toast.LENGTH_SHORT).show();
+                    loading.setVisibility(View.GONE);
+                    button_transfer.setVisibility(View.VISIBLE);
+                }
+            }
+        },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(context, "Connection Error", Toast.LENGTH_SHORT).show();
+                        loading.setVisibility(View.GONE);
+                        button_transfer.setVisibility(View.VISIBLE);
+                    }
+                })
+        {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String,String> params = new HashMap<>();
+                params.put("account_number", account_number);
+                params.put("balance", balance);
+                return params;
+            }
+        };
+
+        RequestQueue requestQueue = Volley.newRequestQueue(context);
+        requestQueue.add(stringRequest);
+    }
+
+    protected void transferMoneySavingsAccount(View v, final String account_number, final String balance) {
+
+        final Button button_transfer = (Button) ((Activity)context).findViewById(R.id.button_transfer);
+        final ProgressBar loading = (ProgressBar) ((Activity)context).findViewById(R.id.loading);
+
+        loading.setVisibility(View.VISIBLE);
+        button_transfer.setVisibility(View.GONE);
+
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, URL_ADD_MONEY_S, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
+                    JSONObject jsonObject = new JSONObject(response);
+                    String success = jsonObject.getString("success");
+
+                    if(success.equals("1")) {   //Kun luodaan uusi regularAccount olio, muunnetaan balance int -muotoon.
+                        Toast.makeText(context, "Transfer was successful!", Toast.LENGTH_SHORT).show();
+                        startHomeActivity(context);
+                    } else {
+                        Toast.makeText(context, "Transfer failed", Toast.LENGTH_SHORT).show();
+                        loading.setVisibility(View.GONE);
+                        button_transfer.setVisibility(View.VISIBLE);
+                    }
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    Toast.makeText(context, "Connection Error", Toast.LENGTH_SHORT).show();
+                    loading.setVisibility(View.GONE);
+                    button_transfer.setVisibility(View.VISIBLE);
+                }
+            }
+        },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(context, "Connection Error", Toast.LENGTH_SHORT).show();
+                        loading.setVisibility(View.GONE);
+                        button_transfer.setVisibility(View.VISIBLE);
+                    }
+                })
+        {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String,String> params = new HashMap<>();
+                params.put("account_number", account_number);
+                params.put("balance", balance);
+                return params;
+            }
+        };
+
+        RequestQueue requestQueue = Volley.newRequestQueue(context);
+        requestQueue.add(stringRequest);
+    }
+
+    protected void getAccountBalance(View v, final String account_number, final String my_account_number) {
 
         final Button button_account_number = (Button) ((Activity)context).findViewById(R.id.button_account_number);
         final ProgressBar loading = (ProgressBar) ((Activity)context).findViewById(R.id.loading);
@@ -833,6 +940,7 @@ public class Database {
                             String balance = object.getString("balance").trim();
                             HelperClass helper = HelperClass.getInstance();
                             helper.saveBalance(balance);
+                            startTransferActivity(context, account_number, my_account_number);
                         }
 
                     } else  {
@@ -884,6 +992,13 @@ public class Database {
         Intent intent = new Intent(context, HomeActivity.class);
         intent.putExtra("first_name", first_name);
         intent.putExtra("email", email);
+        context.startActivity(intent);
+    }
+
+    public static void startTransferActivity(Context context, String account_number, String my_account_number) { //Tämän metodin avulla voidaa käynnistää kotiaktiviteetti toisesta näkymästä.
+        Intent intent = new Intent(context, TransferActivity.class);
+        intent.putExtra(ACCOUNT_NUMBER_PAYEE, account_number);
+        intent.putExtra(MY_ACCOUNT_NUMBER, my_account_number);
         context.startActivity(intent);
     }
 

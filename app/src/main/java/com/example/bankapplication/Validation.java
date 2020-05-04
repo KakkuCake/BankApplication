@@ -120,6 +120,21 @@ public class Validation {
 
     }
 
+    protected boolean validateAccountNumberTransfer(String account_numberInput) {
+
+        TextInputLayout account_number = (TextInputLayout) ((Activity)context).findViewById(R.id.account_number);
+
+        if (account_numberInput.length() != 8) {
+            account_number.setError("Account number must be 8 digits!");
+            return false;
+
+        } else {
+            account_number.setError(null);
+            return true;
+        }
+
+    }
+
     protected boolean validateAccountNumber(String account_numberInput) {
 
         TextInputLayout account_number = (TextInputLayout) ((Activity)context).findViewById(R.id.account_number);

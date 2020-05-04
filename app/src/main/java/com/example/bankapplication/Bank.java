@@ -8,16 +8,6 @@ public class Bank {
     private static ArrayList<Account> mAccounts = new ArrayList<>();
     private static ArrayList<Float> acBalanceforTransfer = new ArrayList<>();
 
-    public void setBalanceForTransfer(float balance) {
-        acBalanceforTransfer.add(balance);
-    }
-
-    public float getBalanceForTransfer() {
-        for (Float balance : acBalanceforTransfer)
-            return balance;
-        return 0;
-    }
-
     public void addRegularAccount(String email, String account_number, float balance) {
         mAccounts.add(new RegularAccount(email, account_number, balance));
     }

@@ -17,7 +17,6 @@
         <activity android:name=".ChangeCreditLimitActivity" />
         <activity android:name=".CreditAccountActivity" />
         <activity android:name=".AddMoneyActivity" />
-        <activity android:name=".AccountTransfer" />
         <activity android:name=".TransferActivity" />
         <activity android:name=".RegularAccountActivity" />
         <activity android:name=".CreateNewAccountActivity" />
