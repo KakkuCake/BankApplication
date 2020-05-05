@@ -64,7 +64,7 @@ public class SavingsAccountActivity extends AppCompatActivity {
     }
 
     private void showInterestRate() {
-        String sentence = "Your interest rate is " + bank.getInterestRate(account_number) + "%";
+        String sentence = getString(R.string.interestRateIs) + " " + bank.getInterestRate(account_number) + "%";
         Toast.makeText(this, sentence, Toast.LENGTH_LONG).show();
     }
 

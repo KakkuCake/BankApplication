@@ -49,7 +49,7 @@ public class TransferActivity extends AppCompatActivity {
                 float my_balance = myAccount.getBalance();//Let's get user's new balance from bank so we can count the new balance.
 
                 if (amount > my_balance) {
-                    balance.setError("You have not enough balance!");
+                    balance.setError(getString(R.string.notEnoughBalance));
                 } else {
                     bank.withdrawMoney(my_account_number, amount);
                     Account myAccount2 = bank.returnAccount(my_account_number);
@@ -82,7 +82,7 @@ public class TransferActivity extends AppCompatActivity {
             }
         });
 
-        Toast.makeText(this, "Choose the type of account you want to create and press the confirm button", Toast.LENGTH_LONG).show();
+        Toast.makeText(this, getString(R.string.AccNumActivity), Toast.LENGTH_LONG).show();
     }
 
     protected String getBalance() {

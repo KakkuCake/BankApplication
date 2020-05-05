@@ -71,4 +71,5 @@
     <string name="noAccounts2">Sinun pitää tehdä tili ensin</string>
     <string name="notEnoughBalance">Saldo ei riitä</string>
     <string name="limitError">Nostoraja ylittyy!</string>
+    <string name="interestRateIs">Tilin korko on</string>
 </resources>

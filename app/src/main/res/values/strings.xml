@@ -70,4 +70,5 @@
     <string name="noAccounts2">You have no accounts, please go back and create one</string>
     <string name="notEnoughBalance">Not enough balance</string>
     <string name="limitError">Withdrawal limit exceeded!</string>
+    <string name="interestRateIs">Your interest rate is</string>
 </resources>
