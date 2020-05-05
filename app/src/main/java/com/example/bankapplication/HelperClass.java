@@ -31,7 +31,10 @@ public class HelperClass { //Luokka avustaa Database luokan getAccountBalance -m
     protected void clearList() {
        bList.clear();
     }
+    protected void randomNumber(){
 
+
+    }
     protected ArrayList<String> populateSpinner(String mEmail) {
 
        Bank bank = Bank.getInstance();
