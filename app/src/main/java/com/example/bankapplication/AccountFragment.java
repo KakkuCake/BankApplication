@@ -98,8 +98,13 @@ public class AccountFragment extends Fragment {
     }
 
     private void startTransactionsActivity() {
-        Intent intent = new Intent(getActivity(), CardTransactionsActivity.class);
-        startActivity(intent);
+        BankCard bankCard = bank.returnCard(mEmail);
+        if (bankCard == null) {
+            Toast.makeText(getActivity(), "First create bankcard!", Toast.LENGTH_SHORT).show();
+        } else {
+            Intent intent = new Intent(getActivity(), CardTransactionsActivity.class);
+            startActivity(intent);
+        }
     }
 
 
