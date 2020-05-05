@@ -1,6 +1,7 @@
 package com.example.bankapplication;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 public class HelperClass { //Luokka avustaa Database luokan getAccountBalance -metodia.
     // Tarkoitus on tallentaa hetkellisesti Arraylist bListiin halutun käyttäjän balanssi, jotta osataan kirjoittaa tietokantaan uusi balanssi käyttäjälle.
@@ -64,6 +65,20 @@ public class HelperClass { //Luokka avustaa Database luokan getAccountBalance -m
 
         return nameList;
 
+    }
+
+    protected String getCardNumber(){
+        String cardNumber = "";
+        final Random random = new Random();
+
+        for(int i =0; i<4; i++){
+            for(int j=0; j<4;j++){
+                int a = random.nextInt(10);
+                cardNumber = cardNumber + a;
+            }
+            cardNumber = cardNumber + " ";
+        }
+        return cardNumber;
     }
 
 

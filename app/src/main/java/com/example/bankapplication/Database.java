@@ -26,21 +26,25 @@ import java.util.Map;
 
 public class Database {
 
-    private static String URL_REGIST = "http://192.168.168.1/android_register_login/register.php";
-    private static String URL_LOGIN = "http://192.168.168.1/android_register_login/login.php";
-    private static String URL_EDIT = "http://192.168.168.1/android_register_login/edit_profile.php";
-    private static String URL_CREATE_REGULAR_ACCOUNT = "http://192.168.168.1/android_register_login/create_regular_account.php";
-    private static String URL_CREATE_CREDIT_ACCOUNT = "http://192.168.168.1/android_register_login/create_credit_account.php";
-    private static String URL_CREATE_SAVINGS_ACCOUNT = "http://192.168.168.1/android_register_login/create_savings_account.php";
-    private static String URL_CHECK_REGULAR_ACCOUNT = "http://192.168.168.1/android_register_login/check_regular_account.php";
-    private static String URL_CHECK_CREDIT_ACCOUNT = "http://192.168.168.1/android_register_login/check_credit_account.php";
-    private static String URL_CHECK_SAVINGS_ACCOUNT = "http://192.168.168.1/android_register_login/check_savings_account.php";
-    private static String URL_ADD_MONEY_R = "http://192.168.168.1/android_register_login/add_money_regular_account.php";
-    private static String URL_ADD_MONEY_C = "http://192.168.168.1/android_register_login/add_money_credit_account.php";
-    private static String URL_ADD_MONEY_S = "http://192.168.168.1/android_register_login/add_money_savings_account.php";
-    private static String URL_CHANGE_CREDIT_LIMIT = "http://192.168.168.1/android_register_login/change_credit_limit.php";
-    private static String URL_WITHDRAW_MONEY = "http://192.168.168.1/android_register_login/withdraw_money.php";
-    private static String URL_GET_ACCOUNT_BALANCE = "http://192.168.168.1/android_register_login/get_account_balance.php";
+    private static String URL_REGIST = "http://192.168.1.162/android_register_login/register.php";
+    private static String URL_LOGIN = "http://192.168.1.162/android_register_login/login.php";
+    private static String URL_EDIT = "http://192.168.1.162/android_register_login/edit_profile.php";
+    private static String URL_CREATE_REGULAR_ACCOUNT = "http://192.168.1.162/android_register_login/create_regular_account.php";
+    private static String URL_CREATE_CREDIT_ACCOUNT = "http://192.168.1.162/android_register_login/create_credit_account.php";
+    private static String URL_CREATE_SAVINGS_ACCOUNT = "http://192.168.1.162/android_register_login/create_savings_account.php";
+    private static String URL_CHECK_REGULAR_ACCOUNT = "http://192.168.1.162/android_register_login/check_regular_account.php";
+    private static String URL_CHECK_CREDIT_ACCOUNT = "http://192.168.1.162/android_register_login/check_credit_account.php";
+    private static String URL_CHECK_SAVINGS_ACCOUNT = "http://192.168.1.162/android_register_login/check_savings_account.php";
+    private static String URL_ADD_MONEY_R = "http://192.168.1.162/android_register_login/add_money_regular_account.php";
+    private static String URL_ADD_MONEY_C = "http://192.168.1.162/android_register_login/add_money_credit_account.php";
+    private static String URL_ADD_MONEY_S = "http://192.168.1.162/android_register_login/add_money_savings_account.php";
+    private static String URL_CHANGE_CREDIT_LIMIT = "http://192.168.1.162/android_register_login/change_credit_limit.php";
+    private static String URL_WITHDRAW_MONEY = "http://192.168.1.162/android_register_login/withdraw_money.php";
+    private static String URL_GET_ACCOUNT_BALANCE = "http://192.168.1.162/android_register_login/get_account_balance.php";
+    private static String URL_CREATE_BANK_CARD = "http://192.168.1.162/android_register_login/create_bank_card.php";
+    private static String URL_CHECK_BANK_CARD = "http://192.168.1.162/android_register_login/check_bank_card.php";
+    private static String URL_SAVE_CARD_BALANCE = "http://192.168.1.162/android_register_login/save_card_balance.php";
+    private static String URL_SAVE_CARD_LIMIT = "http://192.168.1.162/android_register_login/save_card_limit.php";
 
     Context context;
 
@@ -148,6 +152,7 @@ public class Database {
                             checkRegularAccountData(email);
                             checkCreditAccountData(email);
                             checkSavingsAccountData(email);
+                            checkBankCardData(email);
 
                             startHomeActivityAfterLogin(context, first_name, email);
                         }
@@ -486,7 +491,7 @@ public class Database {
         RequestQueue requestQueue = Volley.newRequestQueue(context);
         requestQueue.add(stringRequest);
 
-    }
+    } //Näitä 4 metodia käytetään Login -metodin sisäluokkina silloin, kun kirjautuminen onnistuu. Eli tarkistetaan mitä tilejä käyttäjällä on ja lisätään ne pankin arraylistiin session ajaksi.
 
     private void checkCreditAccountData(final String email) {
 
@@ -540,7 +545,7 @@ public class Database {
         RequestQueue requestQueue = Volley.newRequestQueue(context);
         requestQueue.add(stringRequest);
 
-    }
+    } //2.
 
     private void checkSavingsAccountData(final String email) {
 
@@ -591,7 +596,60 @@ public class Database {
         RequestQueue requestQueue = Volley.newRequestQueue(context);
         requestQueue.add(stringRequest);
 
-    }
+    } //3.
+
+    private void checkBankCardData(final String email) {
+
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, URL_CHECK_BANK_CARD, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
+                    JSONObject jsonObject = new JSONObject(response);
+                    String success = jsonObject.getString("success");
+                    JSONArray jsonArray = jsonObject.getJSONArray("card_found");
+
+                    if (success.equals("1")) {
+
+                        for  (int i = 0; i < jsonArray.length(); i++) {
+                            JSONObject object = jsonArray.getJSONObject(i);
+
+                            String card_number = object.getString("card_number").trim();
+                            String balance = object.getString("balance").trim();
+                            String withdraw_limit = object.getString("withdraw_limit").trim();
+
+                            float balance_float = Float.parseFloat(balance); //Kun luodaan uusi regularAccount olio, muunnetaan balance int -muotoon.
+                            float withdraw_limit_float = Float.parseFloat(withdraw_limit);
+                            bank.addBankCard(email, card_number, balance_float, withdraw_limit_float);
+                        }
+
+                    }
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    Toast.makeText(context, "Connection error occurred", Toast.LENGTH_SHORT).show();
+                }
+
+            }
+        },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(context, "Connection11 error occurred", Toast.LENGTH_SHORT).show();
+                    }
+                })
+        {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<>();
+                params.put("email", email);
+                return params;
+            }
+        };
+
+        RequestQueue requestQueue = Volley.newRequestQueue(context);
+        requestQueue.add(stringRequest);
+
+    }  //4.
 
     protected void addMoneyRegularAccount(View v, final String account_number, final String balance) {
 
@@ -1033,6 +1091,151 @@ public class Database {
         requestQueue.add(stringRequest);
 
     }
+
+    protected void addBankCard(View v, final String email, final String card_number, final String balance, final String withdraw_limit) {
+
+        final Button button_create_card = (Button) ((Activity)context).findViewById(R.id.button_create_card);
+        final ProgressBar loading = (ProgressBar) ((Activity)context).findViewById(R.id.loading);
+
+        button_create_card.setVisibility(View.GONE);
+        loading.setVisibility(View.VISIBLE);
+
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, URL_CREATE_BANK_CARD, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
+                    JSONObject jsonObject = new JSONObject(response);
+                    String success = jsonObject.getString("success");
+
+                    if(success.equals("1")) {
+                        float balance_float = Float.parseFloat(balance);
+                        float withdraw_limit_float = Float.parseFloat(withdraw_limit);  //Kun luodaan uusi regularAccount olio, muunnetaan balance int -muotoon.
+                        bank.addBankCard(email, card_number, balance_float, withdraw_limit_float);
+                        Toast.makeText(context, "You have now bank card!, Congratulations!", Toast.LENGTH_SHORT).show();
+                        startHomeActivity(context);
+                    } else {
+                        Toast.makeText(context, "Failed", Toast.LENGTH_SHORT).show();
+                        button_create_card.setVisibility(View.VISIBLE);
+                        loading.setVisibility(View.GONE);
+                    }
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    Toast.makeText(context, "Failed", Toast.LENGTH_SHORT).show();
+                    button_create_card.setVisibility(View.VISIBLE);
+                    loading.setVisibility(View.GONE);
+                }
+            }
+        },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(context, "ConnectionError", Toast.LENGTH_SHORT).show();
+                        button_create_card.setVisibility(View.VISIBLE);
+                        loading.setVisibility(View.GONE);
+                    }
+                })
+        {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String,String> params = new HashMap<>();
+                params.put("email", email);
+                params.put("card_number", card_number);
+                params.put("balance", balance);
+                params.put("withdraw_limit", withdraw_limit);
+                return params;
+            }
+        };
+
+        RequestQueue requestQueue = Volley.newRequestQueue(context);
+        requestQueue.add(stringRequest);
+    }
+
+    protected void saveBalanceBankCard(View v, final String email, final String balance) {
+
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, URL_SAVE_CARD_BALANCE, new Response.Listener<String>() {
+        @Override
+        public void onResponse(String response) {
+            try {
+                JSONObject jsonObject = new JSONObject(response);
+                String success = jsonObject.getString("success");
+
+                if (success.equals("1")) {
+                    Toast.makeText(context, "Deposit was successful", Toast.LENGTH_SHORT).show();
+                    startHomeActivity(context);
+                } else {
+                    Toast.makeText(context, "Deposit failed", Toast.LENGTH_SHORT).show();
+                }
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+                Toast.makeText(context, "Connection error: " + e.toString(), Toast.LENGTH_SHORT).show();
+            }
+        }
+    },
+            new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    Toast.makeText(context, "Connection error: " + error.toString(), Toast.LENGTH_SHORT).show();
+                }
+            })
+    {
+        @Override
+        protected Map<String, String> getParams() throws AuthFailureError {
+            Map<String, String> params = new HashMap<>();
+            params.put("email", email);
+            params.put("balance", balance);
+            return params;
+        }
+    };
+
+    RequestQueue requestQueue = Volley.newRequestQueue(context);
+        requestQueue.add(stringRequest);
+
+    }
+
+   protected void saveLimitBankCard(View v, final String email, final String withdraw_limit) {
+
+       StringRequest stringRequest = new StringRequest(Request.Method.POST, URL_SAVE_CARD_LIMIT, new Response.Listener<String>() {
+           @Override
+           public void onResponse(String response) {
+               try {
+                   JSONObject jsonObject = new JSONObject(response);
+                   String success = jsonObject.getString("success");
+
+                   if (success.equals("1")) {
+                       Toast.makeText(context, "Withdraw limit change was successful!", Toast.LENGTH_SHORT).show();
+                       startHomeActivity(context);
+                   } else {
+                       Toast.makeText(context, "Withdraw limit change failed!", Toast.LENGTH_SHORT).show();
+                   }
+
+               } catch (JSONException e) {
+                   e.printStackTrace();
+                   Toast.makeText(context, "Connection error: " + e.toString(), Toast.LENGTH_SHORT).show();
+               }
+           }
+       },
+               new Response.ErrorListener() {
+                   @Override
+                   public void onErrorResponse(VolleyError error) {
+                       Toast.makeText(context, "Connection error: " + error.toString(), Toast.LENGTH_SHORT).show();
+                   }
+               })
+       {
+           @Override
+           protected Map<String, String> getParams() throws AuthFailureError {
+               Map<String, String> params = new HashMap<>();
+               params.put("email", email);
+               params.put("withdraw_limit", withdraw_limit);
+               return params;
+           }
+       };
+
+       RequestQueue requestQueue = Volley.newRequestQueue(context);
+       requestQueue.add(stringRequest);
+
+   }
 
     public static void startHomeActivity(Context context) { //Tämän metodin avulla voidaa käynnistää kotiaktiviteetti toisesta näkymästä.
         context.startActivity(new Intent(context, HomeActivity.class));

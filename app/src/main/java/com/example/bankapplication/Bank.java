@@ -16,6 +16,7 @@ public class Bank {
 
     private static Bank b = null;
     private static ArrayList<Account> mAccounts = new ArrayList<>();
+    private static ArrayList<BankCard> mCards = new ArrayList<>();
     Context context;
 
     public void addRegularAccount(String email, String account_number, float balance) {
@@ -28,6 +29,10 @@ public class Bank {
 
     public void addSavingsAccount(String email, String account_number, float balance) {
         mAccounts.add(new SavingsAccount(email, account_number, balance));
+    }
+
+    public void addBankCard(String email, String card_number, float balance, float withdraw_limit) {
+        mCards.add(new BankCard(email, card_number, balance, withdraw_limit));
     }
 
     public void depositMoney(String acNumber, float amount) {
@@ -85,17 +90,42 @@ public class Bank {
         return null;
     }
 
-    public void clearArrayList() { //Tehdään tämä uloskirjautumisen yhteydessä, jotta luokkamuuttuja unohtaa arraylistin sisältämän datan.
+    public void clearArrayLists() { //Tehdään tämä uloskirjautumisen yhteydessä, jotta luokkamuuttuja unohtaa arraylistin sisältämän datan.
         mAccounts.clear();
+        mCards.clear();
         clear(); // users.csv
     }
 
-
-    public static Bank getInstance() {
-        if (b == null) {
-            return new Bank();
+    public void depositCard(String email, float amount) {
+        for (BankCard card : mCards)  {
+            if (card.getEmail().equals(email)) {
+                card.setBalance(amount);
+            }
         }
-        return b;
+    }
+
+    public void withdrawCard(String email, float amount) {
+        for (BankCard card : mCards)  {
+            if (card.getEmail().equals(email)) {
+                card.setBalance(-amount);
+            }
+        }
+    }
+
+    public void setNewWithdrawLimit(String email, float new_limit) {
+        for (BankCard card : mCards) {
+            if (card.getEmail().equals(email)) {
+                card.setWithdrawLimit(new_limit);
+            }
+        }
+    }
+
+    public BankCard returnCard(String email) {
+        for (BankCard card: mCards) {
+            if (email.equals(card.getEmail()));
+                return card;
+        }
+        return null;
     }
 
     public void writeTransaction(String transactionType, String amount) {
@@ -139,5 +169,13 @@ public class Bank {
             System.out.println("joo");
         }
     }
+
+    public static Bank getInstance() {
+        if (b == null) {
+            return new Bank();
+        }
+        return b;
+    }
+
 
 }

@@ -91,7 +91,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                         new AccountFragment()).commit();
                 break;
             case R.id.navigation_logout:
-                bank.clearArrayList();
+                bank.clearArrayLists();
                 sessionManager.logout();
                 break;
         }

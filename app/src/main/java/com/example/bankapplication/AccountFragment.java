@@ -17,11 +17,13 @@ import java.util.HashMap;
 
 public class AccountFragment extends Fragment {
 
-    private Button button_edit_profile, button_create_accounts;
+    private Button button_edit_profile, button_create_accounts, button_create_bank_card, button_card_transactions;
     String mEmail;
     ArrayList nameList;
     HelperClass helper = new HelperClass();
     SessionManager sessionManager;
+
+    Bank bank = Bank.getInstance();
 
     @Nullable
     @Override
@@ -50,6 +52,22 @@ public class AccountFragment extends Fragment {
             }
         });
 
+        button_create_bank_card = (Button) view.findViewById(R.id.button_create_bank_card);
+        button_create_bank_card.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startCreateCardActivity();
+            }
+        });
+
+        button_card_transactions = (Button) view.findViewById(R.id.button_card_transactions);
+        button_card_transactions.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startTransactionsActivity();
+            }
+        });
+
         return view;
     }
 
@@ -68,5 +86,21 @@ public class AccountFragment extends Fragment {
             startActivity(intent);
         }
     }
+
+    private void startCreateCardActivity() {
+        BankCard bankCard = bank.returnCard(mEmail);
+        if (bankCard == null) {
+            Intent intent = new Intent(getActivity(), CreateCardActivity.class);
+            startActivity(intent);
+        } else {
+            Toast.makeText(getActivity(), "You already have bankcard!", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    private void startTransactionsActivity() {
+        Intent intent = new Intent(getActivity(), CardTransactionsActivity.class);
+        startActivity(intent);
+    }
+
 
 }

@@ -7,12 +7,17 @@
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
-        android:label="@string/app_name"
+        android:label="MobileBank"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".CreateNewSavingsAccountActivity"></activity>
+        <activity android:name=".CardWithdrawActivity"></activity>
+        <activity android:name=".WithdrawLimitChangeActivity" />
+        <activity android:name=".DepositCardActivity" />
+        <activity android:name=".CardTransactionsActivity" />
+        <activity android:name=".CreateCardActivity" />
+        <activity android:name=".CreateNewSavingsAccountActivity" />
         <activity android:name=".SavingsAccountActivity" />
         <activity android:name=".AccountNumberActivity" />
         <activity android:name=".CreateNewCreditAccountActivity" />

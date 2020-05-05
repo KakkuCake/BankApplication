@@ -54,20 +54,22 @@
 
     <Button
         android:id="@+id/button_login"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_below="@id/layoutpassword"
-        android:layout_marginTop="30dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="-1dp"
         android:backgroundTint="@color/colorPrimary2"
         android:text="@string/login"
-        android:textColor="@color/colorText"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:textColor="@color/colorText" />
 
     <TextView
         android:id="@+id/link_regist"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="284dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="298dp"
         android:gravity="center"
         android:text="@string/register"
         android:textColor="@color/colorAccent" />

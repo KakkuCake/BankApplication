@@ -182,7 +182,29 @@ public class Validation {
         }
         catch (NumberFormatException nfe)
         {
-            balance.setError("Invalid balance, please try again!");
+            balance.setError("Invalid amount, please try again!");
+            return false;
+        }
+    }
+
+    protected boolean validateWithdraw(String withdrawInput) {
+
+        TextInputLayout balance = (TextInputLayout) ((Activity)context).findViewById(R.id.balance);
+
+        try
+        {
+            float f = Float.valueOf(withdrawInput.trim()).floatValue();
+            if (f<0) {
+                balance.setError("withdraw can't be negative");
+                return false;
+            } else {
+                balance.setError(null);
+                return true;
+            }
+        }
+        catch (NumberFormatException nfe)
+        {
+            balance.setError("Invalid amount, please try again!");
             return false;
         }
     }
@@ -240,6 +262,31 @@ public class Validation {
             credit.setError("Invalid credit, please try again!");
             return false;
         }
+    }
+
+    protected boolean validateWithDrawLimit(String limitInput) {
+
+        TextInputLayout limit = (TextInputLayout) ((Activity) context).findViewById(R.id.withdraw_limit);
+
+        try {
+            float f = Float.valueOf(limitInput.trim()).floatValue();
+            if (f < 0) {
+                limit.setError("withdraw limit can't be negative");
+                return false;
+            } else {
+                if (f > 50000) {
+                    limit.setError("You can have max 50k withdraw limit");
+                    return false;
+                } else {
+                    limit.setError(null);
+                    return true;
+                }
+            }
+        } catch (NumberFormatException nfe) {
+            limit.setError("Invalid credit, please try again!");
+            return false;
+        }
+
     }
 
 }

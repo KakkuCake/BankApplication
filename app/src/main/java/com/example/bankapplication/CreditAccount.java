@@ -17,8 +17,4 @@ public class CreditAccount extends Account {
         credit = new_credit;
     }
 
-    public void setBalance(float amount) {
-            this.balance += amount;
-    }
-
 }
