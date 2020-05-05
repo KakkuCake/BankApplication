@@ -36,6 +36,7 @@ public class LogInActivity extends AppCompatActivity {
         link_regist = findViewById(R.id.link_regist);
         changeLanguage = findViewById(R.id.changeLang);
 
+
         button_login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -67,9 +68,6 @@ public class LogInActivity extends AppCompatActivity {
         });
 
     }
-
-
-    //NÄISTÄ OMA LUOKKA
 
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR1)
     private void changeLocale(String locale) {

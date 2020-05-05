@@ -26,21 +26,21 @@ import java.util.Map;
 
 public class Database {
 
-    private static String URL_REGIST = "http://192.168.1.162/android_register_login/register.php";
-    private static String URL_LOGIN = "http://192.168.1.162/android_register_login/login.php";
-    private static String URL_EDIT = "http://192.168.1.162/android_register_login/edit_profile.php";
-    private static String URL_CREATE_REGULAR_ACCOUNT = "http://192.168.1.162/android_register_login/create_regular_account.php";
-    private static String URL_CREATE_CREDIT_ACCOUNT = "http://192.168.1.162/android_register_login/create_credit_account.php";
-    private static String URL_CREATE_SAVINGS_ACCOUNT = "http://192.168.1.162/android_register_login/create_savings_account.php";
-    private static String URL_CHECK_REGULAR_ACCOUNT = "http://192.168.1.162/android_register_login/check_regular_account.php";
-    private static String URL_CHECK_CREDIT_ACCOUNT = "http://192.168.1.162/android_register_login/check_credit_account.php";
-    private static String URL_CHECK_SAVINGS_ACCOUNT = "http://192.168.1.162/android_register_login/check_savings_account.php";
-    private static String URL_ADD_MONEY_R = "http://192.168.1.162/android_register_login/add_money_regular_account.php";
-    private static String URL_ADD_MONEY_C = "http://192.168.1.162/android_register_login/add_money_credit_account.php";
-    private static String URL_ADD_MONEY_S = "http://192.168.1.162/android_register_login/add_money_savings_account.php";
-    private static String URL_CHANGE_CREDIT_LIMIT = "http://192.168.1.162/android_register_login/change_credit_limit.php";
-    private static String URL_WITHDRAW_MONEY = "http://192.168.1.162/android_register_login/withdraw_money.php";
-    private static String URL_GET_ACCOUNT_BALANCE = "http://192.168.1.162/android_register_login/get_account_balance.php";
+    private static String URL_REGIST = "http://192.168.168.1/android_register_login/register.php";
+    private static String URL_LOGIN = "http://192.168.168.1/android_register_login/login.php";
+    private static String URL_EDIT = "http://192.168.168.1/android_register_login/edit_profile.php";
+    private static String URL_CREATE_REGULAR_ACCOUNT = "http://192.168.168.1/android_register_login/create_regular_account.php";
+    private static String URL_CREATE_CREDIT_ACCOUNT = "http://192.168.168.1/android_register_login/create_credit_account.php";
+    private static String URL_CREATE_SAVINGS_ACCOUNT = "http://192.168.168.1/android_register_login/create_savings_account.php";
+    private static String URL_CHECK_REGULAR_ACCOUNT = "http://192.168.168.1/android_register_login/check_regular_account.php";
+    private static String URL_CHECK_CREDIT_ACCOUNT = "http://192.168.168.1/android_register_login/check_credit_account.php";
+    private static String URL_CHECK_SAVINGS_ACCOUNT = "http://192.168.168.1/android_register_login/check_savings_account.php";
+    private static String URL_ADD_MONEY_R = "http://192.168.168.1/android_register_login/add_money_regular_account.php";
+    private static String URL_ADD_MONEY_C = "http://192.168.168.1/android_register_login/add_money_credit_account.php";
+    private static String URL_ADD_MONEY_S = "http://192.168.168.1/android_register_login/add_money_savings_account.php";
+    private static String URL_CHANGE_CREDIT_LIMIT = "http://192.168.168.1/android_register_login/change_credit_limit.php";
+    private static String URL_WITHDRAW_MONEY = "http://192.168.168.1/android_register_login/withdraw_money.php";
+    private static String URL_GET_ACCOUNT_BALANCE = "http://192.168.168.1/android_register_login/get_account_balance.php";
 
     Context context;
 

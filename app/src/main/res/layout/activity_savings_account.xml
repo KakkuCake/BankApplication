@@ -9,21 +9,22 @@
 
     <ImageView
         android:id="@+id/logo"
-        android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:src="@drawable/kastelu"
+        android:layout_width="400dp"
+        android:layout_height="250dp"
+        android:src="@drawable/banklogo"
         app:layout_constraintBottom_toTopOf="@+id/button_add_money_s"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.454"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.105"
         tools:ignore="MissingConstraints" />
 
     <Button
         android:id="@+id/button_add_money_s"
         android:layout_width="250dp"
         android:layout_height="40dp"
-        android:layout_marginBottom="8dp"
+        android:layout_marginBottom="12dp"
         android:backgroundTint="@android:color/holo_blue_dark"
         android:text="add money"
         android:textColor="@android:color/black"
@@ -44,6 +45,6 @@
         app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.626" />
+        app:layout_constraintVertical_bias="0.82" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
