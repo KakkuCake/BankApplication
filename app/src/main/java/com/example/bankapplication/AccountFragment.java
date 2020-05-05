@@ -79,7 +79,7 @@ public class AccountFragment extends Fragment {
     private void startCreateNewAccountActivity(String email) {
         nameList = helper.populateSpinner(email);
         if (nameList.isEmpty())  {  // Käyttäjän ei pitäisi päätyä tähän if-looppiin missään tilanteessa, mutta varmistetaan silti.
-            Toast.makeText(getActivity(), "You already have 3 accounts!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(), getString(R.string.maxAccount), Toast.LENGTH_SHORT).show();
         } else {
             nameList.clear();
             Intent intent = new Intent(getActivity(), CreateNewAccountActivity.class);
@@ -93,14 +93,14 @@ public class AccountFragment extends Fragment {
             Intent intent = new Intent(getActivity(), CreateCardActivity.class);
             startActivity(intent);
         } else {
-            Toast.makeText(getActivity(), "You already have bankcard!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(), getString(R.string.maxCard), Toast.LENGTH_SHORT).show();
         }
     }
 
     private void startTransactionsActivity() {
         BankCard bankCard = bank.returnCard(mEmail);
         if (bankCard == null) {
-            Toast.makeText(getActivity(), "First create bankcard!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(), getString(R.string.createCard), Toast.LENGTH_SHORT).show();
         } else {
             Intent intent = new Intent(getActivity(), CardTransactionsActivity.class);
             startActivity(intent);

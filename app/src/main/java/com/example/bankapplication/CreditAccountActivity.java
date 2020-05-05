@@ -4,14 +4,18 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.method.ScrollingMovementMethod;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 public class CreditAccountActivity extends AppCompatActivity {
 
-    private Button button_transfer_c, button_add_money_c, button_change_credit_limit;
+    private Button button_transfer_c, button_add_money_c, button_change_credit_limit, button_check_transactions_c;
+    private TextView textview_transactions_c;
     public static final String ACCOUNT_NUMBER = "com.example.bankapplication.ACCOUNT_NUMBER";
     String account_number;
+    Bank bank = new Bank();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +46,18 @@ public class CreditAccountActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity4();
+            }
+        });
+
+        final Account account2 = bank.returnAccount(account_number);
+        textview_transactions_c = findViewById(R.id.textview_transactions_c);
+        button_check_transactions_c = findViewById(R.id.button_check_transactions_c);
+        button_check_transactions_c.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                textview_transactions_c.setText(getString(R.string.balance) + ": " + account2.balance + "€\n\n"+ bank.readTransaction(CreditAccountActivity.this, account_number));
+                textview_transactions_c.setMovementMethod(new ScrollingMovementMethod());
+
             }
         });
     }

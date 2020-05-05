@@ -4,13 +4,16 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.method.ScrollingMovementMethod;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class SavingsAccountActivity extends AppCompatActivity {
 
-    private Button button_add_money_s, button_check_interest_rate;
+    private Button button_add_money_s, button_check_interest_rate, button_check_transactions_s;
+    private TextView textview_transactions_s;
     public static final String ACCOUNT_NUMBER = "com.example.bankapplication.ACCOUNT_NUMBER";
     String account_number;
 
@@ -39,6 +42,19 @@ public class SavingsAccountActivity extends AppCompatActivity {
                 showInterestRate();
             }
         });
+
+        final Account account2 = bank.returnAccount(account_number);
+        textview_transactions_s = findViewById(R.id.textview_transactions_s);
+        button_check_transactions_s = findViewById(R.id.button_check_transactions_s);
+        button_check_transactions_s.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                textview_transactions_s.setText(getString(R.string.balance) + ": " + account2.balance + "€\n\n"+ bank.readTransaction(SavingsAccountActivity.this, account_number));
+                textview_transactions_s.setMovementMethod(new ScrollingMovementMethod());
+
+            }
+        });
+
     }
 
     private void startActivity1() {

@@ -1,5 +1,6 @@
 package com.example.bankapplication;
 
+import java.io.StringWriter;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -7,6 +8,7 @@ public class HelperClass { //Luokka avustaa Database luokan getAccountBalance -m
     // Tarkoitus on tallentaa hetkellisesti Arraylist bListiin halutun käyttäjän balanssi, jotta osataan kirjoittaa tietokantaan uusi balanssi käyttäjälle.
 
     public float balance;
+    public String email2 = "";
     protected static ArrayList<String> bList = new ArrayList<>();
     private static HelperClass b = null;
 
@@ -80,6 +82,7 @@ public class HelperClass { //Luokka avustaa Database luokan getAccountBalance -m
         }
         return cardNumber;
     }
+
 
 
 }

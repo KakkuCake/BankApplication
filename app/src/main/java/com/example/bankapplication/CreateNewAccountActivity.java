@@ -42,7 +42,7 @@ public class CreateNewAccountActivity extends AppCompatActivity {
         if (nameList.isEmpty())  {  // Käyttäjän ei pitäisi päätyä tähän if-looppiin missään tilanteessa, mutta varmistetaan silti.
             button_select_account.setVisibility(View.GONE);
             spinner.setVisibility(View.GONE);
-            Toast.makeText(this, "You already have 3 accounts!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, getString(R.string.maxAccount), Toast.LENGTH_SHORT).show();
         } else {
             ArrayAdapter adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, nameList);
             adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);

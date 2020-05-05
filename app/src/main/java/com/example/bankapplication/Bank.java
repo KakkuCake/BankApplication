@@ -8,7 +8,9 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 import static android.content.Context.MODE_PRIVATE;
 
@@ -50,6 +52,7 @@ public class Bank {
             }
         }
     }
+
 
     public void setNewCreditLimit(String account_number, float new_credit) {
         for (Account account : mAccounts) {
@@ -93,7 +96,7 @@ public class Bank {
     public void clearArrayLists() { //Tehdään tämä uloskirjautumisen yhteydessä, jotta luokkamuuttuja unohtaa arraylistin sisältämän datan.
         mAccounts.clear();
         mCards.clear();
-        clear(); // users.csv
+
     }
 
     public void depositCard(String email, float amount) {
@@ -128,11 +131,12 @@ public class Bank {
         return null;
     }
 
-    public void writeTransaction(String transactionType, String amount) {
+    public void writeTransaction(String accNum, String transactionType, String amount, Context context) {
         try {
-
-            OutputStreamWriter file = new OutputStreamWriter(context.openFileOutput("users.csv", Context.MODE_APPEND));
-            file.write( transactionType + ";" + amount + "\n");
+            OutputStreamWriter file = new OutputStreamWriter(context.openFileOutput("transactions.csv", Context.MODE_APPEND));
+            SimpleDateFormat formatter= new SimpleDateFormat("HH:mm dd.MM.yy");
+            Date date = new Date(System.currentTimeMillis());
+            file.write( accNum + ";" + transactionType + ";" + amount + "€;" + formatter.format(date) + " \n");
             file.close();
 
         } catch (FileNotFoundException ex) {
@@ -141,33 +145,31 @@ public class Bank {
             ex.printStackTrace();
         }
     }
-    public void readTransaction(){
+
+
+    public String readTransaction(Context context, String account_number){
+        String transactions = "";
+        String line = "";
         try {
-            InputStream file = context.openFileInput("users.csv");
+            InputStream file = context.openFileInput("transactions.csv");
             BufferedReader br = new BufferedReader(new InputStreamReader(file));
-            String line = "";
             while ((line = br.readLine()) != null) {
-                System.out.println(line);
-                String[] lista = line.split(";");
-                System.out.println(lista[1] + "####################");
+                String[] lista = line.split(";"); //accNum;type;amount
+                if(lista[0].equals(account_number)) {
+                    transactions = transactions + lista[1] + " " + lista[2] + " " + lista[3] + "\n\n";
+                }else{
+                }
             }
+            System.out.println(transactions);
             br.close();
             file.close();
+
         }catch (FileNotFoundException e){
             System.out.println("error");
         }catch (IOException e){
             System.out.println("error");
         }
-    }
-    public void clear() {
-        try {
-            OutputStreamWriter file = new OutputStreamWriter(context.openFileOutput("users2.csv", MODE_PRIVATE));
-            file.write("");
-            file.flush();
-            file.close();
-        }catch (IOException e){
-            System.out.println("joo");
-        }
+        return transactions;
     }
 
     public static Bank getInstance() {

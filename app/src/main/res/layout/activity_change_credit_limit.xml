@@ -26,7 +26,7 @@
         app:errorEnabled="true"
         app:passwordToggleEnabled="true">
         <com.google.android.material.textfield.TextInputEditText
-            android:hint="Put here your new credit limit"
+            android:hint="@string/limit2"
             android:textColor="@color/colorPrimaryDark"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
@@ -37,7 +37,7 @@
         android:id="@+id/button_credit"
         android:layout_below="@id/credit"
         android:layout_marginTop="30dp"
-        android:text="Confirm"
+        android:text="@string/confirm"
         android:backgroundTint="@android:color/holo_blue_dark"
         android:textColor="@android:color/black"
         android:layout_width="match_parent"

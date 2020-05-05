@@ -67,6 +67,7 @@ public class TransferActivity extends AppCompatActivity {
 
                     if (account_mark.equals("R")) {
                         database.transferMoneyRegularAccount(v, account_number_payee, new_balance_string);
+
                     } else if (account_mark.equals("C")) {
                         database.transferMoneyCreditAccount(v, account_number_payee, new_balance_string);
                     } else if (account_mark.equals("S")) {
@@ -74,6 +75,8 @@ public class TransferActivity extends AppCompatActivity {
                     } else {
                         finish(); // EI pitäisi olla mahdollista, että joudutaan tähän looppiin, mutta jos jostain ihmeen syystä niin käy, suljetaan ohjelma.
                     }
+                    bank.writeTransaction(my_account_number, "Transfer to account: " + account_number_payee, "-" + amount, TransferActivity.this);
+                    bank.writeTransaction(account_number_payee, "Transfer from account:  " + my_account_number, "+" + amount, TransferActivity.this);
                 }
 
             }

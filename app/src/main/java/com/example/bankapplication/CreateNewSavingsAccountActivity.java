@@ -16,6 +16,7 @@ public class CreateNewSavingsAccountActivity extends AppCompatActivity {
     private Button button_create_new_account;
     String getEmail, account_type;
     private TextInputLayout account_number, balance;
+    Bank bank = new Bank();
 
     SessionManager sessionManager;
     Validation validator = new Validation(this);
@@ -53,6 +54,7 @@ public class CreateNewSavingsAccountActivity extends AppCompatActivity {
 
                 final String account_number = "S" + account_numberInput;
                 database.addSavingsAccount(v, email, account_number, balance);
+                bank.writeTransaction(account_number, "Account Created, first deposit: ", balance, CreateNewSavingsAccountActivity.this);
 
             }
         });

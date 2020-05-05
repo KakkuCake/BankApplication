@@ -18,7 +18,7 @@
         android:layout_height="wrap_content"
         app:errorEnabled="true">
         <com.google.android.material.textfield.TextInputEditText
-            android:hint="account number"
+            android:hint="@string/accountNum"
             android:textColor="@color/colorPrimaryDark"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
@@ -32,7 +32,7 @@
         app:passwordToggleEnabled="true">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:hint="balance"
+            android:hint="@string/amountofmoney"
             android:textColor="@color/colorPrimaryDark"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
@@ -50,7 +50,7 @@
         android:id="@+id/button_create_new_account"
         android:backgroundTint="@android:color/holo_blue_dark"
         android:textColor="@android:color/black"
-        android:text="Confirm"
+        android:text="@string/confirm"
         android:layout_margin="30dp"
         android:layout_width="match_parent"
         android:layout_height="55dp" />

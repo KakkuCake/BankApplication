@@ -9,12 +9,26 @@
 
     <ImageView
         android:id="@+id/logo"
-        android:layout_width="400dp"
-        android:layout_height="250dp"
+        android:layout_width="292dp"
+        android:layout_height="154dp"
         android:src="@drawable/banklogo"
         app:layout_constraintBottom_toTopOf="@+id/button_add_money_r"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.454"
+        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.091"
+        tools:ignore="MissingConstraints" />
+
+    <ImageView
+        android:id="@+id/logo2"
+        android:layout_width="442dp"
+        android:layout_height="467dp"
+        android:layout_marginTop="16dp"
+        android:src="@drawable/korttilogo"
+        app:layout_constraintBottom_toTopOf="@+id/button_add_money_r"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.516"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.091"
@@ -24,9 +38,8 @@
         android:id="@+id/button_add_money_b"
         android:layout_width="250dp"
         android:layout_height="40dp"
-        android:layout_marginBottom="20dp"
         android:backgroundTint="@android:color/holo_blue_dark"
-        android:text="add money"
+        android:text="@string/addMoney"
         android:textColor="@android:color/black"
         app:layout_constraintBottom_toTopOf="@+id/button_withdraw"
         app:layout_constraintEnd_toEndOf="parent"
@@ -38,27 +51,86 @@
         android:layout_width="250dp"
         android:layout_height="40dp"
         android:backgroundTint="@android:color/holo_blue_dark"
-        android:text="Change withdraw limit"
+        android:text="@string/limit"
         android:textColor="@android:color/black"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.552"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.804" />
+        app:layout_constraintVertical_bias="0.894" />
 
     <Button
         android:id="@+id/button_withdraw"
         android:layout_width="250dp"
         android:layout_height="40dp"
         android:backgroundTint="@android:color/holo_blue_dark"
-        android:text="Withdraw"
+        android:text="@string/Withdraw"
+        android:textColor="@android:color/black"
+        app:layout_constraintBottom_toTopOf="@+id/button_change_withdraw_limit"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.552"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <Button
+        android:id="@+id/button_check_transactions_card"
+        android:layout_width="250dp"
+        android:layout_height="40dp"
+        android:backgroundTint="@android:color/holo_blue_dark"
+        android:text="@string/transactions"
         android:textColor="@android:color/black"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.552"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.72" />
+        app:layout_constraintVertical_bias="0.952" />
+
+    <TextView
+        android:id="@+id/cardNumText"
+        android:layout_width="260dp"
+        android:layout_height="48dp"
+        android:lineSpacingExtra="8sp"
+        android:text="4444 4444 4444 4444"
+        android:textSize="19sp"
+        android:textStyle="bold"
+        android:typeface="monospace"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.589"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.428" />
+
+    <TextView
+        android:id="@+id/cardHolderName"
+        android:layout_width="260dp"
+        android:layout_height="48dp"
+        android:lineSpacingExtra="8sp"
+        android:text="4444 4444 4444 4444"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        android:typeface="monospace"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.602"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.468" />
+
+    <TextView
+        android:id="@+id/transactions_textview"
+        android:layout_width="320dp"
+        android:layout_height="150dp"
+        android:scrollbars="vertical"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.494"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.617" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

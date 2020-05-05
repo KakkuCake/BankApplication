@@ -51,6 +51,7 @@ public class DepositCardActivity extends AppCompatActivity {
 
                 String my_balance = String.valueOf(new_balance);
                 database.saveBalanceBankCard(v, mEmail, my_balance);
+                bank.writeTransaction(myCard.card_number, "Card deposit: ", "+"+ amount, DepositCardActivity.this);
 
             }
         });

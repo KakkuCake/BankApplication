@@ -17,6 +17,7 @@ public class CreateNewCreditAccountActivity extends AppCompatActivity {
     private Button button_create_new_account;
     String getEmail, account_type;
     private TextInputLayout account_number, balance, credit;
+    Bank bank = new Bank();
 
     SessionManager sessionManager;
     Validation validator = new Validation(this);
@@ -57,6 +58,7 @@ public class CreateNewCreditAccountActivity extends AppCompatActivity {
 
                 final String account_number = "C" + account_numberInput;
                 database.addCreditAccount(v, email, account_number, balance, credit);
+                bank.writeTransaction(account_number, "Account created, first deposit: ", balance, CreateNewCreditAccountActivity.this);
 
             }
         });

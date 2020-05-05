@@ -20,7 +20,7 @@
         android:backgroundTint="@android:color/holo_blue_dark"
         android:textColor="@android:color/black"
         android:layout_height="wrap_content"
-        android:text="Select the account type"></Button>
+        android:text="@string/selectType"></Button>
 
 
 </LinearLayout>

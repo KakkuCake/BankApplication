@@ -19,7 +19,7 @@
         app:errorEnabled="true"
         app:passwordToggleEnabled="true">
         <com.google.android.material.textfield.TextInputEditText
-            android:hint="Put here the amount of money"
+            android:hint="@string/transferMoney"
             android:textColor="@color/colorPrimaryDark"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
@@ -37,7 +37,7 @@
         android:id="@+id/button_transfer"
         android:backgroundTint="@android:color/holo_blue_dark"
         android:textColor="@android:color/black"
-        android:text="Confirm"
+        android:text="@string/confirm"
         android:layout_margin="30dp"
         android:layout_width="match_parent"
         android:layout_height="55dp" />

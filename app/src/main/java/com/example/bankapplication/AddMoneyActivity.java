@@ -43,6 +43,7 @@ public class AddMoneyActivity extends AppCompatActivity {
 
                 float amount = Float.parseFloat(deposit);
                 bank.depositMoney(account_number, amount);
+                bank.writeTransaction(account_number, "Deposit: ", "+"+ amount, AddMoneyActivity.this);
 
                 Account myAccount = bank.returnAccount(account_number);
                 float accounts_balance = myAccount.getBalance();//Let's get user's new balance from bank so we can count the new balance.

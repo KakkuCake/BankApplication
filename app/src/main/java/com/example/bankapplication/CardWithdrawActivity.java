@@ -46,9 +46,9 @@ public class CardWithdrawActivity extends AppCompatActivity {
                 BankCard myCard = bank.returnCard(mEmail);
 
                 if (amount > myCard.getBalance()) {
-                    balance.setError("You have not enough balance!");
+                    balance.setError(getString(R.string.notEnoughBalance));
                 } else if (amount > myCard.getWithdrawLimit()) {
-                    balance.setError("Limit error!");
+                    balance.setError(getString(R.string.limitError));
                 } else {
 
                     bank.withdrawCard(mEmail, amount);
@@ -56,6 +56,7 @@ public class CardWithdrawActivity extends AppCompatActivity {
 
                     String my_balance = String.valueOf(new_balance);
                     database.saveBalanceBankCard(v, mEmail, my_balance);
+                    bank.writeTransaction(myCard.card_number, "Card Withdraw: ", "-"+ amount, CardWithdrawActivity.this);
                 }
 
             }

@@ -68,7 +68,7 @@ public class BankActionsFragment extends Fragment {
         button_transaction = (Button) view.findViewById(R.id.button_transaction);
 
         if (spinner.getCount()==0){
-            Toast.makeText(getActivity(),"You have no accounts", Toast.LENGTH_LONG).show();
+            Toast.makeText(getActivity(),getString(R.string.noAccounts), Toast.LENGTH_LONG).show();
             button_transaction.setVisibility(View.GONE);
             spinner.setVisibility(View.GONE);
         }
@@ -78,7 +78,7 @@ public class BankActionsFragment extends Fragment {
             public void onClick(View v) {
 
                 if (account.equals(null)) {
-                    Toast.makeText(getActivity(), "You have no accounts, please go back and create one", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), getString(R.string.noAccounts2), Toast.LENGTH_SHORT).show();
                 }
 
                 char first_letter = account.charAt(0);

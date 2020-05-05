@@ -25,7 +25,7 @@
         app:errorEnabled="true"
         app:passwordToggleEnabled="true">
         <com.google.android.material.textfield.TextInputEditText
-            android:hint="put here the new withdraw limit"
+            android:hint="@string/newWIthdraw"
             android:textColor="@color/colorPrimaryDark"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
@@ -40,7 +40,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="-4dp"
         android:backgroundTint="@android:color/holo_blue_dark"
-        android:text="Confirm"
+        android:text="@string/confirm"
         android:textColor="@android:color/black" />
 
 

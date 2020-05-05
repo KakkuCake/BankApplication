@@ -20,6 +20,7 @@ public class CreateCardActivity extends AppCompatActivity {
     Database database = new Database(this);
     SessionManager sessionManager;
     HelperClass helper = new HelperClass();
+    Bank bank = new Bank();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,7 +30,6 @@ public class CreateCardActivity extends AppCompatActivity {
         sessionManager = new SessionManager(this);
         HashMap<String, String> user = sessionManager.getUserDetail(); // Selvitetään kirjautuneen käyttäjän etunimi ja sähköposti.
         mEmail = user.get(sessionManager.EMAIL);
-
 
         balance = findViewById(R.id.balance);
         withdraw_limit = findViewById(R.id.withdraw_limit);
@@ -52,6 +52,7 @@ public class CreateCardActivity extends AppCompatActivity {
                 final String card_number = helper.getCardNumber();
 
                 database.addBankCard(v, mEmail, card_number, balance, limit);
+                bank.writeTransaction(card_number, "Card created, first deposit: ", balance, CreateCardActivity.this);
 
             }
         });

@@ -53,7 +53,7 @@ public class Validation {
             first_name.setError(context.getResources().getString(R.string.invalidName));
             return false;
         } else if (!(firstNameInput.matches("[a-zA-Z]+"))) {
-            first_name.setError("Invalid name");
+            first_name.setError(context.getResources().getString(R.string.invalidName2));
             return false;
         } else {
             first_name.setError(null);
@@ -72,7 +72,7 @@ public class Validation {
             last_name.setError(context.getResources().getString(R.string.invalidName));
             return false;
         } else if (!(lastNameInput.matches("[a-zA-Z]+"))) {
-            last_name.setError("Invalid name");
+            last_name.setError(context.getResources().getString(R.string.invalidName2));
             return false;
         } else {
             last_name.setError(null);
@@ -117,7 +117,7 @@ public class Validation {
         if (passwordInput.equals(c_passwordInput)) {
             return true;
         } else {
-            Toast.makeText(context, "Passwords don't match", Toast.LENGTH_SHORT).show();
+            Toast.makeText(context, context.getString(R.string.passwordmatch), Toast.LENGTH_SHORT).show();
             return false;
         }
 
@@ -128,7 +128,7 @@ public class Validation {
         TextInputLayout account_number = (TextInputLayout) ((Activity)context).findViewById(R.id.account_number);
 
         if (account_numberInput.length() != 8) {
-            account_number.setError("Account number must be 8 digits!");
+            account_number.setError(context.getString(R.string.account8));
             return false;
 
         } else {
@@ -143,7 +143,7 @@ public class Validation {
         TextInputLayout account_number = (TextInputLayout) ((Activity)context).findViewById(R.id.account_number);
 
         if (account_numberInput.length() != 7) {
-            account_number.setError("Account number must be 7 digits!");
+            account_number.setError(context.getString(R.string.account7));
             return false;
         }
 
@@ -155,7 +155,7 @@ public class Validation {
         }
         catch (NumberFormatException nfe)
         {
-            account_number.setError("Invalid account_number, please try again!");
+            account_number.setError(context.getString(R.string.invalidAccNum));
             return false;
         }
     }
@@ -168,11 +168,11 @@ public class Validation {
         {
             float f = Float.valueOf(balanceInput.trim()).floatValue();
             if (f<0) {
-                balance.setError("balance can't be negative");
+                balance.setError(context.getString(R.string.negBalance));
                 return false;
             } else  {
                 if (f > 1000000) {
-                    balance.setError("You can deposit max 1m at a time");
+                    balance.setError(context.getString(R.string.maxDeposit));
                     return false;
                 } else  {
                     balance.setError(null);
@@ -182,7 +182,7 @@ public class Validation {
         }
         catch (NumberFormatException nfe)
         {
-            balance.setError("Invalid amount, please try again!");
+            balance.setError(context.getString(R.string.invalidAmount));
             return false;
         }
     }
@@ -195,7 +195,7 @@ public class Validation {
         {
             float f = Float.valueOf(withdrawInput.trim()).floatValue();
             if (f<0) {
-                balance.setError("withdraw can't be negative");
+                balance.setError(context.getString(R.string.negWithdraw));
                 return false;
             } else {
                 balance.setError(null);
@@ -204,7 +204,7 @@ public class Validation {
         }
         catch (NumberFormatException nfe)
         {
-            balance.setError("Invalid amount, please try again!");
+            balance.setError(context.getString(R.string.invalidAmount));
             return false;
         }
     }
@@ -217,11 +217,11 @@ public class Validation {
         {
             float f = Float.valueOf(balanceInput.trim()).floatValue();
             if (f<0) {
-                balance.setError("balance can't be negative");
+                balance.setError(context.getString(R.string.negBalance));
                 return false;
             } else  {
                 if (f > 1000000) {
-                    balance.setError("You can transfer max 1m at a time");
+                    balance.setError(context.getString(R.string.maxTransfer));
                     return false;
                 } else  {
                     balance.setError(null);
@@ -231,7 +231,7 @@ public class Validation {
         }
         catch (NumberFormatException nfe)
         {
-            balance.setError("Invalid amount, please try again!");
+            balance.setError(context.getString(R.string.invalidAmount));
             return false;
         }
     }
@@ -245,11 +245,11 @@ public class Validation {
         try {
             float f = Float.valueOf(creditInput.trim()).floatValue();
             if (f < 0) {
-                credit.setError("balance can't be negative");
+                credit.setError(context.getString(R.string.negBalance));
                 return false;
             } else {
                 if (f > 50000) {
-                    credit.setError("You can have max 50k credit limit");
+                    credit.setError(context.getString(R.string.maxCred));
                     return false;
                 } else {
                     credit.setError(null);
@@ -259,7 +259,7 @@ public class Validation {
         }
         catch (NumberFormatException nfe)
         {
-            credit.setError("Invalid credit, please try again!");
+            credit.setError(context.getString(R.string.invalidAmount));
             return false;
         }
     }
@@ -271,11 +271,11 @@ public class Validation {
         try {
             float f = Float.valueOf(limitInput.trim()).floatValue();
             if (f < 0) {
-                limit.setError("withdraw limit can't be negative");
+                limit.setError(context.getString(R.string.negWithdraw));
                 return false;
             } else {
                 if (f > 50000) {
-                    limit.setError("You can have max 50k withdraw limit");
+                    limit.setError(context.getString(R.string.maxWithdraw));
                     return false;
                 } else {
                     limit.setError(null);
@@ -283,7 +283,7 @@ public class Validation {
                 }
             }
         } catch (NumberFormatException nfe) {
-            limit.setError("Invalid credit, please try again!");
+            limit.setError(context.getString(R.string.invalidAmount));
             return false;
         }
 

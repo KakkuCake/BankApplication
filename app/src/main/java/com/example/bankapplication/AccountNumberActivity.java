@@ -42,7 +42,7 @@ public class AccountNumberActivity extends AppCompatActivity {
             }
         });
 
-        Toast.makeText(this, "Choose the type of account you want to create and press the confirm button", Toast.LENGTH_LONG).show();
+        Toast.makeText(this, getString(R.string.AccNumActivity), Toast.LENGTH_LONG).show();
 
 
     }

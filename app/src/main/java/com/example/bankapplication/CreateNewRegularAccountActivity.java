@@ -17,6 +17,7 @@ public class CreateNewRegularAccountActivity extends AppCompatActivity {
     private Button button_create_new_account;
     String getEmail;
     private TextInputLayout account_number, balance;
+    Bank bank = new Bank();
 
     SessionManager sessionManager;
     Validation validator = new Validation(this);
@@ -50,6 +51,7 @@ public class CreateNewRegularAccountActivity extends AppCompatActivity {
                     final String balance = balanceInput;
                     final String account_number = "R" + account_numberInput;  // Käytetään tunnuksia tilinumerossa, jotta tiedetään minkä tyyppinen tili on käytössä.
                     database.addRegularAccount(v, email, account_number, balance);
+                    bank.writeTransaction(account_number, "Account Created, first deposit: ", balance, CreateNewRegularAccountActivity.this);
             }
         });
 
