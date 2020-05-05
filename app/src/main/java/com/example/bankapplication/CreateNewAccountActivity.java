@@ -23,7 +23,7 @@ public class CreateNewAccountActivity extends AppCompatActivity {
     ArrayList nameList;
     SessionManager sessionManager;
 
-    Bank bank = Bank.getInstance();
+    HelperClass helper = new HelperClass();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,16 +34,19 @@ public class CreateNewAccountActivity extends AppCompatActivity {
         HashMap<String, String> user = sessionManager.getUserDetail();
         mEmail = user.get(sessionManager.EMAIL);
 
-        nameList = populateSpinner();
+        button_select_account = (Button) findViewById(R.id.button_select_account);
+        spinner = findViewById(R.id.spinner);
 
-        if (nameList.isEmpty())  {
+        nameList = helper.populateSpinner(mEmail);
+
+        if (nameList.isEmpty())  {  // Käyttäjän ei pitäisi päätyä tähän if-looppiin missään tilanteessa, mutta varmistetaan silti.
+            button_select_account.setVisibility(View.GONE);
+            spinner.setVisibility(View.GONE);
             Toast.makeText(this, "You already have 3 accounts!", Toast.LENGTH_SHORT).show();
-
         } else {
             ArrayAdapter adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, nameList);
             adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
-            spinner = findViewById(R.id.spinner);
             spinner.setAdapter(adapter);
             spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                 @Override
@@ -56,15 +59,17 @@ public class CreateNewAccountActivity extends AppCompatActivity {
                 }
             });
 
-            button_select_account = (Button) findViewById(R.id.button_select_account);
             button_select_account.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     if (account_type.equals("regularAccount")) {
+                        nameList.clear(); // Tyhjennetään varmuudeksi apuluokasta saatu arraylist.
                         startCreateRegularAccountActivity();
                     } else if (account_type.equals("creditAccount")) {
+                        nameList.clear();
                         startCreateCreditAccountActivity();
                     } else if (account_type.equals("savingsAccount")) {
+                        nameList.clear();
                         startCreateSavingsAccountActivity();
                     }
                 }
@@ -88,35 +93,5 @@ public class CreateNewAccountActivity extends AppCompatActivity {
         Intent intent = new Intent(CreateNewAccountActivity.this, CreateNewSavingsAccountActivity.class);
         startActivity(intent);
     }
-
-
-    private ArrayList<String> populateSpinner() {
-
-        ArrayList<String> arr = bank.arraylistOfAccounts(mEmail);
-
-        for (String a : arr) {
-            System.out.println(a);
-        }
-
-        nameList = new ArrayList(); //Täytetään ensiksi lista
-        nameList.add("regularAccount");
-        nameList.add("creditAccount");
-        nameList.add("savingsAccount");
-
-        for (String s : arr) {   //Jos käyttäjällä on jo R-, C- tai S-tili niin poistetaan se pudotusvalikosta. Käyttäjällä saa olla max 1 tili/tilityyppi
-            char first_letter = s.charAt(0);
-            String account_mark = "" + first_letter;  //Let's get the account mark (which is either R, C, or S) to know which account user is using.
-            if (account_mark.equals("R"))
-                nameList.remove("regularAccount");
-            else if (account_mark.equals("C"))
-                nameList.remove("creditAccount");
-            else if (account_mark.equals("S"))
-                nameList.remove("savingsAccount");
-        }
-
-        return nameList;
-
-    }
-
 
 }

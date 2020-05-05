@@ -7,46 +7,59 @@
     android:background="@android:color/white"
     tools:context=".CreditAccountActivity">
 
-    <Button
-        android:id="@+id/button_add_money_c"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="220dp"
-        android:text="Add money"
-        android:backgroundTint="@android:color/holo_blue_dark"
-        android:textColor="@android:color/black"
+    <ImageView
+        android:id="@+id/logo"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:src="@drawable/kastelu"
+        app:layout_constraintBottom_toTopOf="@+id/button_add_money_c"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.615" />
+        tools:ignore="MissingConstraints" />
+
+    <Button
+        android:id="@+id/button_add_money_c"
+        android:layout_width="250dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="224dp"
+        android:backgroundTint="@android:color/holo_blue_dark"
+        android:text="Add money"
+        android:textColor="@android:color/black"
+        app:layout_constraintBottom_toTopOf="@+id/button_transfer_c"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.858" />
 
     <Button
         android:id="@+id/button_transfer_c"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="312dp"
-        android:layout_marginBottom="192dp"
+        android:layout_width="250dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="352dp"
         android:backgroundTint="@android:color/holo_blue_dark"
-        android:textColor="@android:color/black"
         android:text="Transfer"
+        android:textColor="@android:color/black"
+        app:layout_constraintBottom_toTopOf="@+id/button_change_credit_limit"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintVertical_bias="0.804" />
 
     <Button
         android:id="@+id/button_change_credit_limit"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="204dp"
+        android:layout_width="250dp"
+        android:layout_height="40dp"
+        android:layout_marginBottom="176dp"
         android:backgroundTint="@android:color/holo_blue_dark"
+        android:text="change credit limit"
         android:textColor="@android:color/black"
-        android:text="Change credit limit"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.483"
+        app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

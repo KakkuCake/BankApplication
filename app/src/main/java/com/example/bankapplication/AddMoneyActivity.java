@@ -47,11 +47,8 @@ public class AddMoneyActivity extends AppCompatActivity {
                 Account myAccount = bank.returnAccount(account_number);
                 float accounts_balance = myAccount.getBalance();//Let's get user's new balance from bank so we can count the new balance.
 
-                System.out.println("accounts_balance: " + accounts_balance);
 
                 String new_balance_string = String.valueOf(accounts_balance);
-
-                System.out.println("new_balance_string: " + new_balance_string);
 
                 char first_letter = account_number.charAt(0);
                 String account_mark = "" + first_letter;  // Selvitetään käyttäjätunnuksen ensimmäinen kirjain (R, C tai S) riippuen tilityypistä.
@@ -59,8 +56,8 @@ public class AddMoneyActivity extends AppCompatActivity {
                     database.addMoneyRegularAccount(v, account_number, new_balance_string); //Finally let's save the new balance to database.
                 } else if (account_mark.equals("C")) {
                     database.addMoneyCreditAccount(v, account_number, new_balance_string); //Finally let's save the new balance to database.
-                } else {
-                    System.out.println("");
+                } else if (account_mark.equals("S")) {
+                    database.addMoneySavingsAccount(v, account_number, new_balance_string);
                 }
             }
         });

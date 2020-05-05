@@ -69,11 +69,11 @@ public class Database {
                     String success = jsonObject.getString("success");
 
                     if(success.equals("1")) {
-                        Toast.makeText(context, "Success!", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context, "The registration was successful!", Toast.LENGTH_SHORT).show();
                         startLogInActivity(context);
 
                     } else if(success.equals("-1")) {
-                        Toast.makeText(context, "Sähköposti varattu", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context, "That email is taken!", Toast.LENGTH_SHORT).show();
                         loading.setVisibility(View.GONE);
                         button_regist.setVisibility(View.VISIBLE);
 
@@ -207,7 +207,7 @@ public class Database {
                             String success = jsonObject.getString("success");
 
                             if (success.equals("1")) {
-                                Toast.makeText( context, "Success!", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(context, "The profile change was successful", Toast.LENGTH_SHORT).show();
                                 SessionManager sessionManager = new SessionManager(context);
                                 sessionManager.createSession(first_name, email, id);
                                 startHomeActivity(context);
@@ -394,6 +394,10 @@ public class Database {
                         Toast.makeText(context, "Success!", Toast.LENGTH_SHORT).show();
                         startHomeActivity(context);
                     } else if (success.equals("-1")) {
+                        Toast.makeText(context, "The account number has been already taken", Toast.LENGTH_LONG).show();
+                        loading.setVisibility(View.GONE);
+                        button_create_new_account.setVisibility(View.VISIBLE);
+                    } else if (success.equals("-2")) {
                         Toast.makeText(context, "You already have one savingsaccount, please read more about our banks policy", Toast.LENGTH_LONG).show();
                         startHomeActivity(context);
                     } else {
@@ -675,6 +679,49 @@ public class Database {
 
     }
 
+    protected void addMoneySavingsAccount(View v, final String account_number, final String balance) {
+
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, URL_ADD_MONEY_S, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
+                    JSONObject jsonObject = new JSONObject(response);
+                    String success = jsonObject.getString("success");
+
+                    if (success.equals("1")) {
+                        Toast.makeText(context, "Deposit was successful", Toast.LENGTH_SHORT).show();
+                        startHomeActivity(context);
+                    } else {
+                        Toast.makeText(context, "Deposit failed", Toast.LENGTH_SHORT).show();
+                    }
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    Toast.makeText( context, "Connection error: " + e.toString(), Toast.LENGTH_SHORT).show();
+                }
+            }
+        },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText( context, "Connection error: " + error.toString(), Toast.LENGTH_SHORT).show();
+                    }
+                })
+        {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<>();
+                params.put("account_number", account_number);
+                params.put("balance", balance);
+                return params;
+            }
+        };
+
+        RequestQueue requestQueue = Volley.newRequestQueue(context);
+        requestQueue.add(stringRequest);
+
+    }
+
     protected void changeCreditLimit(View v, final String account_number, final String credit) {
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST, URL_CHANGE_CREDIT_LIMIT, new Response.Listener<String>() {
@@ -922,7 +969,7 @@ public class Database {
 
     protected void getAccountBalance(View v, String account_numberInput, final String my_account_number) {
 
-        final String account_number = account_numberInput.substring(0, 1).toUpperCase() + account_numberInput.substring(1);
+        final String account_number = account_numberInput.substring(0, 1).toUpperCase() + account_numberInput.substring(1); //Muutetaan vielä varmuudeksi ensimmäinen kirjain isoksi niin kuin tietokannassakin on.
 
         final Button button_account_number = (Button) ((Activity)context).findViewById(R.id.button_account_number);
         final ProgressBar loading = (ProgressBar) ((Activity)context).findViewById(R.id.loading);

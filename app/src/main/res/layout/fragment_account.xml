@@ -7,32 +7,44 @@
     android:layout_height="match_parent">
 
 
-    <Button
-        android:id="@+id/button_edit_profile"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:backgroundTint="@android:color/holo_blue_dark"
-        android:textColor="@android:color/black"
-        android:text="Edit Profile"
-        app:layout_constraintBottom_toBottomOf="parent"
+    <ImageView
+        android:id="@+id/logo"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:src="@drawable/kastelu"
+        app:layout_constraintBottom_toTopOf="@+id/button_create_accounts"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.541"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.871" />
+        tools:ignore="MissingConstraints" />
+
+    <Button
+        android:id="@+id/button_edit_profile"
+        android:layout_width="250dp"
+        android:layout_height="40dp"
+        android:backgroundTint="@android:color/holo_blue_dark"
+        android:text="Edit Profile"
+        android:textColor="@android:color/black"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.546"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.812" />
 
     <Button
         android:id="@+id/button_create_accounts"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="250dp"
+        android:layout_height="40dp"
         android:layout_marginTop="328dp"
         android:backgroundTint="@android:color/holo_blue_dark"
-        android:textColor="@android:color/black"
         android:text="Create Accounts"
+        android:textColor="@android:color/black"
         app:layout_constraintBottom_toTopOf="@+id/button_edit_profile"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.541"
+        app:layout_constraintHorizontal_bias="0.552"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.575" />
+        app:layout_constraintVertical_bias="0.921" />
 </androidx.constraintlayout.widget.ConstraintLayout>

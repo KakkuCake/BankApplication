@@ -40,7 +40,7 @@ public class TransferActivity extends AppCompatActivity {
 
                 String balanceInput = balance.getEditText().getText().toString().trim(); ;
 
-                if (!validator.validateBalance(balanceInput)) {
+                if (!validator.validateTransfer(balanceInput)) {
                     return;
                 }
 
@@ -58,11 +58,8 @@ public class TransferActivity extends AppCompatActivity {
                     database.withdrawMoney(v, my_account_number, my_new_balance_string);
 
                     float payees_balance = Float.parseFloat(getBalance());//This is the balance of the account the user put in the previous activity.
-                    System.out.println("The balance of account " + account_number_payee + " is + " + payees_balance);
                     float ac_new_balance = amount + payees_balance;
-                    System.out.println("The balance of account " + account_number_payee + " after transfer is " + ac_new_balance);
                     String new_balance_string = String.valueOf(ac_new_balance);
-                    System.out.println("The balance of account " + account_number_payee + " after transfer is as a string " + new_balance_string);
 
 
                     char first_letter = account_number_payee.charAt(0);
@@ -72,8 +69,10 @@ public class TransferActivity extends AppCompatActivity {
                         database.transferMoneyRegularAccount(v, account_number_payee, new_balance_string);
                     } else if (account_mark.equals("C")) {
                         database.transferMoneyCreditAccount(v, account_number_payee, new_balance_string);
+                    } else if (account_mark.equals("S")) {
+                        database.transferMoneySavingsAccount(v, account_number_payee, new_balance_string);
                     } else {
-                        System.out.println("");
+                        finish(); // EI pitäisi olla mahdollista, että joudutaan tähän looppiin, mutta jos jostain ihmeen syystä niin käy, suljetaan ohjelma.
                     }
                 }
 

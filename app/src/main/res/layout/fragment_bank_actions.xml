@@ -7,19 +7,21 @@
     android:gravity="center"
     tools:context=".CreateNewAccountActivity">
 
+
     <Spinner
         android:id="@+id/spinner2"
         android:backgroundTint="@android:color/holo_blue_dark"
         android:textColor="@android:color/black"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"></Spinner>
+
     <Button
         android:id="@+id/button_transaction"
-        android:backgroundTint="@android:color/holo_blue_dark"
-        android:textColor="@android:color/black"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Select Your account"></Button>
+        android:backgroundTint="@android:color/holo_blue_dark"
+        android:text="Select Your account"
+        android:textColor="@android:color/black"></Button>
 
 
 </LinearLayout>

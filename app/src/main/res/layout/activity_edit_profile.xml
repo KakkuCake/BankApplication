@@ -82,8 +82,8 @@
 
     <Button
         android:id="@+id/button_save"
-        android:backgroundTint="@color/colorPrimary"
-        android:textColor="@android:color/white"
+        android:backgroundTint="@android:color/holo_blue_dark"
+        android:textColor="@android:color/black"
         android:text="@string/saveChanges"
         android:layout_margin="30dp"
         android:layout_width="match_parent"

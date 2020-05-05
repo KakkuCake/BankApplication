@@ -13,13 +13,10 @@ public class Validation {
 
     private static final Pattern PASSWORD_PATTERN =
             Pattern.compile("^" +
-                    //"(?=.*[0-9])" +         //at least 1 digit
-                    //"(?=.*[a-z])" +         //at least 1 lower case letter
-                    //"(?=.*[A-Z])" +         //at least 1 upper case letter
-                    "(?=.*[a-zA-Z])" +      //any letter
-                    "(?=.*[@#$%^&+=])" +    //at least 1 special character
-                    "(?=\\S+$)" +           //no white spaces
-                    ".{4,}" +               //at least 4 characters
+                    "(?=.*[a-zA-Z])" +      //mikä tahansa kirjain
+                    "(?=.*[@#$%^&+=])" +    //vähintään yksi erikoismerkki
+                    "(?=\\S+$)" +           //ei välilyöntejä
+                    ".{5,}" +               //vähintään 5 merkkiä
                     "$");
 
     Context context;
@@ -45,15 +42,18 @@ public class Validation {
         }
     }
 
-    protected boolean validateFirstName(String usernameInput) {
+    protected boolean validateFirstName(String firstNameInput) {
 
-        TextInputLayout first_name = (TextInputLayout) ((Activity)context).findViewById(R.id.first_name);
+        TextInputLayout first_name = (TextInputLayout) ((Activity) context).findViewById(R.id.first_name);
 
-        if (usernameInput.isEmpty()) {
+        if (firstNameInput.isEmpty()) {
             first_name.setError(context.getResources().getString(R.string.fieldError));
             return false;
-        } else if (usernameInput.length() > 17) {
+        } else if (firstNameInput.length() > 17) {
             first_name.setError(context.getResources().getString(R.string.invalidName));
+            return false;
+        } else if (!(firstNameInput.matches("[a-zA-Z]+"))) {
+            first_name.setError("Invalid name");
             return false;
         } else {
             first_name.setError(null);
@@ -61,15 +61,18 @@ public class Validation {
         }
     }
 
-    protected boolean validateLastName(String usernameInput) {
+    protected boolean validateLastName(String lastNameInput) {
 
         TextInputLayout last_name = (TextInputLayout) ((Activity)context).findViewById(R.id.last_name);
 
-        if (usernameInput.isEmpty()) {
+        if (lastNameInput.isEmpty()) {
             last_name.setError(context.getResources().getString(R.string.fieldError));
             return false;
-        } else if (usernameInput.length() > 25) {
+        } else if (lastNameInput.length() > 25) {
             last_name.setError(context.getResources().getString(R.string.invalidName));
+            return false;
+        } else if (!(lastNameInput.matches("[a-zA-Z]+"))) {
+            last_name.setError("Invalid name");
             return false;
         } else {
             last_name.setError(null);
@@ -180,6 +183,33 @@ public class Validation {
         catch (NumberFormatException nfe)
         {
             balance.setError("Invalid balance, please try again!");
+            return false;
+        }
+    }
+
+    protected boolean validateTransfer(String balanceInput) {
+
+        TextInputLayout balance = (TextInputLayout) ((Activity)context).findViewById(R.id.balance);
+
+        try
+        {
+            float f = Float.valueOf(balanceInput.trim()).floatValue();
+            if (f<0) {
+                balance.setError("balance can't be negative");
+                return false;
+            } else  {
+                if (f > 1000000) {
+                    balance.setError("You can transfer max 1m at a time");
+                    return false;
+                } else  {
+                    balance.setError(null);
+                    return true;
+                }
+            }
+        }
+        catch (NumberFormatException nfe)
+        {
+            balance.setError("Invalid amount, please try again!");
             return false;
         }
     }
