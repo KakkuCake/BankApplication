@@ -22,22 +22,22 @@ public class Bank {
     Context context;
 
     public void addRegularAccount(String email, String account_number, float balance) {
-        mAccounts.add(new RegularAccount(email, account_number, balance));
+        mAccounts.add(new RegularAccount(email, account_number, balance)); //creates a new instance of an account (Type R,C,S) and ads it to mAccounts ArrayList.
     }
 
     public void addCreditAccount(String email, String account_number, float balance, float credit) {
-        mAccounts.add(new CreditAccount(email, account_number, balance, credit));
+        mAccounts.add(new CreditAccount(email, account_number, balance, credit));//creates a new instance of an account (Type R,C,S) and ads it to mAccounts ArrayList.
     }
 
     public void addSavingsAccount(String email, String account_number, float balance) {
-        mAccounts.add(new SavingsAccount(email, account_number, balance));
+        mAccounts.add(new SavingsAccount(email, account_number, balance));//creates a new instance of Account (Type R,C,S) and ads it to mAccounts ArrayList.
     }
 
     public void addBankCard(String email, String card_number, float balance, float withdraw_limit) {
-        mCards.add(new BankCard(email, card_number, balance, withdraw_limit));
+        mCards.add(new BankCard(email, card_number, balance, withdraw_limit));//creates a new instance of BankCard and ads it to mCards Arraylist.
     }
 
-    public void depositMoney(String acNumber, float amount) {
+    public void depositMoney(String acNumber, float amount) { //Searches the mAccounts arraylist for a specific account number to which money(amount) is deposited.
         for (Account account : mAccounts)  {
             if (account.getAcNumber().equals(acNumber)) {
                 account.setBalance(amount);
@@ -45,7 +45,7 @@ public class Bank {
         }
     }
 
-    public void withdrawMoney(String acNumber, float amount) {
+    public void withdrawMoney(String acNumber, float amount) { //Searches the mAccounts arraylist for a specific account number to which money(amount) is withdrawn from.
         for (Account account : mAccounts)  {
             if (account.getAcNumber().equals(acNumber)) {
                 account.setBalance(-amount);
@@ -54,7 +54,7 @@ public class Bank {
     }
 
 
-    public void setNewCreditLimit(String account_number, float new_credit) {
+    public void setNewCreditLimit(String account_number, float new_credit) { //Searches the mAccounts arraylist for a specific account which credit limit is to be changed
         for (Account account : mAccounts) {
             if (account instanceof CreditAccount) {
                 if (account_number.equals(account.getAcNumber()))
@@ -63,7 +63,7 @@ public class Bank {
         }
     }
 
-    public String getInterestRate(String account_number) {
+    public String getInterestRate(String account_number) { //Searches the mAccounts arraylist for a specific savings account and returns the interest rate
         for (Account account : mAccounts) {
             if (account instanceof SavingsAccount) {
                 if (account_number.equals(account.getAcNumber()))
@@ -73,7 +73,7 @@ public class Bank {
         return null;
     }
 
-    public ArrayList<String> arraylistOfAccounts(String email) {
+    public ArrayList<String> arraylistOfAccounts(String email) { // Returns all accounts of the current, signed in user
         ArrayList<String> accounts = new ArrayList<String>();
         String accountInformation;
         for (Account account: mAccounts) {
@@ -85,7 +85,7 @@ public class Bank {
         return accounts;
     }
 
-    public Account returnAccount(String account_number) {
+    public Account returnAccount(String account_number) { // Returns specific account of the current, signed in user
         for (Account account: mAccounts) {
             if (account_number.equals(account.getAcNumber()))
                return account;
@@ -93,13 +93,12 @@ public class Bank {
         return null;
     }
 
-    public void clearArrayLists() { //Tehdään tämä uloskirjautumisen yhteydessä, jotta luokkamuuttuja unohtaa arraylistin sisältämän datan.
+    public void clearArrayLists() { //This is executed during log out, to clear the ArrayLists of data.
         mAccounts.clear();
         mCards.clear();
-
     }
 
-    public void depositCard(String email, float amount) {
+    public void depositCard(String email, float amount) { //Gets user's card and adds money to it.
         for (BankCard card : mCards)  {
             if (card.getEmail().equals(email)) {
                 card.setBalance(amount);
@@ -107,7 +106,7 @@ public class Bank {
         }
     }
 
-    public void withdrawCard(String email, float amount) {
+    public void withdrawCard(String email, float amount) { //Gets user's card and withdraws money from it.
         for (BankCard card : mCards)  {
             if (card.getEmail().equals(email)) {
                 card.setBalance(-amount);
@@ -115,7 +114,7 @@ public class Bank {
         }
     }
 
-    public void setNewWithdrawLimit(String email, float new_limit) {
+    public void setNewWithdrawLimit(String email, float new_limit) { //Gets user's card and sets a new withdrawal limit
         for (BankCard card : mCards) {
             if (card.getEmail().equals(email)) {
                 card.setWithdrawLimit(new_limit);
@@ -123,14 +122,15 @@ public class Bank {
         }
     }
 
-    public BankCard returnCard(String email) {
+    public BankCard returnCard(String email) { //Returns the instance of user's card
         for (BankCard card: mCards) {
             if (email.equals(card.getEmail()));
                 return card;
         }
         return null;
     }
-
+    //Writes transactions to transactions.csv -file. Text is formatted as follows: "AccountNumber;TransactionType;Amount;DATE" =>
+    // 'C1234567;Deposit;+40€;21:20 6.5.20'
     public void writeTransaction(String accNum, String transactionType, String amount, Context context) {
         try {
             OutputStreamWriter file = new OutputStreamWriter(context.openFileOutput("transactions.csv", Context.MODE_APPEND));
@@ -146,7 +146,7 @@ public class Bank {
         }
     }
 
-
+    //Reads specific transactions according to users account_number from transactions.csv and writes them to /String transactions = "";/
     public String readTransaction(Context context, String account_number){
         String transactions = "";
         String line = "";
@@ -171,7 +171,7 @@ public class Bank {
         }
         return transactions;
     }
-
+    //helps to create a new instance of Bank
     public static Bank getInstance() {
         if (b == null) {
             return new Bank();
