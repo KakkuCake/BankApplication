@@ -172,7 +172,7 @@ public class Bank {
         return transactions;
     }
     //helps to create a new instance of Bank
-    public static Bank getInstance() {
+    public static Bank getInstance() {  //We used Singleton principle in this class.
         if (b == null) {
             return new Bank();
         }

@@ -26,25 +26,25 @@ import java.util.Map;
 
 public class Database {
 
-    private static String URL_REGIST = "http://192.168.168.1/android_register_login/register.php";
-    private static String URL_LOGIN = "http://192.168.168.1/android_register_login/login.php";
-    private static String URL_EDIT = "http://192.168.168.1/android_register_login/edit_profile.php";
-    private static String URL_CREATE_REGULAR_ACCOUNT = "http://192.168.168.1/android_register_login/create_regular_account.php";
-    private static String URL_CREATE_CREDIT_ACCOUNT = "http://192.168.168.1/android_register_login/create_credit_account.php";
-    private static String URL_CREATE_SAVINGS_ACCOUNT = "http://192.168.168.1/android_register_login/create_savings_account.php";
-    private static String URL_CHECK_REGULAR_ACCOUNT = "http://192.168.168.1/android_register_login/check_regular_account.php";
-    private static String URL_CHECK_CREDIT_ACCOUNT = "http://192.168.168.1/android_register_login/check_credit_account.php";
-    private static String URL_CHECK_SAVINGS_ACCOUNT = "http://192.168.168.1/android_register_login/check_savings_account.php";
-    private static String URL_ADD_MONEY_R = "http://192.168.168.1/android_register_login/add_money_regular_account.php";
-    private static String URL_ADD_MONEY_C = "http://192.168.168.1/android_register_login/add_money_credit_account.php";
-    private static String URL_ADD_MONEY_S = "http://192.168.168.1/android_register_login/add_money_savings_account.php";
-    private static String URL_CHANGE_CREDIT_LIMIT = "http://192.168.168.1/android_register_login/change_credit_limit.php";
-    private static String URL_WITHDRAW_MONEY = "http://192.168.168.1/android_register_login/withdraw_money.php";
-    private static String URL_GET_ACCOUNT_BALANCE = "http://192.168.168.1/android_register_login/get_account_balance.php";
-    private static String URL_CREATE_BANK_CARD = "http://192.168.168.1/android_register_login/create_bank_card.php";
-    private static String URL_CHECK_BANK_CARD = "http://192.168.168.1/android_register_login/check_bank_card.php";
-    private static String URL_SAVE_CARD_BALANCE = "http://192.168.168.1/android_register_login/save_card_balance.php";
-    private static String URL_SAVE_CARD_LIMIT = "http://192.168.168.1/android_register_login/save_card_limit.php";
+    private static String URL_REGIST = "http://192.168.1.162/android_register_login/register.php";
+    private static String URL_LOGIN = "http://192.168.1.162/android_register_login/login.php";
+    private static String URL_EDIT = "http://192.168.1.162/android_register_login/edit_profile.php";
+    private static String URL_CREATE_REGULAR_ACCOUNT = "http://192.168.1.162/android_register_login/create_regular_account.php";
+    private static String URL_CREATE_CREDIT_ACCOUNT = "http://192.168.1.162/android_register_login/create_credit_account.php";
+    private static String URL_CREATE_SAVINGS_ACCOUNT = "http://192.168.1.162/android_register_login/create_savings_account.php";
+    private static String URL_CHECK_REGULAR_ACCOUNT = "http://192.168.1.162/android_register_login/check_regular_account.php";
+    private static String URL_CHECK_CREDIT_ACCOUNT = "http://192.168.1.162/android_register_login/check_credit_account.php";
+    private static String URL_CHECK_SAVINGS_ACCOUNT = "http://192.168.1.162/android_register_login/check_savings_account.php";
+    private static String URL_ADD_MONEY_R = "http://192.168.1.162/android_register_login/add_money_regular_account.php";
+    private static String URL_ADD_MONEY_C = "http://192.168.1.162/android_register_login/add_money_credit_account.php";
+    private static String URL_ADD_MONEY_S = "http://192.168.1.162/android_register_login/add_money_savings_account.php";
+    private static String URL_CHANGE_CREDIT_LIMIT = "http://192.168.1.162/android_register_login/change_credit_limit.php";
+    private static String URL_WITHDRAW_MONEY = "http://192.168.1.162/android_register_login/withdraw_money.php";
+    private static String URL_GET_ACCOUNT_BALANCE = "http://192.168.1.162/android_register_login/get_account_balance.php";
+    private static String URL_CREATE_BANK_CARD = "http://192.168.1.162/android_register_login/create_bank_card.php";
+    private static String URL_CHECK_BANK_CARD = "http://192.168.1.162/android_register_login/check_bank_card.php";
+    private static String URL_SAVE_CARD_BALANCE = "http://192.168.1.162/android_register_login/save_card_balance.php";
+    private static String URL_SAVE_CARD_LIMIT = "http://192.168.1.162/android_register_login/save_card_limit.php";
 
     Context context;
 
@@ -118,7 +118,8 @@ public class Database {
         RequestQueue requestQueue = Volley.newRequestQueue(context);
         requestQueue.add(stringRequest);
 
-    }
+    }  /* This method takes the view v, first_name, last_name and password values and
+     saves them to database if the registration is successful*/
 
     protected void Login(View v, final String email, final String password) {
 
@@ -193,7 +194,8 @@ public class Database {
         RequestQueue requestQueue = Volley.newRequestQueue(context);
         requestQueue.add(stringRequest);
 
-    }
+    } /* This method takes view v, email and password values and if they are written in the database,  user will be logged in.
+     The method also creates session with session manager class and adds every account and bank card to arraylist if user have them*/
 
     protected void editProfile(View v, final String email, final String first_name, final String last_name, final String password, final String id) {  // Tällä metodilla voi muuttaa käyttäjän etunimeä, sukunimeä ja salasanaa.
 
@@ -247,7 +249,8 @@ public class Database {
         RequestQueue requestQueue = Volley.newRequestQueue(context);
         requestQueue.add(stringRequest);
 
-    }
+    } /* This allows user to change first name, last name and
+     password and saves them to database*/
 
     protected void addRegularAccount(View v, final String email, final String account_number, final String balance) {
 
@@ -311,7 +314,8 @@ public class Database {
 
         RequestQueue requestQueue = Volley.newRequestQueue(context);
         requestQueue.add(stringRequest);
-    }
+    } /* If users input values are valid, this method will save them to database and create
+    RegularAccount instance and add it to Bank's arraylist */
 
     protected void addCreditAccount(View v, final String email, final String account_number, final String balance, final String credit) {
 
@@ -376,7 +380,8 @@ public class Database {
 
         RequestQueue requestQueue = Volley.newRequestQueue(context);
         requestQueue.add(stringRequest);
-    }
+    } /* If users input values are valid, this method will save them to database and create
+    CreditAccount instance and add it to Bank's arraylist */
 
     protected void addSavingsAccount(View v, final String email, final String account_number, final String balance) {
 
@@ -440,7 +445,8 @@ public class Database {
 
         RequestQueue requestQueue = Volley.newRequestQueue(context);
         requestQueue.add(stringRequest);
-    }
+    } /* If users input values are valid, this method will save them to database and create
+    SavingsAccount instance and add it to Bank's arraylist */
 
     private void checkRegularAccountData(final String email) {
 
@@ -491,7 +497,8 @@ public class Database {
         RequestQueue requestQueue = Volley.newRequestQueue(context);
         requestQueue.add(stringRequest);
 
-    } //Näitä 4 metodia käytetään Login -metodin sisäluokkina silloin, kun kirjautuminen onnistuu. Eli tarkistetaan mitä tilejä käyttäjällä on ja lisätään ne pankin arraylistiin session ajaksi.
+    } /* These four private methods are inner methods of Login -method. They takes email as a input value and checks if user have accounts or bankcard
+    made with that email. If user has accounts or bankcard, these 4 methods will add them to Bank's arraylist */
 
     private void checkCreditAccountData(final String email) {
 
@@ -692,7 +699,8 @@ public class Database {
         RequestQueue requestQueue = Volley.newRequestQueue(context);
         requestQueue.add(stringRequest);
 
-    }
+    } /* This method takes account number and balance as values and saves user's regular account's
+    new balance to database */
 
     protected void addMoneyCreditAccount(View v, final String account_number, final String balance) {
 
@@ -735,7 +743,8 @@ public class Database {
         RequestQueue requestQueue = Volley.newRequestQueue(context);
         requestQueue.add(stringRequest);
 
-    }
+    } /* This method takes account number and balance as values and saves user's credit account's
+    new balance to database */
 
     protected void addMoneySavingsAccount(View v, final String account_number, final String balance) {
 
@@ -778,7 +787,8 @@ public class Database {
         RequestQueue requestQueue = Volley.newRequestQueue(context);
         requestQueue.add(stringRequest);
 
-    }
+    } /* This method takes account number and balance as values and saves user's savings account's
+    new balance to database */
 
     protected void changeCreditLimit(View v, final String account_number, final String credit) {
 
@@ -821,7 +831,8 @@ public class Database {
         RequestQueue requestQueue = Volley.newRequestQueue(context);
         requestQueue.add(stringRequest);
 
-    }
+    } /* This method takes account number and credit as values and saves user's credit account's
+    new credit limit to database */
 
     protected void withdrawMoney(View v, final String account_number, final String balance) {
 
@@ -861,7 +872,8 @@ public class Database {
         RequestQueue requestQueue = Volley.newRequestQueue(context);
         requestQueue.add(stringRequest);
 
-    }
+    } /* This method takes account number and balance as values and saves user's
+    new balance to database */
 
     protected void transferMoneyRegularAccount(View v, final String account_number, final String balance) {
 
@@ -915,7 +927,8 @@ public class Database {
 
         RequestQueue requestQueue = Volley.newRequestQueue(context);
         requestQueue.add(stringRequest);
-    }
+    }  /* This method transfers money from user's account to the regularaccount which account number user gives.
+    If account number can't be found from database, user will be informed with Toast */
 
     protected void transferMoneyCreditAccount(View v, final String account_number, final String balance) {
 
@@ -969,7 +982,8 @@ public class Database {
 
         RequestQueue requestQueue = Volley.newRequestQueue(context);
         requestQueue.add(stringRequest);
-    }
+    }  /* This method transfers money from user's account to the creditaccount which account number user gives.
+    If account number can't be found from database, user will be informed with Toast */
 
     protected void transferMoneySavingsAccount(View v, final String account_number, final String balance) {
 
@@ -1023,7 +1037,8 @@ public class Database {
 
         RequestQueue requestQueue = Volley.newRequestQueue(context);
         requestQueue.add(stringRequest);
-    }
+    } /* This method transfers money from user's account to the savingsaccount which account number user gives.
+    If account number can't be found from database, user will be informed with Toast */
 
     protected void getAccountBalance(View v, String account_numberInput, final String my_account_number) {
 
@@ -1090,7 +1105,8 @@ public class Database {
         RequestQueue requestQueue = Volley.newRequestQueue(context);
         requestQueue.add(stringRequest);
 
-    }
+    } /* This method tries to get account's balance and if it finds it, the balance will be added to
+    Helperclass which instance will help the transaction.*/
 
     protected void addBankCard(View v, final String email, final String card_number, final String balance, final String withdraw_limit) {
 
@@ -1149,7 +1165,8 @@ public class Database {
 
         RequestQueue requestQueue = Volley.newRequestQueue(context);
         requestQueue.add(stringRequest);
-    }
+    } /* This method takes the view v, card_number, balance and password
+     withdraw limit values and saves them to database if they are valid.*/
 
     protected void saveBalanceBankCard(View v, final String email, final String balance) {
 
@@ -1192,7 +1209,8 @@ public class Database {
     RequestQueue requestQueue = Volley.newRequestQueue(context);
         requestQueue.add(stringRequest);
 
-    }
+    }  /* This method takes email and balance as values and saves user's bank card's
+    new balance to database */
 
    protected void saveLimitBankCard(View v, final String email, final String withdraw_limit) {
 
@@ -1235,24 +1253,25 @@ public class Database {
        RequestQueue requestQueue = Volley.newRequestQueue(context);
        requestQueue.add(stringRequest);
 
-   }
+   } /* This method takes email and withdraw limit as values and saves user's bank card's
+    new withdraw limit to database */
 
-    public static void startHomeActivity(Context context) { //Tämän metodin avulla voidaa käynnistää kotiaktiviteetti toisesta näkymästä.
+    public static void startHomeActivity(Context context) {
         context.startActivity(new Intent(context, HomeActivity.class));
     }
 
-    public static void startLogInActivity(Context context) { //Tämän metodin avulla voidaa käynnistää kotiaktiviteetti toisesta näkymästä.
+    public static void startLogInActivity(Context context) {
         context.startActivity(new Intent(context, LogInActivity.class));
     }
 
-    public static void startHomeActivityAfterLogin(Context context, String first_name, String email) { //Tämän metodin avulla voidaa käynnistää kotiaktiviteetti toisesta näkymästä.
+    public static void startHomeActivityAfterLogin(Context context, String first_name, String email) {
         Intent intent = new Intent(context, HomeActivity.class);
         intent.putExtra("first_name", first_name);
         intent.putExtra("email", email);
         context.startActivity(intent);
     }
 
-    public static void startTransferActivity(Context context, String account_number, String my_account_number) { //Tämän metodin avulla voidaa käynnistää kotiaktiviteetti toisesta näkymästä.
+    public static void startTransferActivity(Context context, String account_number, String my_account_number) {
         Intent intent = new Intent(context, TransferActivity.class);
         intent.putExtra(ACCOUNT_NUMBER_PAYEE, account_number);
         intent.putExtra(MY_ACCOUNT_NUMBER, my_account_number);
