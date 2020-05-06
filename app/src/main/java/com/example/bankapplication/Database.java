@@ -73,11 +73,11 @@ public class Database {
                     String success = jsonObject.getString("success");
 
                     if(success.equals("1")) {
-                        Toast.makeText(context, "The registration was successful!", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context, context.getString(R.string.registerSuccess), Toast.LENGTH_SHORT).show();
                         startLogInActivity(context);
 
                     } else if(success.equals("-1")) {
-                        Toast.makeText(context, "That email is taken!", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context, context.getString(R.string.takenEmail), Toast.LENGTH_SHORT).show();
                         loading.setVisibility(View.GONE);
                         button_regist.setVisibility(View.VISIBLE);
 
@@ -160,14 +160,14 @@ public class Database {
                     } else {
                         loading.setVisibility(View.GONE);
                         button_login.setVisibility(View.VISIBLE);
-                        Toast.makeText(context, "", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context, context.getString(R.string.connectionError), Toast.LENGTH_SHORT).show();
                     }
 
                 } catch (JSONException e) {
                     e.printStackTrace();
                     loading.setVisibility(View.GONE);
                     button_login.setVisibility(View.VISIBLE);
-                    Toast.makeText(context, "", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context, context.getString(R.string.connectionError), Toast.LENGTH_SHORT).show();
                 }
 
             }
@@ -177,7 +177,7 @@ public class Database {
                     public void onErrorResponse(VolleyError error) {
                         loading.setVisibility(View.GONE);
                         button_login.setVisibility(View.VISIBLE);
-                        Toast.makeText(context, "", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context, context.getString(R.string.connectionError), Toast.LENGTH_SHORT).show();
                     }
                 })
         {
@@ -212,7 +212,7 @@ public class Database {
                             String success = jsonObject.getString("success");
 
                             if (success.equals("1")) {
-                                Toast.makeText(context, "The profile change was successful", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(context, context.getString(R.string.changesSaved), Toast.LENGTH_SHORT).show();
                                 SessionManager sessionManager = new SessionManager(context);
                                 sessionManager.createSession(first_name, email, id);
                                 startHomeActivity(context);
@@ -221,7 +221,7 @@ public class Database {
                         } catch (JSONException e) {
                             e.printStackTrace();
                             progressDialog.dismiss();
-                            Toast.makeText( context, "Error at saving the details: " + e.toString(), Toast.LENGTH_SHORT).show();
+                            Toast.makeText( context, context.getString(R.string.changesFail) + e.toString(), Toast.LENGTH_SHORT).show();
                         }
                     }
                 },
@@ -229,7 +229,7 @@ public class Database {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         progressDialog.dismiss();
-                        Toast.makeText( context, "Error at saving the details: " + error.toString(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText( context, context.getString(R.string.changesFail) + error.toString(), Toast.LENGTH_SHORT).show();
                     }
                 })
         {
@@ -267,24 +267,24 @@ public class Database {
                     if(success.equals("1")) {
                         float balance_float = Float.parseFloat(balance);  //Kun luodaan uusi regularAccount olio, muunnetaan balance int -muotoon.
                         bank.addRegularAccount(email, account_number, balance_float);
-                        Toast.makeText(context, "Success!", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context, context.getString(R.string.success), Toast.LENGTH_SHORT).show();
                         startHomeActivity(context);
                     } else if (success.equals("-1")) {
-                        Toast.makeText(context, "The account number has been already taken", Toast.LENGTH_LONG).show();
+                        Toast.makeText(context, context.getString(R.string.numberTaken), Toast.LENGTH_LONG).show();
                         loading.setVisibility(View.GONE);
                         button_create_new_account.setVisibility(View.VISIBLE);
                     } else if (success.equals("-2")) {
-                        Toast.makeText(context, "You already have one regularaccount, please read more about our banks policy", Toast.LENGTH_LONG).show();
+                        Toast.makeText(context, context.getString(R.string.policy), Toast.LENGTH_LONG).show();
                         startHomeActivity(context);
                     } else {
-                        Toast.makeText(context, "Failed", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context, context.getString(R.string.fail), Toast.LENGTH_SHORT).show();
                         loading.setVisibility(View.GONE);
                         button_create_new_account.setVisibility(View.VISIBLE);
                     }
 
                 } catch (JSONException e) {
                     e.printStackTrace();
-                    Toast.makeText(context, "Failed", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context, context.getString(R.string.fail), Toast.LENGTH_SHORT).show();
                     loading.setVisibility(View.GONE);
                     button_create_new_account.setVisibility(View.VISIBLE);
                 }
@@ -293,7 +293,7 @@ public class Database {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(context, "ConnectionError", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context, context.getString(R.string.connectionError), Toast.LENGTH_SHORT).show();
                         loading.setVisibility(View.GONE);
                         button_create_new_account.setVisibility(View.VISIBLE);
                     }
@@ -332,23 +332,23 @@ public class Database {
                         float balance_float = Float.parseFloat(balance); //Kun luodaan uusi regularAccount olio, muunnetaan balance flaot -muotoon.
                         float credit_float = Float.parseFloat(credit); //Kun luodaan uusi regularAccount olio, muunnetaan credit float -muotoon.
                         bank.addCreditAccount(email, account_number, balance_float, credit_float);
-                        Toast.makeText(context, "Success!", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context, context.getString(R.string.success), Toast.LENGTH_SHORT).show();
                         startHomeActivity(context);
                     } else if (success.equals("-1")) {
-                        Toast.makeText(context, "The account number has been already taken", Toast.LENGTH_LONG).show();
+                        Toast.makeText(context, context.getString(R.string.numberTaken), Toast.LENGTH_LONG).show();
                         loading.setVisibility(View.GONE);
                         button_create_new_account.setVisibility(View.VISIBLE);
                     } else if (success.equals("-2")) {
-                        Toast.makeText(context, "You already have one creditaccount, please read more about our banks policy", Toast.LENGTH_LONG).show();
+                        Toast.makeText(context, context.getString(R.string.policy3), Toast.LENGTH_LONG).show();
                         startHomeActivity(context);
                     } else {
-                        Toast.makeText(context, "Failed", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context, context.getString(R.string.fail), Toast.LENGTH_SHORT).show();
                         loading.setVisibility(View.GONE);
                         button_create_new_account.setVisibility(View.VISIBLE);
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
-                    Toast.makeText(context, "Failed", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context, context.getString(R.string.fail), Toast.LENGTH_SHORT).show();
                     loading.setVisibility(View.GONE);
                     button_create_new_account.setVisibility(View.VISIBLE);
                 }
@@ -357,7 +357,7 @@ public class Database {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(context, "ConnectionError", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context, context.getString(R.string.connectionError), Toast.LENGTH_SHORT).show();
                         loading.setVisibility(View.GONE);
                         button_create_new_account.setVisibility(View.VISIBLE);
                     }
@@ -396,24 +396,24 @@ public class Database {
                     if(success.equals("1")) {
                         float balance_float = Float.parseFloat(balance);  //Kun luodaan uusi regularAccount olio, muunnetaan balance int -muotoon.
                         bank.addSavingsAccount(email, account_number, balance_float);
-                        Toast.makeText(context, "Success!", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context, context.getString(R.string.success), Toast.LENGTH_SHORT).show();
                         startHomeActivity(context);
                     } else if (success.equals("-1")) {
-                        Toast.makeText(context, "The account number has been already taken", Toast.LENGTH_LONG).show();
+                        Toast.makeText(context, context.getString(R.string.numberTaken), Toast.LENGTH_LONG).show();
                         loading.setVisibility(View.GONE);
                         button_create_new_account.setVisibility(View.VISIBLE);
                     } else if (success.equals("-2")) {
-                        Toast.makeText(context, "You already have one savingsaccount, please read more about our banks policy", Toast.LENGTH_LONG).show();
+                        Toast.makeText(context, context.getString(R.string.policy2), Toast.LENGTH_LONG).show();
                         startHomeActivity(context);
                     } else {
-                        Toast.makeText(context, "Failed", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context, context.getString(R.string.fail), Toast.LENGTH_SHORT).show();
                         loading.setVisibility(View.GONE);
                         button_create_new_account.setVisibility(View.VISIBLE);
                     }
 
                 } catch (JSONException e) {
                     e.printStackTrace();
-                    Toast.makeText(context, "Failed", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context, context.getString(R.string.fail), Toast.LENGTH_SHORT).show();
                     loading.setVisibility(View.GONE);
                     button_create_new_account.setVisibility(View.VISIBLE);
                 }
@@ -422,7 +422,7 @@ public class Database {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(context, "ConnectionError", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context, context.getString(R.string.connectionError), Toast.LENGTH_SHORT).show();
                         loading.setVisibility(View.GONE);
                         button_create_new_account.setVisibility(View.VISIBLE);
                     }
@@ -468,7 +468,7 @@ public class Database {
 
                 } catch (JSONException e) {
                     e.printStackTrace();
-                    Toast.makeText(context, "Connection1 error occurred", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context, context.getString(R.string.connectionError), Toast.LENGTH_SHORT).show();
                 }
 
             }
@@ -476,7 +476,7 @@ public class Database {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(context, "Connection11 error occurred", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context, context.getString(R.string.connectionError), Toast.LENGTH_SHORT).show();
                     }
                 })
         {
@@ -522,7 +522,7 @@ public class Database {
 
                 } catch (JSONException e) {
                     e.printStackTrace();
-                    Toast.makeText(context, "Connection2 error occurred", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context, context.getString(R.string.connectionError), Toast.LENGTH_SHORT).show();
                 }
 
             }
@@ -530,7 +530,7 @@ public class Database {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(context, "Connection22 error occurred", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context, context.getString(R.string.connectionError), Toast.LENGTH_SHORT).show();
                     }
                 })
         {
@@ -573,7 +573,7 @@ public class Database {
 
                 } catch (JSONException e) {
                     e.printStackTrace();
-                    Toast.makeText(context, "Connection1 error occurred", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context, context.getString(R.string.connectionError), Toast.LENGTH_SHORT).show();
                 }
 
             }
@@ -581,7 +581,7 @@ public class Database {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(context, "Connection11 error occurred", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context, context.getString(R.string.connectionError), Toast.LENGTH_SHORT).show();
                     }
                 })
         {
@@ -626,7 +626,7 @@ public class Database {
 
                 } catch (JSONException e) {
                     e.printStackTrace();
-                    Toast.makeText(context, "Connection error occurred", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context, context.getString(R.string.connectionError), Toast.LENGTH_SHORT).show();
                 }
 
             }
@@ -634,7 +634,7 @@ public class Database {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(context, "Connection11 error occurred", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context, context.getString(R.string.connectionError), Toast.LENGTH_SHORT).show();
                     }
                 })
         {
@@ -661,22 +661,22 @@ public class Database {
                             String success = jsonObject.getString("success");
 
                             if (success.equals("1")) {
-                                Toast.makeText(context, "Deposit was successful", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(context, context.getString(R.string.depositSuc), Toast.LENGTH_SHORT).show();
                                 startHomeActivity(context);
                             } else {
-                                Toast.makeText(context, "Deposit failed", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(context, context.getString(R.string.depositFail), Toast.LENGTH_SHORT).show();
                             }
 
                         } catch (JSONException e) {
                             e.printStackTrace();
-                            Toast.makeText( context, "Connection error: " + e.toString(), Toast.LENGTH_SHORT).show();
+                            Toast.makeText( context, context.getString(R.string.connectionError) + e.toString(), Toast.LENGTH_SHORT).show();
                         }
                     }
                 },
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Toast.makeText( context, "Connection error: " + error.toString(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText( context, context.getString(R.string.connectionError) + error.toString(), Toast.LENGTH_SHORT).show();
                     }
                 })
         {
@@ -704,22 +704,22 @@ public class Database {
                     String success = jsonObject.getString("success");
 
                     if (success.equals("1")) {
-                        Toast.makeText( context, "Deposit was successful", Toast.LENGTH_SHORT).show();
+                        Toast.makeText( context, context.getString(R.string.depositSuc), Toast.LENGTH_SHORT).show();
                         startHomeActivity(context);
                     } else {
-                        Toast.makeText( context, "Deposit failed", Toast.LENGTH_SHORT).show();
+                        Toast.makeText( context, context.getString(R.string.depositFail), Toast.LENGTH_SHORT).show();
                     }
 
                 } catch (JSONException e) {
                     e.printStackTrace();
-                    Toast.makeText( context, "Connection error: " + e.toString(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText( context, context.getString(R.string.connectionError) + e.toString(), Toast.LENGTH_SHORT).show();
                 }
             }
         },
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Toast.makeText( context, "Connection error: " + error.toString(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText( context, context.getString(R.string.connectionError) + error.toString(), Toast.LENGTH_SHORT).show();
                     }
                 })
         {
@@ -747,22 +747,22 @@ public class Database {
                     String success = jsonObject.getString("success");
 
                     if (success.equals("1")) {
-                        Toast.makeText(context, "Deposit was successful", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context, context.getString(R.string.depositSuc), Toast.LENGTH_SHORT).show();
                         startHomeActivity(context);
                     } else {
-                        Toast.makeText(context, "Deposit failed", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context, context.getString(R.string.depositFail), Toast.LENGTH_SHORT).show();
                     }
 
                 } catch (JSONException e) {
                     e.printStackTrace();
-                    Toast.makeText( context, "Connection error: " + e.toString(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText( context, context.getString(R.string.connectionError) + e.toString(), Toast.LENGTH_SHORT).show();
                 }
             }
         },
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Toast.makeText( context, "Connection error: " + error.toString(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText( context, context.getString(R.string.connectionError) + error.toString(), Toast.LENGTH_SHORT).show();
                     }
                 })
         {
@@ -790,22 +790,22 @@ public class Database {
                     String success = jsonObject.getString("success");
 
                     if (success.equals("1")) {
-                        Toast.makeText(context, "Credit limit change was successful!", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context, context.getString(R.string.credChange), Toast.LENGTH_SHORT).show();
                         startHomeActivity(context);
                     } else {
-                        Toast.makeText( context, "Credit limit change failed", Toast.LENGTH_SHORT).show();
+                        Toast.makeText( context, context.getString(R.string.credChangeFail), Toast.LENGTH_SHORT).show();
                     }
 
                 } catch (JSONException e) {
                     e.printStackTrace();
-                    Toast.makeText( context, "Connection error: " + e.toString(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText( context, context.getString(R.string.connectionError) + e.toString(), Toast.LENGTH_SHORT).show();
                 }
             }
         },
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Toast.makeText( context, "Connection error: " + error.toString(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText( context, context.getString(R.string.connectionError) + error.toString(), Toast.LENGTH_SHORT).show();
                     }
                 })
         {
@@ -833,19 +833,19 @@ public class Database {
                     String success = jsonObject.getString("success");
 
                     if (success.equals("0")) {
-                        Toast.makeText( context, "Withdraw failed", Toast.LENGTH_SHORT).show();
+                        Toast.makeText( context, context.getString(R.string.withDrawfail), Toast.LENGTH_SHORT).show();
                     }
 
                 } catch (JSONException e) {
                     e.printStackTrace();
-                    Toast.makeText( context, "Connection11 error: " + e.toString(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText( context, context.getString(R.string.connectionError) + e.toString(), Toast.LENGTH_SHORT).show();
                 }
             }
         },
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Toast.makeText( context, "Connection22 error: " + error.toString(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText( context, context.getString(R.string.connectionError) + error.toString(), Toast.LENGTH_SHORT).show();
                     }
                 })
         {
@@ -879,17 +879,17 @@ public class Database {
                     String success = jsonObject.getString("success");
 
                     if(success.equals("1")) {   //Kun luodaan uusi regularAccount olio, muunnetaan balance int -muotoon.
-                        Toast.makeText(context, "Transfer was successful!", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context, context.getString(R.string.transferSuc), Toast.LENGTH_SHORT).show();
                         startHomeActivity(context);
                     } else {
-                        Toast.makeText(context, "Transfer failed", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context, context.getString(R.string.transferFail), Toast.LENGTH_SHORT).show();
                         loading.setVisibility(View.GONE);
                         button_transfer.setVisibility(View.VISIBLE);
                     }
 
                 } catch (JSONException e) {
                     e.printStackTrace();
-                    Toast.makeText(context, "Connection Error", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context, context.getString(R.string.connectionError), Toast.LENGTH_SHORT).show();
                     loading.setVisibility(View.GONE);
                     button_transfer.setVisibility(View.VISIBLE);
                 }
@@ -898,7 +898,7 @@ public class Database {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(context, "Connection Error", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context, context.getString(R.string.connectionError), Toast.LENGTH_SHORT).show();
                         loading.setVisibility(View.GONE);
                         button_transfer.setVisibility(View.VISIBLE);
                     }
@@ -933,17 +933,17 @@ public class Database {
                     String success = jsonObject.getString("success");
 
                     if(success.equals("1")) {   //Kun luodaan uusi regularAccount olio, muunnetaan balance int -muotoon.
-                        Toast.makeText(context, "Transfer was successful!", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context, context.getString(R.string.transferSuc), Toast.LENGTH_SHORT).show();
                         startHomeActivity(context);
                     } else {
-                        Toast.makeText(context, "Transfer failed", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context, context.getString(R.string.transferFail), Toast.LENGTH_SHORT).show();
                         loading.setVisibility(View.GONE);
                         button_transfer.setVisibility(View.VISIBLE);
                     }
 
                 } catch (JSONException e) {
                     e.printStackTrace();
-                    Toast.makeText(context, "Connection Error", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context, context.getString(R.string.connectionError), Toast.LENGTH_SHORT).show();
                     loading.setVisibility(View.GONE);
                     button_transfer.setVisibility(View.VISIBLE);
                 }
@@ -952,7 +952,7 @@ public class Database {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(context, "Connection Error", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context, context.getString(R.string.connectionError), Toast.LENGTH_SHORT).show();
                         loading.setVisibility(View.GONE);
                         button_transfer.setVisibility(View.VISIBLE);
                     }
@@ -987,17 +987,17 @@ public class Database {
                     String success = jsonObject.getString("success");
 
                     if(success.equals("1")) {   //Kun luodaan uusi regularAccount olio, muunnetaan balance int -muotoon.
-                        Toast.makeText(context, "Transfer was successful!", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context, context.getString(R.string.transferSuc), Toast.LENGTH_SHORT).show();
                         startHomeActivity(context);
                     } else {
-                        Toast.makeText(context, "Transfer failed", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context, context.getString(R.string.transferFail), Toast.LENGTH_SHORT).show();
                         loading.setVisibility(View.GONE);
                         button_transfer.setVisibility(View.VISIBLE);
                     }
 
                 } catch (JSONException e) {
                     e.printStackTrace();
-                    Toast.makeText(context, "Connection Error", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context, context.getString(R.string.connectionError), Toast.LENGTH_SHORT).show();
                     loading.setVisibility(View.GONE);
                     button_transfer.setVisibility(View.VISIBLE);
                 }
@@ -1006,7 +1006,7 @@ public class Database {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(context, "Connection Error", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context, context.getString(R.string.connectionError), Toast.LENGTH_SHORT).show();
                         loading.setVisibility(View.GONE);
                         button_transfer.setVisibility(View.VISIBLE);
                     }
@@ -1056,14 +1056,14 @@ public class Database {
                         }
 
                     } else  {
-                        Toast.makeText(context, "No account found with that account number", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context, context.getString(R.string.noAccFound), Toast.LENGTH_SHORT).show();
                         loading.setVisibility(View.GONE);
                         button_account_number.setVisibility(View.VISIBLE);
                     }
 
                 } catch (JSONException e) {
                     e.printStackTrace();
-                    Toast.makeText(context, "Connection111 error occurred", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context, context.getString(R.string.connectionError), Toast.LENGTH_SHORT).show();
                     loading.setVisibility(View.GONE);
                     button_account_number.setVisibility(View.VISIBLE);
                 }
@@ -1073,7 +1073,7 @@ public class Database {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(context, "Connection222 Error", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context, context.getString(R.string.connectionError), Toast.LENGTH_SHORT).show();
                         loading.setVisibility(View.GONE);
                         button_account_number.setVisibility(View.VISIBLE);
                     }
@@ -1111,7 +1111,7 @@ public class Database {
                         float balance_float = Float.parseFloat(balance);
                         float withdraw_limit_float = Float.parseFloat(withdraw_limit);  //Kun luodaan uusi regularAccount olio, muunnetaan balance int -muotoon.
                         bank.addBankCard(email, card_number, balance_float, withdraw_limit_float);
-                        Toast.makeText(context, "You have now bank card!, Congratulations!", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context, context.getString(R.string.cardSucc), Toast.LENGTH_SHORT).show();
                         startHomeActivity(context);
                     } else {
                         Toast.makeText(context, "Failed", Toast.LENGTH_SHORT).show();
@@ -1130,7 +1130,7 @@ public class Database {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(context, "ConnectionError", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context, context.getString(R.string.connectionError), Toast.LENGTH_SHORT).show();
                         button_create_card.setVisibility(View.VISIBLE);
                         loading.setVisibility(View.GONE);
                     }
@@ -1161,22 +1161,22 @@ public class Database {
                 String success = jsonObject.getString("success");
 
                 if (success.equals("1")) {
-                    Toast.makeText(context, "Deposit was successful", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context, context.getString(R.string.depositSuc), Toast.LENGTH_SHORT).show();
                     startHomeActivity(context);
                 } else {
-                    Toast.makeText(context, "Deposit failed", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context, context.getString(R.string.depositFail), Toast.LENGTH_SHORT).show();
                 }
 
             } catch (JSONException e) {
                 e.printStackTrace();
-                Toast.makeText(context, "Connection error: " + e.toString(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, context.getString(R.string.connectionError) + e.toString(), Toast.LENGTH_SHORT).show();
             }
         }
     },
             new Response.ErrorListener() {
                 @Override
                 public void onErrorResponse(VolleyError error) {
-                    Toast.makeText(context, "Connection error: " + error.toString(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context, context.getString(R.string.connectionError) + error.toString(), Toast.LENGTH_SHORT).show();
                 }
             })
     {
@@ -1204,22 +1204,22 @@ public class Database {
                    String success = jsonObject.getString("success");
 
                    if (success.equals("1")) {
-                       Toast.makeText(context, "Withdraw limit change was successful!", Toast.LENGTH_SHORT).show();
+                       Toast.makeText(context, context.getString(R.string.withChange), Toast.LENGTH_SHORT).show();
                        startHomeActivity(context);
                    } else {
-                       Toast.makeText(context, "Withdraw limit change failed!", Toast.LENGTH_SHORT).show();
+                       Toast.makeText(context, context.getString(R.string.withChangeFail), Toast.LENGTH_SHORT).show();
                    }
 
                } catch (JSONException e) {
                    e.printStackTrace();
-                   Toast.makeText(context, "Connection error: " + e.toString(), Toast.LENGTH_SHORT).show();
+                   Toast.makeText(context, context.getString(R.string.connectionError) + e.toString(), Toast.LENGTH_SHORT).show();
                }
            }
        },
                new Response.ErrorListener() {
                    @Override
                    public void onErrorResponse(VolleyError error) {
-                       Toast.makeText(context, "Connection error: " + error.toString(), Toast.LENGTH_SHORT).show();
+                       Toast.makeText(context, context.getString(R.string.connectionError) + error.toString(), Toast.LENGTH_SHORT).show();
                    }
                })
        {
