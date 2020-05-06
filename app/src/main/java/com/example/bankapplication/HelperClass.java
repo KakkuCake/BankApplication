@@ -5,8 +5,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class HelperClass {
-    //Luokka avustaa Database luokan getAccountBalance -metodia.
-    // Tarkoitus on tallentaa hetkellisesti Arraylist bListiin halutun käyttäjän balanssi, jotta osataan kirjoittaa tietokantaan uusi balanssi käyttäjälle.
+  // this class is made only to help with certain things
 
     public float balance;
     public String email2 = "";
