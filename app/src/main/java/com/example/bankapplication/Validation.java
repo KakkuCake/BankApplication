@@ -10,22 +10,30 @@ import com.google.android.material.textfield.TextInputLayout;
 import java.util.regex.Pattern;
 
 public class Validation {
-
+    //This makes the requirements for the password
     private static final Pattern PASSWORD_PATTERN =
             Pattern.compile("^" +
-                    "(?=.*[a-zA-Z])" +      //mikä tahansa kirjain
-                    "(?=.*[@#$%^&+=])" +    //vähintään yksi erikoismerkki
-                    "(?=\\S+$)" +           //ei välilyöntejä
-                    ".{5,}" +               //vähintään 5 merkkiä
+                    "(?=.[0-9])" +         //at least 1 digit
+                    "(?=.[a-z])" +         //at least 1 lower case letter
+                    "(?=.[A-Z])" +         //at least 1 upper case letter
+                    "(?=.[a-zA-Z])" +      //any letter
+                    "(?=.*[@#$%^&+=])" +   //at least 1 special character
+                    "(?=\\S+$)" +          //no whitespaces
+                    ".{12,}" +             //at least 12 characters long
                     "$");
 
     Context context;
 
-    public Validation(Context context){  //Tämän rakentajan avulla voidaan tehdä muutoksia eri näkymissä.
+    public Validation(Context context){  //Using this builder it is possible to make changes from other classes.
             this.context=context;
         }
 
+        /*
+            Whole of this Validation.java class is basically validation methods.
+            Every method's name is self explanatory.
+            For example validateAccountNumber() checks if given account number is correct format and length.
 
+        */
     protected boolean validateEmail(String emailInput) {
 
         TextInputLayout email = (TextInputLayout) ((Activity)context).findViewById(R.id.email);
