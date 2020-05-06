@@ -95,4 +95,5 @@
     <string name="withChangeFail">Withdrawal limit change failed!</string>
     <string name="policy2">You already have one Savings account, please read more about our banks policy</string>
     <string name="policy3">You already have one Credit account, please read more about our banks policy</string>
+    <string name="wrongInputs">Wrong email or password</string>
 </resources>

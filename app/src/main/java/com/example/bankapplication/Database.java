@@ -57,6 +57,9 @@ public class Database {
     protected static final String ACCOUNT_NUMBER_PAYEE = "com.example.bankapplication.ACCOUNT_NUMBER_PAYEE";  // This is used in getAccountBalance -method to give information to the next activity.
     protected static final String MY_ACCOUNT_NUMBER = "com.example.bankapplication.MY_ACCOUNT_NUMBER";  // This is used in getAccountBalance -method to give information to the next activity.
 
+    /*  The following methods use android studios Volley Library. The library is implemented in build.gradle (Module: app). Every method that writes to database or reads from database uses Volley librarys
+    stringrequest ability. With stringrequest we can get the response from database as string and it makes the handling of the database simplier */
+
     protected void Regist(View v, final String email, final String first_name, final String last_name, final String password) {
 
         final ProgressBar loading = (ProgressBar) ((Activity)context).findViewById(R.id.loading);
@@ -161,14 +164,14 @@ public class Database {
                     } else {
                         loading.setVisibility(View.GONE);
                         button_login.setVisibility(View.VISIBLE);
-                        Toast.makeText(context, context.getString(R.string.connectionError), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context, context.getString(R.string.logInFail), Toast.LENGTH_SHORT).show();
                     }
 
                 } catch (JSONException e) {
                     e.printStackTrace();
                     loading.setVisibility(View.GONE);
                     button_login.setVisibility(View.VISIBLE);
-                    Toast.makeText(context, context.getString(R.string.connectionError), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context, context.getString(R.string.logInFail), Toast.LENGTH_SHORT).show();
                 }
 
             }

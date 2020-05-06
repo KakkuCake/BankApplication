@@ -96,4 +96,5 @@
     <string name="withChangeFail">Nostorajan muutos epäonnistui</string>
     <string name="policy2">Sinulla on jo yksi säästötili, lue lisää käyttöehdoistamme</string>
     <string name="policy3">Sinulla on jo yksi luottotili, lue lisää käyttöehdoistamme</string>
+    <string name="wrongInputs">Väärä salasana tai sähköposti</string>
 </resources>

@@ -13,14 +13,15 @@ public class Validation {
     //This makes the requirements for the password
     private static final Pattern PASSWORD_PATTERN =
             Pattern.compile("^" +
-                    "(?=.[0-9])" +         //at least 1 digit
-                    "(?=.[a-z])" +         //at least 1 lower case letter
-                    "(?=.[A-Z])" +         //at least 1 upper case letter
-                    "(?=.[a-zA-Z])" +      //any letter
-                    "(?=.*[@#$%^&+=])" +   //at least 1 special character
-                    "(?=\\S+$)" +          //no whitespaces
-                    ".{12,}" +             //at least 12 characters long
+                    "(?=.*[0-9])" +         //at least 1 digit
+                    "(?=.*[a-z])" +         //at least 1 lower case letter
+                    "(?=.*[A-Z])" +         //at least 1 upper case letter
+                    "(?=.*[a-zA-Z])" +      //any letter
+                    "(?=.*[@#$%^&+=])" +    //at least 1 special character
+                    "(?=\\S+$)" +           //no white spaces
+                    ".{12,}" +               //at least 12 characters
                     "$");
+
 
     Context context;
 
