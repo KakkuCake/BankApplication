@@ -53,7 +53,6 @@ public class Bank {
         }
     }
 
-
     public void setNewCreditLimit(String account_number, float new_credit) { //Searches the mAccounts arraylist for a specific account which credit limit is to be changed
         for (Account account : mAccounts) {
             if (account instanceof CreditAccount) {

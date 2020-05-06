@@ -13,8 +13,5 @@ public class SavingsAccount extends Account {
         return interest_rate;
     }
 
-    public void setBalance(float amount) {
-            this.balance += amount;
-    }
 
 }
